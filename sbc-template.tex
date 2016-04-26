@@ -10,25 +10,19 @@
      
 \sloppy
 
-\title{Instructions for Authors of SBC Conferences\\ Papers and Abstracts}
+\title{Título\\ Papers and Abstracts}
 
-\author{Luciana P. Nedel\inst{1}, Rafael H. Bordini\inst{2}, Flávio Rech
-  Wagner\inst{1}, Jomi F. Hübner\inst{3} }
+\author{Jéssica Lasch de Moura\inst{1}, Andrea Schwertner Charão\inst{1}}
 
 
-\address{Instituto de Informática -- Universidade Federal do Rio Grande do Sul
-  (UFRGS)\\
-  Caixa Postal 15.064 -- 91.501-970 -- Porto Alegre -- RS -- Brazil
+\address{XX -- Universidade Federal de Santa Maria
+  (UFSM)\\
+  Santa Maria -- RS -- Brazil
 \nextinstitute
   Department of Computer Science -- University of Durham\\
   Durham, U.K.
-\nextinstitute
-  Departamento de Sistemas e Computação\\
-  Universidade Regional de Blumenal (FURB) -- Blumenau, SC -- Brazil
-  \email{\{nedel,flavio\}@inf.ufrgs.br, R.Bordini@durham.ac.uk,
-  jomi@inf.furb.br}
+  \email{\{jmoura,andrea\}@inf.ufsm.br}
 }
-
 \begin{document} 
 
 \maketitle
@@ -52,111 +46,97 @@
 \end{resumo}
 
 
-\section{General Information}
+\section{Introdução}
 
-All full papers and posters (short papers) submitted to some SBC conference,
-including any supporting documents, should be written in English or in
-Portuguese. The format paper should be A4 with single column, 3.5 cm for upper
-margin, 2.5 cm for bottom margin and 3.0 cm for lateral margins, without
-headers or footers. The main font must be Times, 12 point nominal size, with 6
-points of space before each paragraph. Page numbers must be suppressed.
+-Importância dos testes
+	-Trabalho anterior: teste de carga + teste funcional;
+	-Teste funcional com selenium e cucumber mais promissor, mas pode ser trabalhoso;
+	-Alternativa pra auxiliar na criação dos testes: analisar o diagrama no formato BPMN e criar artefatos;
+	-Objetivo: melhorar e facilitar o teste funcional;
 
-Full papers must respect the page limits defined by the conference.
-Conferences that publish just abstracts ask for \textbf{one}-page texts.
-
-\section{First Page} \label{sec:firstpage}
-
-The first page must display the paper title, the name and address of the
-authors, the abstract in English and ``resumo'' in Portuguese (``resumos'' are
-required only for papers written in Portuguese). The title must be centered
-over the whole page, in 16 point boldface font and with 12 points of space
-before itself. Author names must be centered in 12 point font, bold, all of
-them disposed in the same line, separated by commas and with 12 points of
-space after the title. Addresses must be centered in 12 point font, also with
-12 points of space after the authors' names. E-mail addresses should be
-written using font Courier New, 10 point nominal size, with 6 points of space
-before and 6 points of space after.
-
-The abstract and ``resumo'' (if is the case) must be in 12 point Times font,
-indented 0.8cm on both sides. The word \textbf{Abstract} and \textbf{Resumo},
-should be written in boldface and must precede the text.
-
-\section{CD-ROMs and Printed Proceedings}
-
-In some conferences, the papers are published on CD-ROM while only the
-abstract is published in the printed Proceedings. In this case, authors are
-invited to prepare two final versions of the paper. One, complete, to be
-published on the CD and the other, containing only the first page, with
-abstract and ``resumo'' (for papers in Portuguese).
-
-\section{Sections and Paragraphs}
-
-Section titles must be in boldface, 13pt, flush left. There should be an extra
-12 pt of space before each title. Section numbering is optional. The first
-paragraph of each section should not be indented, while the first lines of
-subsequent paragraphs should be indented by 1.27 cm.
-
-\subsection{Subsections}
-
-The subsection titles must be in boldface, 12pt, flush left.
-
-\section{Figures and Captions}\label{sec:figs}
+\section{BPM e Teste}
+-Teste é pouco abordado
+-Teste é importante
+-Teste funcional ajuda a aumentar a qualidade do software;
+-Trabalhos relacionados;
 
 
-Figure and table captions should be centered if less than one line
-(Figure~\ref{fig:exampleFig1}), otherwise justified and indented by 0.8cm on
-both margins, as shown in Figure~\ref{fig:exampleFig2}. The caption font must
-be Helvetica, 10 point, boldface, with 6 points of space before and after each
-caption.
+\section{BPMN}
+-O que é;
+-Alguns exemplos;
+-A maioria da ferramentas disponibilizam a exportação dos processos para esse formato e segue o mesmo padrão;
+-Alguns exemplos de notação;
+-Principais elementos;
+explicar bem o sequenceflow, atributos…
+start event e end event
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.5\textwidth]{fig1.jpg}
-\caption{A typical figure}
-\label{fig:exampleFig1}
-\end{figure}
+\section{Teste Funcional}
+-O que é...
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.3\textwidth]{fig2.jpg}
-\caption{This figure is an example of a figure caption taking more than one
-  line and justified considering margins mentioned in Section~\ref{sec:figs}.}
-\label{fig:exampleFig2}
-\end{figure}
+\subsection{Teste com selenium}
+-funcionamento, elementos  necessários  pro  teste
+\subsection{Teste com cucumber}
+-funcionamento, elementos  necessários  pro  teste
 
-In tables, try to avoid the use of colored or shaded backgrounds, and avoid
-thick, doubled, or unnecessary framing lines. When reporting empirical data,
-do not use more decimal digits than warranted by their precision and
-reproducibility. Table caption must be placed before the table (see Table 1)
-and the font used must also be Helvetica, 10 point, boldface, with 6 points of
-space before and after each caption.
+\section{BPMN Parser}
+-Linguagem, ferramenta,exemplos de diagramas foram obtidos em...
+-O que o parser  faz (resumo): tabelinha + criação dos códigos
+arquivo bpmn
+usa java + parser java para xml
+usa array de adjacencias, explicar?
+%colocar diagrama de classes do parser, criar outra sessão específica e link para o java doc
+%onde foram obtidos os diagramas de teste nesse trabalho
 
-\begin{table}[ht]
-\centering
-\caption{Variables to be considered on the evaluation of interaction
-  techniques}
-\label{tab:exTable1}
-\includegraphics[width=.7\textwidth]{table.jpg}
-\end{table}
+\subsection{Funcionamento}
+O principal elemento para o funcionamento do parser é o SequenceFlow. Por conter os atributos “targetRef” e “sourceRef” os elementos do tipo SequenceFlow permitem percorrer todo o diagrama. Ao iniciar o parser, é solicitado ao usuário o caminho para o arquivo BPMN e a ID do processo a ser avaliado. Um diagrama pode conter mais de um processo e, nesse caso, o usuário pode escolher que todos processos sejam avaliados.
+%- usertask e manualtask: nomes de tags padrão do bpms, quem quiser testar precisa alimentar o código com os nomes das tags a serem tratadas
 
-\section{Images}
+\subsubsection{Tratamento e Análise do arquivo XML}
+A primeira etapa do parser é tratar o arquivo XML para que ele possa ser lido pelo parser do Java. Algumas ferramentas exportam o diagrama para o formato BPMN inserindo um “tipo” antes no nome de cada tag XML, por exemplo, a tag de nome “task” pode estar representada como “bpmn2:task” e isso pode impedir que o parser do Java identifique os elementos. Assim, a primeira etapa do código é alterar notações deste tipo.
 
-All images and illustrations should be in black-and-white, or gray tones,
-excepting for the papers that will be electronically available (on CD-ROMs,
-internet, etc.). The image resolution on paper should be about 600 dpi for
-black-and-white images, and 150-300 dpi for grayscale images.  Do not include
-images with excessive resolution, as they may take hours to print, without any
-visible difference in the result. 
+Após isso, é iniciada a avaliação de cada processo. O parser percorre os elementos do tipo sequenceFlow em busca das primeiras tarefas do processo, ou seja, tarefas que sucedem elementos do tipo startEvent. Para cada tarefa encontrada, será criado um objeto da classe definida como “Node” que contém informações básicas sobre os elementos e mais um array de adjacência. 
+
+Então é feita a criação dos arrays de adjacência. No método chamado createNodes que retorna um objeto do tipo List<Node>, são percorridos todos os elementos sequenceFlow partindo das primeiras tarefas e, para cada nova tarefa encontrada, é criado um objeto da classe Node e então o método é chamado recursivamente para obter o array de adjacência do elemento em questão. O trecho de código referente a essa execução pode ser visto na Figura X. Este método é executado recursivamente até encontrar um elemento do tipo endEvent, ou seja, até encontrar um fim.
+
+Assim, têm-se uma lista de objetos da classe Node. Os primeiros elementos desta lista serão, obrigatóriamente, as primeiras tarefas que foram encontradas no início da execução. Estes elementos teram as informações pertinentes mais o array de ajacências, que também é uma lista de objetos Node. Nesta lista estarão contidos todos os objetos da classe Node que sucedem a tarefa anterior.
+%mostrar um exemplo, imagem
+
+\subsubsection{Criação de artefatos para o teste funcional}
+Após o documento XML ser devidamente analisado e as tarefas do processo esterem armazenadas no array de objetos Node, é possível criar os artefatos para auxiliar no teste funcional. Uma parte importante para esta etapa é identificar as últimas tarefas à serem executadas, ou seja, tarefas que antecedem um elemento do tipo endEvent. Estas tarefas irão auxiliar na criação dos possíveis caminhos pelos quais o processo pode passar.
+
+Para criar os possíveis caminhos do processo, o array de adjacências obtido anteriormente é navegado recursivamente até encontrar uma condição de parada: a(s) últimos tarefas a serem executadas. Para cada chamada deste método, é recebido o array e os elementos pelos quais esse caminho passou anteriomente, ao encontrar a condição de parada, este novo caminho é armazenado e é iniciado um novo caminho. %método paths
+
+Na criação dos caminhos, há uma exceção para quando existir uma divisão de fluxo através de um gateway do tipo inclusivo. Diferente do que acontece com o tipo exclusivo, onde apenas uma opção de pode ser seguida de cada vez, no caminho incluso as opções podem variar pois um ou mais caminhos podem ser seguidos ao mesmo tempo. Os caminhos em que apenas um fluxo é seguido já são cobertos pela execução normal, então, após a criação dos caminhos, é identificada a existencia de fluxos inclusivos e, se necessário, caminhos adicionais são inseridos.
+
+A partir da criação dos caminhos, é chamado o método fillTable que percorre os caminhos para criar a tabela com os caminhos possíveis. No cabeçalho da tabela estarão presentes os nomes de todas as tarefas do processo e cada linha representa um caminho possível. O método fillTable ira percorrer todos os caminhos, comparando cada elemento do caminho com um elemento do processo, se o elemento faz parte deste caminho a coluna será marcada com um "X" caso contrário, a coluna será marcada com um "0". Ao final de toda a execução, a tabela será salva em um arquivo do tipo excel. Caso exista mais de um processo a ser analisado, as tabelas para cada processo estarão distribuídas individualmente no arquivo excel.
+%exemplo de tabela
+
+O segundo artefato criado é o código para o teste funcional, dois elementos essencias para o teste são criados: os esqueleto para os cenários de teste para o Cucumber e o esqueleto dos métodos na classe stepDefinition. 
+
+-createFunctionalCode(paths, items, participantName); cria os cenarios e as definições dos passos
+-só leva em conta tipos de tarefas que são executadas por pessoas -> já que quer fazer um teste funcional
+    -para gerar o cenário e o stepdefinition - usertask e manualtask: nomes de tags padrão do bpms, quem quiser testar precisa alimentar o código com os nomes das tags a serem tratadas
+	
+-subprocess -> apenas como uma tarefa, normalmente sao simples, so testa o principal,subprocessos normalmente sao simples
+
+
+- todos os cenario coloca no mesmo arquivo feature
+- todas as definições coloca no mesmo stepdefinition
+
+\subsection{Resultados}
+%colocar um exemplo inteiro?
+
+\subsection{Desvantagens?/Melhorias?}
+-nomes de tags padrão do bpms, quem quiser testar precisa alimentar o código com os nomes das tags a serem tratadas
+-tbm tem que tirar que que tem antes do nome da tag (ex: bpmn2:task), tem que colcoar no código
+-como sao percorridos os sequenceflows, problemas com recursão, sem parada, ex: pizza.bpmn, para isso é colocado um "delimitador de recursao",  que controla o numero de vezes em que uma flechinha vai ser percorrida, o padrão é X e pode ser alterado conforme o tamanho do processo
+-código em constante melhorias
+
+
 
 \section{References}
 
-Bibliographic references must be unambiguous and uniform.  We recommend giving
-the author names references in brackets, e.g. \cite{knuth:84},
-\cite{boulic:91}, and \cite{smith:99}.
-
-The references must be listed using 12 point font size, with 6 points of space
-before each reference. The first line of each reference should not be
-indented, while the subsequent should be indented by 0.5 cm.
+%Bibliographic references must be unambiguous and uniform.  We recommend givingthe author names references in brackets, e.g. \cite{knuth:84},\cite{boulic:91}, and \cite{smith:99}.
 
 \bibliographystyle{sbc}
 \bibliography{sbc-template}
