@@ -40,6 +40,7 @@
 -Importância dos testes
 	-Trabalho anterior: teste de carga + teste funcional;
 	-Teste funcional com selenium e cucumber mais promissor, mas pode ser trabalhoso;
+		-Também é necessário criar manualmente cada cenário de teste
 	-Alternativa pra auxiliar na criação dos testes: analisar o diagrama no formato BPMN e criar alguns códigos;
 	-Objetivo: melhorar e facilitar o teste funcional automatizado;
 
@@ -49,63 +50,30 @@
 -Teste funcional ajuda a aumentar a qualidade do software;
 -Trabalhos relacionados;
 
-\section{BPMN}
+\section{Business Process Model and Notation - \emph{BPMN}}
+O padrão Business Process Model and Notation, ou BPMN, foi criado com o objetivo de fornecer uma notação fácilmente compreensível por todos os usuários, desde os analistas que criam os rascunhos iniciais dos processos até os desenvolvedores responsáveis por implementar os processos e, finalmente, para os usuários que irão gerenciar e monitorar esses processos\cite{model2011notation}. A versão BPMN 2.0, a mais recente, define um padrão XML para arquivos contendo dados sobre o modelo e o funcionamento do processo bem como a sua representação visual\cite{kurzdiagram}, isto permite que o XML seja analisado para obter-se informações importantes sobre os processos. A maioria das ferramentas BPM disponibiliza a exportação do processo em formato XML seguindo o padrão BPMN. No padrão BPMN um processo é descrito como um diagrama de elementos de fluxo, que são: Tasks (Tarefas), Events (Eventos), Gateways e Sequence Flows \cite{kurzdiagram}.
 
-A Process describes a sequence or flow of Activities in an organization with the objective of carrying out work. In
-BPMN a Process is depicted as a graph of Flow Elements, which are a set of Activities, Events, Gateways, and
-Sequence Flows that define finite execution semantics (see Figure 10.1). Processes can be defined at any level from
-enterprise-wide Processes to Processes performed by a single person. Low-level Processes can be grouped
-together to achieve a common business goal
+%tasks
+\emph{Tasks} são a menor parte de um processo, são utilizadas quando o processo não pode ser dividido mais detalhadamente. Geralmente as Tasks são executadas por um usuário final ou por uma aplicação. Existem diferentes tipos de Tasks para representar o diferente comportamente que tava tarefa pode representar. Por exemplo, uma \emph{userTask} representa uma tarefa em que um usuário deve executar uma ação.
+%represent. The list of Task types MAY be extended along with any corresponding indicators. \emph{userTask},\emph{manualTask}.
 
-A Task is an atomic Activity within a Process flow. A Task is used when the work in the Process cannot be broken
-down to a finer level of detail. Generally, an end-user and/or applications are used to perform the Task when it is
-executed.
-A Task object shares the same shape as the Sub-Process, which is a rectangle that has rounded corners (see Figure
-10.8).
-? A Task is a rounded corner rectangle that MUST 
+%events
+Um \emph{Event} é algo que "acontece" durante o curso de um processo\cite{model2011notation}. Existem três tipos principais de eventos: Start Event (indica o início do processo), End Event (indica um fim do processo) e Intermediate Events (indica um evento entre o início e o fim do processo).
 
-10.2.3.1 Types of Tasks
-There are different types of Tasks identified within BPMN to separate the types of inherent behavior that Tasks might
-represent. The list of Task types MAY be extended along with any corresponding indicators. A Task which is not further
-specified is called Abstract Task (this was referred to as the None Task in BPMN 1.2). The notation of the Abstract
-Task is shown in Figure 10.8
+%gateways
+\emph{Gateways} são usados para controlar o fluxo do processo. Em gateways do tipo \emph{Exclusive}, apenas um dos caminhos que partem do gateway poderão ser seguidos, já em gateways do tipo \emph{Inclusive} um ou mais caminhos podem ser seguidos. Em gateways do tipo \emph{Parallel} todos os caminhos são tomados em paralelo.
 
-BPMN 2.0 define um padrão XML para arquivos contendo o modelo e funcionamento do processo e a representação visual do processo. 
-@article{kurzdiagram,
-  title={Diagram Interchangeability in BPMN 2},
-  author={Kurz, Matthias and Menge, Falko and Misiak, Zbigniew}
-}
-%citar pros acima e colocar no .bib
--A maioria da ferramentas disponibilizam a exportação dos processos para esse formato e segue o mesmo padrão;
+%A Parallel Gateway is used to synchronize (combine) parallel flows and to create parallel flows.? The Parallel Gateway MUST use a marker that is in the shape of 
+%plus sign and is placed within the Gateway
+%diamond (see Figure 10.110) to distinguish it from other Gateway
 
-http://www.bpmnquickguide.com/get-bpmn-quick-guide/
+%sequence flows
+Um elemento \emph{Sequence Flow} é usado para exibir a ordem em que os demais elementos são executados em um processo. Cada \emph{sequenceFlow} possui um atributo \emph{sourceRef} que indica de onde este \emph{sequenceFlow} vem, ou sua "fonte", e um atributo \emph{targetRef} que indica para onde ele vai, ou seja, seu alvo. Cada \emph{sequenceFlow} possui apenas possui apenas uma fonte e um alvo. Analisando os elementos \emph{sequenceFlow} e analisando os dois atributos citados acima é possível identificar todo o fluxo do processo.
 
--O que é;
-has developed a standard Business Process Model and Notation (BPMN).
-The primary goal of BPMN is to provide a notation that is readily understandable by all business users, from the business
-analysts that create the initial drafts of the processes, to the technical developers responsible for implementing the
-technology that will perform those processes, and finally, to the business people who will manage and monitor those
-processes. 
-@article{model2011notation,
-  title={Notation (BPMN) version 2.0},
-  author={Model, Business Process},
-  journal={OMG Specification, Object Management Group},
-  year={2011}
-}
-
--Alguns exemplos;
-
--Alguns exemplos de notação;
--Principais elementos;
-explicar bem o sequenceflow, atributos…
-start event e end event
-\emph{SequenceFlow},“targetRef” e “sourceRef”
-http://blog.goodelearning.com/bpmn/bpmn-2-0-terms-explained-process-flows/
-\emph{userTask},\emph{manualTask}.
-\emph{Gateway}
 
 \section{Teste Funcional}
 -O que é...
+-Cobertura de teste funcional
 
 \subsection{Teste com selenium}
 -funcionamento, elementos  necessários  pro  teste, código
@@ -128,31 +96,31 @@ implementation.
 
 \subsection{Funcionamento}
 %colocar uma citação pra array de adjacencias
-O principal elemento para o funcionamento do parser é o \emph{SequenceFlow}. Por conter os atributos “targetRef” e “sourceRef” os elementos do tipo SequenceFlow permitem percorrer todo o diagrama. Ao iniciar o parser, é solicitado ao usuário o caminho para o arquivo BPMN e a ID do processo a ser avaliado. Um diagrama pode conter mais de um processo e, nesse caso, o usuário pode escolher que todos processos sejam avaliados.
+O principal elemento para o funcionamento do parser é o \emph{Sequence Flow}. Por conter os atributos “targetRef” e “sourceRef” os elementos deste tipo permitem percorrer todo o diagrama. Ao iniciar o parser, é solicitado ao usuário o caminho para o arquivo BPMN e a ID do processo a ser avaliado. Um diagrama pode conter mais de um processo e, nesse caso, o usuário pode escolher que todos processos sejam avaliados.
 
-Foi criada a classe \emph{Node} cujos objetos devem guardar informações básicas sobre as tarefas do processo e um array de objetos da mesma classe. Durante a execução do parser uma array de objetos da classe Node é preenchido formando assim um array de adjacências. O método principal do parser percorre o processo recursivamente através dos elementos do tipo \emph{SequenceFlow}, enquanto um tarefa for encontrada, um objeto da classe Node é criado e o método é chamado recursivamente de modo a retornar o array de adjacências para este objeto.
+A classe \emph{Node} define um tipo de objeto que guarda informações básicas sobre as tarefas do processo e um \emph{array} de objetos da mesma classe. Durante a execução do parser um array de objetos da classe Node é preenchido formando assim um array de adjacências. O método principal do parser percorre o processo recursivamente através dos elementos do tipo \emph{Sequence Flow}, enquanto um tarefa for encontrada, um objeto da classe Node é criado e o método é chamado recursivamente de modo a retornar o array de adjacências para este objeto.
 
-A partir do array de adjacências são criados os caminhos possíveis pelos quais o processo pode executar. O método que cria os caminhos percorre recursivamente o array de adjacências criado anteriormente e "constrói" um novo caminho, tendo como condição de parada o encontro de uma das últimas tarefas a serem executadas. Ao encontrar uma tarefa final, o caminho é armazenado e é iniciada a construção de um novo caminho.
+A partir do array de adjacências são criados os caminhos possíveis pelos quais o processo pode passar. O método que cria os caminhos percorre recursivamente o array de adjacências criado anteriormente e "constrói" um novo caminho, tendo como condição de parada o encontro de uma das últimas tarefas a serem executadas. Uma tarefa é uma das últimas quando o elemento que a sucede no fluxo for \emph{End Event}. Ao encontrar uma tarefa final, o caminho é armazenado e é iniciada a construção de um novo caminho.
 
-Os caminhos obtidos são base para a criação dos dois artefatos para auxiliar no teste funcional: tabela de caminhos possíveis e código para o teste funcional. Para criar a tabela com os caminhos possíveis, cada tarefa existente representará uma coluna na tabela e cada caminho representará um linha. Para cada caminho, se a tarefa estiver presente a coluna será marcada com "X" caso contrário a coluna será marcada com um "0". Caso mais de um processo seja avaliado ao mesmo tempo, a tabela correspondente a cada processo estará separada individualmente no arquivo final.
+Os caminhos obtidos são base para a criação dos dois artefatos para o teste funcional: tabela de caminhos possíveis e código para o teste funcional. Para criar a tabela com os caminhos possíveis, cada tarefa existente no processo representará uma coluna na tabela e cada caminho representará uma nova linha. Para cada caminho, se a tarefa estiver presente a coluna será marcada com "X" caso contrário a coluna será marcada com um "0". Caso mais de um processo seja avaliado ao mesmo tempo, a tabela referente à cada processo estará separada individualmente no arquivo final.
 %colocar tabela de exemplo
 
-Para a criação do código para o teste funcional dois arquivos devem ser criados: o arquivo contendo os cenários e a classe \emph{stepDefinition} contendo os métodos para cada passo de cenário. Para criar estes artefatos, cada caminho obtido é considerado um caminho diferente. Como trata-se de um teste funcional, apenas tarefas que podem ser executadas por um usuário podem ser executadas (\emph{userTask},\emph{manualTask}...). Assim, para cada caminho é criado um novo cenário utilizando a notação do Cucumber e comtemplando apenas as tarefas que podem ser executadas por um usuário. O método correspondente a cada passo do cenário é criado ao mesmo tempo. 
+Para a criação do código para o teste funcional dois arquivos devem ser criados: o arquivo contendo os cenários e a classe \emph{stepDefinition} contendo os métodos para cada passo do cenário. Para criar estes artefatos, cada caminho obtido é considerado um cenário diferente. Como trata-se de um teste funcional, apenas tarefas que podem ser executadas por um usuário devem ser avaliadas (\emph{userTask},\emph{manualTask}...). Assim, para cada caminho é criado um novo cenário utilizando a notação do Cucumber e comtemplando apenas as tarefas que podem ser executadas por um usuário. O método correspondente a cada passo do cenário é criado ao mesmo tempo. 
 %imagem com exemplo: pedaço do processo -> cenário -> stepdefinition
 %explicar imagem, os arquivos conteram varios processos e varios métodos, ambos precisam ser completados para a execução do teste
 
 \subsection{Dificuldades/Limitações}
 Algumas ferramentas exportam o diagrama para o formato BPMN inserindo um “tipo” antes no nome de cada tag XML, por exemplo, a tag de nome “task” pode estar representada como “semantic:task” e isso pode impedir que o parser do Java identifique os elementos. Assim, foi necessário preparar o parser para tratar este tipo de situação.
 
-Para a criação dos artefatos para o teste funcional são levados em conta apenas tarefas que podem ser executadas por um usuário. Apesar de utilizarem o mesmo padrão BPMN, algumas ferramentas podem utilizar nomes diferentes para representar estas tarefas no arquivo XML. Por isso, dependendo da tarefa que for utilizada, pode ser necessário substituir o nome dos tipos a serem utilizados no parser.
+Na criação dos artefatos para o teste funcional são levados em conta apenas tarefas que podem ser executadas por um usuário. Apesar de utilizarem o mesmo padrão BPMN, algumas ferramentas podem utilizar nomes diferentes para representar estas tarefas no arquivo XML. Por isso, dependendo da tarefa que for utilizada, pode ser necessário substituir o nome dos tipos a serem utilizados no parser.
 
 %-subprocess -> apenas como uma tarefa, normalmente sao simples, so testa o principal,subprocessos normalmente sao simples
 
-Na criação dos caminhos, uma dificuldade ocorreu devido aos desvios causados por elementos do tipo \emph{Gateway}. Para isso, para cada Node criado no array é guardada o tipo do elemento que o antecede. E então na criação dos caminhos elementos que partem de um desvio de fluxo são tratados para criar os caminhos corretamente, por exemplo: se dois elementos, X e Y, vem de um gateway exclusivo, os caminhos obtido até estes elementos serão duplicados, ou seja, metade dos caminhos passaram apenas por X e metade dos caminhos passarão apenas por Y.
+Na criação dos caminhos, uma dificuldade ocorreu devido aos desvios causados por elementos do tipo \emph{Gateway}. Para isso, para cada Node criado no array é guardada o tipo do elemento que o antecede. Assim, na criação dos caminhos, elementos que partem de um desvio de fluxo precisaram ser tratados para criar os caminhos corretamente, por exemplo: se dois elementos, X e Y, vem de um gateway exclusivo, os caminhos obtidos até estes elementos serão duplicados, ou seja, metade dos caminhos passaram apenas por X e metade dos caminhos passarão apenas por Y.
 
 %Na criação dos caminhos, há uma exceção para quando existir uma divisão de fluxo através de um gateway do tipo inclusivo. Diferente do que acontece com o tipo exclusivo, onde apenas uma opção de pode ser seguida de cada vez, no caminho incluso as opções podem variar pois um ou mais caminhos podem ser seguidos ao mesmo tempo. Os caminhos em que apenas um fluxo é seguido já são cobertos pela execução normal do parser, então, após a criação dos caminhos, é identificada a existencia de fluxos inclusivos e, se necessário, caminhos adicionais são inseridos.
 
-Pelo parser percorrer o processo baseado no fluxo dos elementos do tipo \emph{sequenceFlow} e ser executado recursivamente, ocorreram problemas em processos onde uma parcela do processo é executada recursivamente. Esses problemas foram causados devido ao fluxo nunca encontrar um "fim" nesses casos, para solucionar esses problema foi criado um "delimitador de recursão" que define e controla o número de vezes em que o mesmo \emph{sequenceFlow} será executado.
+Devido ao fato de o parser ser executado recursivamente e percorrer o processo baseado no fluxo dos elementos do tipo \emph{sequenceFlow}, ocorreram problemas em processos onde uma parcela do processo também é executada recursivamente. Estes problemas foram causados devido ao fluxo nunca encontrar um "fim". Para solucionar esses problema foi criado um "delimitador de recursão" que define e controla o número de vezes em que o mesmo \emph{sequenceFlow} será executado.
 
 %anotações anteriores
 %Após isso, é iniciada a avaliação de cada processo. O parser percorre os elementos do tipo sequenceFlow em busca das primeiras tarefas do processo, ou seja, tarefas que sucedem elementos do tipo startEvent. Para cada tarefa encontrada, será criado um objeto da classe definida como “Node” que contém informações básicas sobre os elementos e mais um array de adjacência. 
@@ -162,8 +130,11 @@ Pelo parser percorrer o processo baseado no fluxo dos elementos do tipo \emph{se
 %Para criar os possíveis caminhos do processo, o array de adjacências obtido anteriormente é navegado recursivamente até encontrar uma condição de parada: a(s) últimos tarefas a serem executadas. Para cada chamada deste método, é recebido o array e os elementos pelos quais esse caminho passou anteriomente, ao encontrar a condição de parada, este novo caminho é armazenado e é iniciado um novo caminho. %método paths
 %A partir da criação dos caminhos, é chamado o método fillTable que percorre os caminhos para criar a tabela com os caminhos possíveis. No cabeçalho da tabela estarão presentes os nomes de todas as tarefas do processo e cada linha representa um caminho possível. O método fillTable ira percorrer todos os caminhos, comparando cada elemento do caminho com um elemento do processo, se o elemento faz parte deste caminho a coluna será marcada com um "X" caso contrário, a coluna será marcada com um "0". Ao final de toda a execução, a tabela será salva em um arquivo do tipo excel. Caso exista mais de um processo a ser analisado, as tabelas para cada processo estarão distribuídas individualmente no arquivo excel.
 
-\subsection{Resultados}
-%colocar um exemplo inteiro?
+\section{Resultados}
+%imagem do processo
+%selecionar um processo e colocar o exemplo inteiro?
+%facilita a criação do código
+%ajuda a ampliar a cobertura dos testes funcionais
 
 \section{References}
 
