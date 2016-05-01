@@ -22,8 +22,7 @@
   (UFSM)\\
   Santa Maria -- RS -- Brazil
 \nextinstitute
-  Laboratório de Sistemas de Computação (LSC) -- Universidade Federal de Santa Maria\\
-  
+  Laboratório de Sistemas de Computação (LSC) -- Universidade Federal de Santa Maria\\  
   \email{\{jmoura,andrea\}@inf.ufsm.br}
 }
 \begin{document} 
@@ -52,9 +51,15 @@
 
 \section{Business Process Model and Notation - \emph{BPMN}}
 O padrão Business Process Model and Notation, ou BPMN, foi criado com o objetivo de fornecer uma notação fácilmente compreensível por todos os usuários, desde os analistas que criam os rascunhos iniciais dos processos até os desenvolvedores responsáveis por implementar os processos e, finalmente, para os usuários que irão gerenciar e monitorar esses processos\cite{model2011notation}. A versão BPMN 2.0, a mais recente, define um padrão XML para arquivos contendo dados sobre o modelo e o funcionamento do processo bem como a sua representação visual\cite{kurzdiagram}, isto permite que o XML seja analisado para obter-se informações importantes sobre os processos. A maioria das ferramentas BPM disponibiliza a exportação do processo em formato XML seguindo o padrão BPMN. No padrão BPMN um processo é descrito como um diagrama de elementos de fluxo, que são: Tasks (Tarefas), Events (Eventos), Gateways e Sequence Flows \cite{kurzdiagram}.
+%
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[width=.9\textwidth]{figuras/BPMNBasicSymbols.png}
+%\caption{Principais elementos de um processo de acordo com o padrão BPMN. Fonte: NobleProg Training Materials}
+%\label{fig:bpmn}
+%\end{figure}
 
-%tasks
-\emph{Tasks} são a menor parte de um processo, são utilizadas quando o processo não pode ser dividido mais detalhadamente. Geralmente as Tasks são executadas por um usuário final ou por uma aplicação. Existem diferentes tipos de Tasks para representar o diferente comportamente que tava tarefa pode representar. Por exemplo, uma \emph{userTask} representa uma tarefa em que um usuário deve executar uma ação.
+Uma \emph{Activiti} é a menor parte de um processo, e é utilizada quando o processo não pode ser dividido mais detalhadamente. Quando uma \emph{Activiti} está inserida no contexto de um processo, ela é chamada de \emph{Task}. Geralmente as Tasks são executadas por um usuário final ou por uma aplicação. Existem diferentes tipos de Tasks para representar o diferente comportamente que tava tarefa pode representar. Por exemplo, uma \emph{userTask} representa uma tarefa em que um usuário deve executar uma ação.
 %represent. The list of Task types MAY be extended along with any corresponding indicators. \emph{userTask},\emph{manualTask}.
 
 %events
@@ -96,23 +101,47 @@ implementation.
 
 \subsection{Funcionamento}
 %colocar uma citação pra array de adjacencias
-O principal elemento para o funcionamento do parser é o \emph{Sequence Flow}. Por conter os atributos “targetRef” e “sourceRef” os elementos deste tipo permitem percorrer todo o diagrama. Ao iniciar o parser, é solicitado ao usuário o caminho para o arquivo BPMN e a ID do processo a ser avaliado. Um diagrama pode conter mais de um processo e, nesse caso, o usuário pode escolher que todos processos sejam avaliados.
+O principal elemento para o funcionamento do parser é o \emph{Sequence Flow}. Por conter os atributos targetRef e sourceRef os elementos deste tipo permitem percorrer todo o diagrama. Ao iniciar o parser, é solicitado ao usuário o caminho para o arquivo BPMN e a ID do processo a ser avaliado. Um diagrama pode conter mais de um processo e, nesse caso, o usuário pode escolher que todos processos sejam avaliados.
 
 A classe \emph{Node} define um tipo de objeto que guarda informações básicas sobre as tarefas do processo e um \emph{array} de objetos da mesma classe. Durante a execução do parser um array de objetos da classe Node é preenchido formando assim um array de adjacências. O método principal do parser percorre o processo recursivamente através dos elementos do tipo \emph{Sequence Flow}, enquanto um tarefa for encontrada, um objeto da classe Node é criado e o método é chamado recursivamente de modo a retornar o array de adjacências para este objeto.
 
 A partir do array de adjacências são criados os caminhos possíveis pelos quais o processo pode passar. O método que cria os caminhos percorre recursivamente o array de adjacências criado anteriormente e "constrói" um novo caminho, tendo como condição de parada o encontro de uma das últimas tarefas a serem executadas. Uma tarefa é uma das últimas quando o elemento que a sucede no fluxo for \emph{End Event}. Ao encontrar uma tarefa final, o caminho é armazenado e é iniciada a construção de um novo caminho.
 
-Os caminhos obtidos são base para a criação dos dois artefatos para o teste funcional: tabela de caminhos possíveis e código para o teste funcional. Para criar a tabela com os caminhos possíveis, cada tarefa existente no processo representará uma coluna na tabela e cada caminho representará uma nova linha. Para cada caminho, se a tarefa estiver presente a coluna será marcada com "X" caso contrário a coluna será marcada com um "0". Caso mais de um processo seja avaliado ao mesmo tempo, a tabela referente à cada processo estará separada individualmente no arquivo final.
+Os caminhos obtidos são base para a criação dos dois artefatos para o teste funcional: tabela de caminhos possíveis e código para o teste funcional. Para criar a tabela com os caminhos possíveis, cada tarefa existente no processo representará uma coluna na tabela e cada caminho representará uma nova linha. Para cada caminho, se a tarefa estiver presente a coluna será marcada com "X" caso contrário a coluna será marcada com um "0". Caso mais de um processo seja avaliado ao mesmo tempo, a tabela referente à cada processo estará separada individualmente no arquivo final. Na Tabela \ref{tab:exemplo}, pode ser visto uma tabela resultante da execução do parser para um processo com cinco \emph{tasks} e dois caminhos possíveis. 
 %colocar tabela de exemplo
 
-Para a criação do código para o teste funcional dois arquivos devem ser criados: o arquivo contendo os cenários e a classe \emph{stepDefinition} contendo os métodos para cada passo do cenário. Para criar estes artefatos, cada caminho obtido é considerado um cenário diferente. Como trata-se de um teste funcional, apenas tarefas que podem ser executadas por um usuário devem ser avaliadas (\emph{userTask},\emph{manualTask}...). Assim, para cada caminho é criado um novo cenário utilizando a notação do Cucumber e comtemplando apenas as tarefas que podem ser executadas por um usuário. O método correspondente a cada passo do cenário é criado ao mesmo tempo. 
-%imagem com exemplo: pedaço do processo -> cenário -> stepdefinition
+Para a criação do código para o teste funcional dois arquivos devem ser criados: o arquivo contendo os cenários e a classe \emph{stepDefinition} contendo os métodos para cada passo do cenário. Para criar estes artefatos, cada caminho obtido é considerado um cenário diferente. Como trata-se de um teste funcional, apenas tarefas que podem ser executadas por um usuário devem ser avaliadas (\emph{userTask},\emph{manualTask}...). Assim, para cada caminho é criado um novo cenário utilizando a notação do Cucumber e comtemplando apenas as tarefas que podem ser executadas por um usuário. O método correspondente a cada passo do cenário é criado ao mesmo tempo. Na Figura \ref{fig:exemplo_cenario}, podem ser vistos dois cenários resultante da execução do parser para um processo com dois caminhos possíveis. 
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.5\textwidth]{figuras/exemplo_cenario.png}
+\caption{Exemplo de cenários resultantes}
+\label{fig:exemplo_cenario}
+\end{figure}
+
 %explicar imagem, os arquivos conteram varios processos e varios métodos, ambos precisam ser completados para a execução do teste
 
-\subsection{Dificuldades/Limitações}
-Algumas ferramentas exportam o diagrama para o formato BPMN inserindo um “tipo” antes no nome de cada tag XML, por exemplo, a tag de nome “task” pode estar representada como “semantic:task” e isso pode impedir que o parser do Java identifique os elementos. Assim, foi necessário preparar o parser para tratar este tipo de situação.
 
-Na criação dos artefatos para o teste funcional são levados em conta apenas tarefas que podem ser executadas por um usuário. Apesar de utilizarem o mesmo padrão BPMN, algumas ferramentas podem utilizar nomes diferentes para representar estas tarefas no arquivo XML. Por isso, dependendo da tarefa que for utilizada, pode ser necessário substituir o nome dos tipos a serem utilizados no parser.
+
+
+\subsection{Dificuldades/Limitações}
+Algumas ferramentas exportam o diagrama para o formato BPMN inserindo um ``tipo'' antes no nome de cada tag XML, por exemplo, a tag de nome task pode estar representada como ``semantic:task'' e isso pode impedir que o parser do Java identifique os elementos. Assim, foi necessário preparar o parser para tratar este tipo de situação.
+
+\begin{table}[]
+\centering
+\caption{Exemplo de tabela resultante}
+\label{tab:exemplo}
+\begin{tabular}{ccccc}
+\multicolumn{1}{l}{Quotation Handling} & \multicolumn{1}{l}{Approve Order} & \multicolumn{1}{l}{Order Handling} & \multicolumn{1}{l}{Shipping Handling} & \multicolumn{1}{l}{Review Order} \\
+X & X & 0 & 0 & 0 \\
+X & X & X & X & X
+\end{tabular}
+\end{table}
+
+
+Na criação dos artefatos para o teste funcional são levados em conta apenas tarefas que podem ser executadas por um usuário. Apesar de utilizarem o mesmo padrão BPMN, algumas ferramentas podem utilizar nomes diferentes parat representar estas tarefas no arquivo XML. Por isso, dependendo da tarefa que for utilizada, pode ser necessário substituir o nome dos tipos a serem utilizados no parser.
+
+%pode gerar caminhos iguais, por remover boa parte das tarefas, como pdoe ser visto na figura de antes também
 
 %-subprocess -> apenas como uma tarefa, normalmente sao simples, so testa o principal,subprocessos normalmente sao simples
 
@@ -130,7 +159,19 @@ Devido ao fato de o parser ser executado recursivamente e percorrer o processo b
 %Para criar os possíveis caminhos do processo, o array de adjacências obtido anteriormente é navegado recursivamente até encontrar uma condição de parada: a(s) últimos tarefas a serem executadas. Para cada chamada deste método, é recebido o array e os elementos pelos quais esse caminho passou anteriomente, ao encontrar a condição de parada, este novo caminho é armazenado e é iniciado um novo caminho. %método paths
 %A partir da criação dos caminhos, é chamado o método fillTable que percorre os caminhos para criar a tabela com os caminhos possíveis. No cabeçalho da tabela estarão presentes os nomes de todas as tarefas do processo e cada linha representa um caminho possível. O método fillTable ira percorrer todos os caminhos, comparando cada elemento do caminho com um elemento do processo, se o elemento faz parte deste caminho a coluna será marcada com um "X" caso contrário, a coluna será marcada com um "0". Ao final de toda a execução, a tabela será salva em um arquivo do tipo excel. Caso exista mais de um processo a ser analisado, as tabelas para cada processo estarão distribuídas individualmente no arquivo excel.
 
+
+
 \section{Resultados}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.8\paperwidth]{figuras/diagrama_exemplo.png}
+\caption{Exemplo de Processo. Fonte: Object Management Group}
+\label{fig:bpmn}
+\end{figure}
+
+%imagem com exemplo: pedaço do processo -> cenário -> stepdefinition
+
 %imagem do processo
 %selecionar um processo e colocar o exemplo inteiro?
 %facilita a criação do código
