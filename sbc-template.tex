@@ -37,21 +37,86 @@
 
 \section{Introdução}
 -Importância dos testes
-	-Trabalho anterior: teste de carga + teste funcional;
-	-Teste funcional com selenium e cucumber mais promissor, mas pode ser trabalhoso;
-		-Também é necessário criar manualmente cada cenário de teste
-	-Alternativa pra auxiliar na criação dos testes: analisar o diagrama no formato BPMN e criar alguns códigos;
-	-Objetivo: melhorar e facilitar o teste funcional automatizado;
+-Trabalho anterior: teste de carga + teste funcional;
+-Teste funcional com selenium e cucumber mais promissor, mas pode ser trabalhoso;
+	-Também é necessário criar manualmente cada cenário de teste
+-Alternativa pra auxiliar na criação dos testes: analisar o diagrama no formato BPMN e criar alguns códigos;
+-Objetivo: melhorar e facilitar o teste funcional automatizado;
+	
+\section{Teste Funcional}
+O teste funcional é um tipo de teste que permite verificar as saídas de um sistema produzidas a partir de entradas pré-definidas. Este tipo de teste permite testar as funcionalidades, requerimentos, regras de negócio presentes no software\cite{molinari2003testes} verificando a existem de erros, o que auxilia na melhora da qualidade do software.
 
-\section{BPM e Teste}
+-Cobertura de teste funcional
+http://cs.txstate.edu/~rp31/papers/ZhuHallMay.pdf
+ftp://mail.im.tku.edu.tw/Prof_Shyur/Software%20Reliability/%B4%C1%A5%BD%B3%F8%A7i/P10.pdf
+http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.50.550&rep=rep1&type=pdf
+
+As atividades de testes podem muitas vezes se tornar exaustivas e trabalhosas, dificultando assim a execução dos testes de forma adequada para a análise de qualidade. Com o objetivo de melhorar a qualidade da análise e o tempo de execução dos testes, foram criados os testes automatizados, que proporcionam a execução dos testes mais rapidamente, e com maior cobertura do software. %http://comunidade.cpqd.com.br/cadernosdetecnologia/Vol1_N1_jan_dez_2005/pdf/artigo09_Fantinato.pdf -> exemplo de trabalho automatizandp \cite{fantinato2005autotest}
+
+%Podem ser consideradas para a automação
+as atividades de geração e de execução
+de casos de teste [2,8]
+%[2] BINDER, R. V., “Testing object-oriented systems
+– Models, patterns, and tools”, Addison-Wesley, 1999.
+%[8] KANER, C., “Improving the maintainability of
+automated test suites”, Proceedings of the
+International Quality Week, 1997. 
+
+%Quando executada corretamente, a
+automação de teste é uma das melhores formas
+de reduzir o tempo de teste no ciclo de vida do
+software, diminuindo o custo e aumentando a
+produtividade do desenvolvimento de software
+como um todo, além de, conseqüentemente,
+aumentar a qualidade do produto final
+
+
+%Caixa-cinza
+%A técnica de teste de caixa-cinza é uma mescla do uso das técnicas de caixa-preta e de caixa-branca. Isso envolve ter acesso a estruturas de dados e algoritmos do %componente a fim de desenvolver os casos de teste, que são executados como na técnica da caixa-preta. Manipular entradas de dados e formatar a saída não é considerado %caixa-cinza pois a entrada e a saída estão claramente fora da caixa-preta. A caixa-cinza pode incluir também o uso de engenharia reversa para determinar por exemplo %os limites superiores e inferiores das classes, além de mensagens de erro.
+%Alguns autores chegam a definir uma técnica de teste caixa cinza, que seria um mesclado do uso das técnicas de caixa preta e caixa branca, mas, como toda execução de %trabalho relacionado à atividade de teste utilizará simultaneamente mais de uma técnica de teste, é recomendável que se fixem os conceitos primários de cada técnica.
+%
+%KOSCIANSKI, A., Soares (2006). M. S. Qualidade de Software Novatec [S.l.]
+%PRESSMAN, R. S. (2002). Engenharia de Software McGraw Hill [S.l.]
+%MYERS, Glenford J. (2004). The Art of Software Testing 2 ed. (Nova Jérsei: John Wiley & Sons). ISBN 0-471-46912-2.
+
+
+\subsection{Teste Funcional utilizando \emph{Selenium}}
+-funcionamento, elementos  necessários  pro  teste, código
+-problema: cirar código
+
+%Para executar testes funcionais em aplicações Web, pode-se utilizar ferramentas livres como Selenium\footnote{Selenium. Available at: www.seleniumhq.org.}, %Watir\footnote{Watir. Available at: www.watir.com.} ou Geb\footnote{Geb. Available at: www.gebish.org.}. Para este trabalho, escolheu-se a ferramenta Selenium, aliada ao Cucumber-JVM\footnote{Cucumber-JVM. Available at: www.github.com/cucumber/cucumber-jvm.} para descrição dos testes. A escolha foi motivada pelo grande número de referências ao Selenium na Web, confirmadas por um trabalho que apresentou resultados satisfatórios com Selenium e Cucumber~\cite{sbqs2013}.
+
+%Com estas ferramentas, o processo para a execução de um teste funcional é composto de: captura da interação do usuário com o navegador (Selenium IDE), exportação do código gerado (Selenium IDE), criação do cenário de teste (Cucumber), criação das definições dos passos do teste (Cucumber), criação dos métodos para cada passo (Java) e execução do teste (Selenium WebDriver). O cenário de teste é a definição, em ordem de execução, dos passos que são executados na aplicação, bem como dos resultados esperados. %Para executar testes funcionais em aplicações Web, pode-se utilizar ferramentas livres como Selenium\footnote{Selenium. Available at: www.seleniumhq.org.}, %Watir\footnote{Watir. Available at: www.watir.com.} ou Geb\footnote{Geb. Available at: www.gebish.org.}. Para este trabalho, escolheu-se a ferramenta Selenium, aliada ao Cucumber-JVM\footnote{Cucumber-JVM. Available at: www.github.com/cucumber/cucumber-jvm.} para descrição dos testes. A escolha foi motivada pelo grande número de referências ao Selenium na Web, confirmadas por um trabalho que apresentou resultados satisfatórios com Selenium e Cucumber~\cite{sbqs2013}.
+
+%Com estas ferramentas, o processo para a execução de um teste funcional é composto de: captura da interação do usuário com o navegador (Selenium IDE), exportação do código gerado (Selenium IDE), criação do cenário de teste (Cucumber), criação das definições dos passos do teste (Cucumber), criação dos métodos para cada passo (Java) e execução do teste (Selenium WebDriver). O cenário de teste é a definição, em ordem de execução, dos passos que são executados na aplicação, bem como dos resultados esperados. 
+
+\subsection{Teste Funcional utilizando \emph{Cucumber-JVM}}
+-funcionamento, elementos  necessários  pro  teste, cenário, stepDefinition
+-problema-]: definir os cenários possíveis
+	
+\section{BPM e Teste Funcional}
+-Teste funcional ajuda a aumentar a qualidade do software;
+-sistemas bpm = web, permite executar testes funcionais com ferramenta
 -Teste é pouco abordado
 -Teste é importante
--Teste funcional ajuda a aumentar a qualidade do software;
 -Trabalhos relacionados;
+%pegar citações
+
+O termo BPM pode ser usado com ênfases diferentes, às vezes com foco em tecnologia (software) e outras vezes em gestão. Mesmo assim, a área tem convergido no entendimento do ciclo de vida de aplicações de BPM, que envolve as atividades de análise, modelagem, execução, monitoramento e otimização~\cite{ABPMP}. 
+
+Os sistemas de BPM (BPMS) têm se afirmado como ferramentas essenciais para suporte a atividades desse ciclo de vida. Atualmente, pode-se dizer que um típico BPMS oferece recursos para definição e modelagem de processos em BPMN, controle da execução e monitoramento de atividades dos processos~\cite{forrester}. Há uma tendência dos BPMS em abreviar o desenvolvimento de software, por exemplo através de geradores de formulários Web associados a tarefas dos processos~\cite{greenresearch}. Nota-se, no entanto, que a preocupação com testes não fica evidente nas ferramentas BPMS. De fato, examinando-se o material promocional e a documentação disponível sobre os principais BPMS, observa-se uma ênfase em etapas de modelagem e execução.
+
+There are some  studies that assess/test compliance of models of processes~\cite{conformancetesting} 
+or evaluate tools based on their features~\cite{comparingbpms} latter being directed to support organizations choosing the ideal BPMS. 
+
+Moreover, the importance of the tests is widely recognized in software engineering ~\cite{swebok14}. 
+Whereas BPMS applications are usually Web-based systems, it can be assumed that it can be successfully tested using dedicated approaches, such as load tests or functional testing of the black-box type. There are also those who argue that BPM applications test differs from traditional Web applications testing~\cite{evoke}, but there were no more references to deepen this view. This finding reinforced the motivation for this work. 
 
 \section{Business Process Model and Notation - \emph{BPMN}}
 O padrão Business Process Model and Notation, ou BPMN, foi criado com o objetivo de fornecer uma notação fácilmente compreensível por todos os usuários, desde os analistas que criam os rascunhos iniciais dos processos até os desenvolvedores responsáveis por implementar os processos e, finalmente, para os usuários que irão gerenciar e monitorar esses processos\cite{model2011notation}. A versão BPMN 2.0, a mais recente, define um padrão XML para arquivos contendo dados sobre o modelo e o funcionamento do processo bem como a sua representação visual\cite{kurzdiagram}, isto permite que o XML seja analisado para obter-se informações importantes sobre os processos. A maioria das ferramentas BPM disponibiliza a exportação do processo em formato XML seguindo o padrão BPMN. No padrão BPMN um processo é descrito como um diagrama de elementos de fluxo, que são: Tasks (Tarefas), Events (Eventos), Gateways e Sequence Flows \cite{kurzdiagram}.
-%
+
+%Também há convergência sobre o padrão BPMN (\emph{Business Process Model and Notation}) para expressar a modelagem de processos.
+
 %\begin{figure}[ht]
 %\centering
 %\includegraphics[width=.9\textwidth]{figuras/BPMNBasicSymbols.png}
@@ -74,16 +139,6 @@ Um \emph{Event} é algo que "acontece" durante o curso de um processo\cite{model2
 
 %sequence flows
 Um elemento \emph{Sequence Flow} é usado para exibir a ordem em que os demais elementos são executados em um processo. Cada \emph{sequenceFlow} possui um atributo \emph{sourceRef} que indica de onde este \emph{sequenceFlow} vem, ou sua "fonte", e um atributo \emph{targetRef} que indica para onde ele vai, ou seja, seu alvo. Cada \emph{sequenceFlow} possui apenas possui apenas uma fonte e um alvo. Analisando os elementos \emph{sequenceFlow} e analisando os dois atributos citados acima é possível identificar todo o fluxo do processo.
-
-
-\section{Teste Funcional}
--O que é...
--Cobertura de teste funcional
-
-\subsection{Teste com selenium}
--funcionamento, elementos  necessários  pro  teste, código
-\subsection{Teste com cucumber}
--funcionamento, elementos  necessários  pro  teste, cenário, stepDefinition
 
 \section{BPMN Parser}
 -Linguagem, ferramenta,exemplos de diagramas foram obtidos em...
@@ -108,7 +163,7 @@ A classe \emph{Node} define um tipo de objeto que guarda informações básicas sob
 A partir do array de adjacências são criados os caminhos possíveis pelos quais o processo pode passar. O método que cria os caminhos percorre recursivamente o array de adjacências criado anteriormente e "constrói" um novo caminho, tendo como condição de parada o encontro de uma das últimas tarefas a serem executadas. Uma tarefa é uma das últimas quando o elemento que a sucede no fluxo for \emph{End Event}. Ao encontrar uma tarefa final, o caminho é armazenado e é iniciada a construção de um novo caminho.
 
 Os caminhos obtidos são base para a criação dos dois artefatos para o teste funcional: tabela de caminhos possíveis e código para o teste funcional. Para criar a tabela com os caminhos possíveis, cada tarefa existente no processo representará uma coluna na tabela e cada caminho representará uma nova linha. Para cada caminho, se a tarefa estiver presente a coluna será marcada com "X" caso contrário a coluna será marcada com um "0". Caso mais de um processo seja avaliado ao mesmo tempo, a tabela referente à cada processo estará separada individualmente no arquivo final. Na Tabela \ref{tab:exemplo}, pode ser visto uma tabela resultante da execução do parser para um processo com cinco \emph{tasks} e dois caminhos possíveis. 
-%colocar tabela de exemplo
+
 
 Para a criação do código para o teste funcional dois arquivos devem ser criados: o arquivo contendo os cenários e a classe \emph{stepDefinition} contendo os métodos para cada passo do cenário. Para criar estes artefatos, cada caminho obtido é considerado um cenário diferente. Como trata-se de um teste funcional, apenas tarefas que podem ser executadas por um usuário devem ser avaliadas (\emph{userTask},\emph{manualTask}...). Assim, para cada caminho é criado um novo cenário utilizando a notação do Cucumber e comtemplando apenas as tarefas que podem ser executadas por um usuário. O método correspondente a cada passo do cenário é criado ao mesmo tempo. Na Figura \ref{fig:exemplo_cenario}, podem ser vistos dois cenários resultante da execução do parser para um processo com dois caminhos possíveis. 
 
@@ -120,9 +175,6 @@ Para a criação do código para o teste funcional dois arquivos devem ser criados:
 \end{figure}
 
 %explicar imagem, os arquivos conteram varios processos e varios métodos, ambos precisam ser completados para a execução do teste
-
-
-
 
 \subsection{Dificuldades/Limitações}
 Algumas ferramentas exportam o diagrama para o formato BPMN inserindo um ``tipo'' antes no nome de cada tag XML, por exemplo, a tag de nome task pode estar representada como ``semantic:task'' e isso pode impedir que o parser do Java identifique os elementos. Assim, foi necessário preparar o parser para tratar este tipo de situação.
@@ -160,7 +212,6 @@ Devido ao fato de o parser ser executado recursivamente e percorrer o processo b
 %A partir da criação dos caminhos, é chamado o método fillTable que percorre os caminhos para criar a tabela com os caminhos possíveis. No cabeçalho da tabela estarão presentes os nomes de todas as tarefas do processo e cada linha representa um caminho possível. O método fillTable ira percorrer todos os caminhos, comparando cada elemento do caminho com um elemento do processo, se o elemento faz parte deste caminho a coluna será marcada com um "X" caso contrário, a coluna será marcada com um "0". Ao final de toda a execução, a tabela será salva em um arquivo do tipo excel. Caso exista mais de um processo a ser analisado, as tabelas para cada processo estarão distribuídas individualmente no arquivo excel.
 
 
-
 \section{Resultados}
 
 \begin{figure}[ht]
@@ -177,9 +228,9 @@ Devido ao fato de o parser ser executado recursivamente e percorrer o processo b
 %facilita a criação do código
 %ajuda a ampliar a cobertura dos testes funcionais
 
-\section{References}
+\section{Conclusão}
 
-%Bibliographic references must be unambiguous and uniform.  We recommend givingthe author names references in brackets, e.g. \cite{knuth:84},\cite{boulic:91}, and \cite{smith:99}.
+\section{References}
 
 \bibliographystyle{sbc}
 \bibliography{sbc-template}
