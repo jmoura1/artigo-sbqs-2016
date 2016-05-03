@@ -41,17 +41,17 @@
 -Teste funcional com selenium e cucumber mais promissor, mas pode ser trabalhoso;
 	-Também é necessário criar manualmente cada cenário de teste
 -Alternativa pra auxiliar na criação dos testes: analisar o diagrama no formato BPMN e criar alguns códigos;
+-aumentar o cobertura dos testes (não só mais fácil como também melhor)
 -Objetivo: melhorar e facilitar o teste funcional automatizado;
 	
-\section{Teste Funcional}
+\section{Teste Funcional de Software}
 O teste funcional é um tipo de teste que permite verificar as saídas de um sistema produzidas a partir de entradas pré-definidas. Este tipo de teste permite testar as funcionalidades, requerimentos, regras de negócio presentes no software\cite{molinari2003testes} verificando a existem de erros, o que auxilia na melhora da qualidade do software.
 
--Cobertura de teste funcional
-http://cs.txstate.edu/~rp31/papers/ZhuHallMay.pdf
-ftp://mail.im.tku.edu.tw/Prof_Shyur/Software%20Reliability/%B4%C1%A5%BD%B3%F8%A7i/P10.pdf
-http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.50.550&rep=rep1&type=pdf
+Uma das principais medidas para o teste de software é a cobertura de teste. A cobertura de teste é a medida da abrangência do teste e pode ser expressa pela cobertura dos casos de testes ou pelo cobertura do código executado.  Existem diversos trabalhos que abordam a importância da cobertura de testes de software\cite{zhu1997software}, inclusive ligando o crescimento da qualidade e confiabilidade do software produzido com o crescimento da cobertura dos testes\cite{malaiya2002software}. Por esses motivos o aumento da cobertura dos testes de software também é um assunto bastante abordado\cite{bieman1996using}.
 
-As atividades de testes podem muitas vezes se tornar exaustivas e trabalhosas, dificultando assim a execução dos testes de forma adequada para a análise de qualidade. Com o objetivo de melhorar a qualidade da análise e o tempo de execução dos testes, foram criados os testes automatizados, que proporcionam a execução dos testes mais rapidamente, e com maior cobertura do software. %http://comunidade.cpqd.com.br/cadernosdetecnologia/Vol1_N1_jan_dez_2005/pdf/artigo09_Fantinato.pdf -> exemplo de trabalho automatizandp \cite{fantinato2005autotest}
+%Essa cobertura pode se basear em fluxos de controle (instrução, ramificação ou caminhos) ou fluxos de dados. Na cobertura baseada em fluxo de controle, o objetivo é %testar linhas de código, condições de ramificação, caminhos que percorrem o código ou outros elementos do fluxo de controle do software. Na cobertura baseada em fluxo %de dados, o objetivo é testar se os estados dos dados permanecem válidos durante a operação do software, por exemplo, se um elemento de dados é definido antes de ser %usado.
+
+No entanto, as atividades para criar teste funcionais com uma boa cobertura podem muitas vezes se tornar exaustivas e trabalhosas, dificultando assim a execução dos testes de forma adequada para a análise de qualidade. Com o objetivo de melhorar a qualidade da análise e o tempo de execução dos testes, foram criados os testes automatizados, que proporcionam a execução dos testes mais rapidamente, e com maior cobertura do software. %\cite{fantinato2005autotest}
 
 %Podem ser consideradas para a automação
 as atividades de geração e de execução
@@ -62,14 +62,7 @@ de casos de teste [2,8]
 automated test suites”, Proceedings of the
 International Quality Week, 1997. 
 
-%Quando executada corretamente, a
-automação de teste é uma das melhores formas
-de reduzir o tempo de teste no ciclo de vida do
-software, diminuindo o custo e aumentando a
-produtividade do desenvolvimento de software
-como um todo, além de, conseqüentemente,
-aumentar a qualidade do produto final
-
+Quando executada corretamente, a automação de teste é uma das melhores formas de reduzir o tempo de teste no ciclo de vida do software, diminuindo o custo e aumentando a produtividade do desenvolvimento de software como um todo, além de, conseqüentemente, aumentar a qualidade do produto final
 
 %Caixa-cinza
 %A técnica de teste de caixa-cinza é uma mescla do uso das técnicas de caixa-preta e de caixa-branca. Isso envolve ter acesso a estruturas de dados e algoritmos do %componente a fim de desenvolver os casos de teste, que são executados como na técnica da caixa-preta. Manipular entradas de dados e formatar a saída não é considerado %caixa-cinza pois a entrada e a saída estão claramente fora da caixa-preta. A caixa-cinza pode incluir também o uso de engenharia reversa para determinar por exemplo %os limites superiores e inferiores das classes, além de mensagens de erro.
@@ -79,8 +72,10 @@ aumentar a qualidade do produto final
 %PRESSMAN, R. S. (2002). Engenharia de Software McGraw Hill [S.l.]
 %MYERS, Glenford J. (2004). The Art of Software Testing 2 ed. (Nova Jérsei: John Wiley & Sons). ISBN 0-471-46912-2.
 
+%ferramentas escolhidas
+%por que foram escolhidas
 
-\subsection{Teste Funcional utilizando \emph{Selenium}}
+\subsection{Teste Funcional Automatizado utilizando \emph{Selenium} e \emph{Cucumber-JVM}}
 -funcionamento, elementos  necessários  pro  teste, código
 -problema: cirar código
 
@@ -90,9 +85,9 @@ aumentar a qualidade do produto final
 
 %Com estas ferramentas, o processo para a execução de um teste funcional é composto de: captura da interação do usuário com o navegador (Selenium IDE), exportação do código gerado (Selenium IDE), criação do cenário de teste (Cucumber), criação das definições dos passos do teste (Cucumber), criação dos métodos para cada passo (Java) e execução do teste (Selenium WebDriver). O cenário de teste é a definição, em ordem de execução, dos passos que são executados na aplicação, bem como dos resultados esperados. 
 
-\subsection{Teste Funcional utilizando \emph{Cucumber-JVM}}
+%\subsection{Teste Funcional utilizando \emph{Cucumber-JVM}}
 -funcionamento, elementos  necessários  pro  teste, cenário, stepDefinition
--problema-]: definir os cenários possíveis
+-problema: definir os cenários possíveis
 	
 \section{BPM e Teste Funcional}
 -Teste funcional ajuda a aumentar a qualidade do software;
