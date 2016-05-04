@@ -15,7 +15,6 @@
 %Uma estratégia para geração de códigos para Teste Funcional de ferramentas de Gerenciamento de Processos de Negócio
 %Gerando códigos para melhoria do Teste Funcional Automatizado de ferramentas de Gerenciamento de Processos de Negócio
 
-
 \author{Jéssica Lasch de Moura\inst{1}, Andrea Schwertner Charão\inst{1}}
 
 \address{Centro de Tecnologia -- Universidade Federal de Santa Maria
@@ -36,76 +35,68 @@
 \end{resumo}
 
 \section{Introdução}
--Importância dos testes
--Trabalho anterior: teste de carga + teste funcional;
--Teste funcional com selenium e cucumber mais promissor, mas pode ser trabalhoso;
-	-Também é necessário criar manualmente cada cenário de teste
--Alternativa pra auxiliar na criação dos testes: analisar o diagrama no formato BPMN e criar alguns códigos;
--aumentar o cobertura dos testes (não só mais fácil como também melhor)
--Objetivo: melhorar e facilitar o teste funcional automatizado;
+
+ \begin{itemize}
+   \item BPM
+   \item Teste com BPM pouco abordado + importância dos testes;
+   \item Citar trabalho anterior = teste com selenium e cucumber se mostrou mais promissor;
+   \begin{itemize}
+	\item Pode ser trabalhoso criar os elementos necessários para o teste completo;
+   \end{itemize}
+   \item Para melhora na criação dos testes: analisar o diagrama no formato BPMN, utilizando um parse, para gerar informações
+     \begin{itemize}
+	\item Facilitar/tornar mais rápida a criação dos elementos
+	\item Aumento na cobertura dos testes (cria todos cenários possíveis)
+   \end{itemize}
+   \item Objetivo:  melhorar e facilitar o teste funcional automatizado de aplicações bpm;
+ \end{itemize}
+ 
+%Mesmo utilizando ferramentas para teste automatizado, alguns elementos necessários podem ter sua criação trabalhosa
+%ainda assim, depende de algumas etapas, como a criação de casso de testes...
 	
 \section{Teste Funcional de Software}
-O teste funcional é um tipo de teste que permite verificar as saídas de um sistema produzidas a partir de entradas pré-definidas. Este tipo de teste permite testar as funcionalidades, requerimentos, regras de negócio presentes no software\cite{molinari2003testes} verificando a existem de erros, o que auxilia na melhora da qualidade do software.
+O teste funcional é um tipo de teste que permite verificar as saídas de um sistema produzidas a partir de entradas pré-definidas. Este tipo de teste permite testar as funcionalidades, requerimentos e regras de negócio presentes no software\cite{molinari2003testes} verificando a existência de erros, o que auxilia na melhoria da qualidade do software.
 
-Uma das principais medidas para o teste de software é a cobertura de teste. A cobertura de teste é a medida da abrangência do teste e pode ser expressa pela cobertura dos casos de testes ou pelo cobertura do código executado.  Existem diversos trabalhos que abordam a importância da cobertura de testes de software\cite{zhu1997software}, inclusive ligando o crescimento da qualidade e confiabilidade do software produzido com o crescimento da cobertura dos testes\cite{malaiya2002software}. Por esses motivos o aumento da cobertura dos testes de software também é um assunto bastante abordado\cite{bieman1996using}.
+Uma das principais medidas para o teste de software é a cobertura de teste. A cobertura de teste é a medida da abrangência do teste e pode ser expressa pela cobertura dos casos de testes ou pela cobertura do código executado. Existem diversos trabalhos que abordam a importância da cobertura de testes de software\cite{zhu1997software,bieman1996using}, inclusive ligando o crescimento da qualidade e confiabilidade do software ao crescimento da cobertura dos testes\cite{malaiya2002software}.
+%Por esses motivos o aumento da cobertura dos testes de software também é um assunto bastante abordado\cite{}.
 
 %Essa cobertura pode se basear em fluxos de controle (instrução, ramificação ou caminhos) ou fluxos de dados. Na cobertura baseada em fluxo de controle, o objetivo é %testar linhas de código, condições de ramificação, caminhos que percorrem o código ou outros elementos do fluxo de controle do software. Na cobertura baseada em fluxo %de dados, o objetivo é testar se os estados dos dados permanecem válidos durante a operação do software, por exemplo, se um elemento de dados é definido antes de ser %usado.
 
-No entanto, as atividades para criar teste funcionais com uma boa cobertura podem muitas vezes se tornar exaustivas e trabalhosas, dificultando assim a execução dos testes de forma adequada para a análise de qualidade. Com o objetivo de melhorar a qualidade da análise e o tempo de execução dos testes, foram criados os testes automatizados, que proporcionam a execução dos testes mais rapidamente, e com maior cobertura do software. %\cite{fantinato2005autotest}
+No entanto, as atividades executadas para criar testes funcionais com uma boa cobertura podem muitas vezes se tornar exaustivas e trabalhosas, dificultando assim a execução dos testes de forma adequada. Com o objetivo de melhorar a qualidade da análise e o tempo de execução dos testes, foram criados os testes automatizados, que proporcionam a execução dos testes mais rapidamente \cite{fantinato2005autotest}. Quando executada corretamente, a automação de teste é uma das melhores formas de reduzir o tempo de teste no ciclo de vida do software, diminuindo o custo e aumentando a produtividade do desenvolvimento de software como um todo, além de, conseqüentemente, aumentar a qualidade do produto final.
 
-%Podem ser consideradas para a automação
-as atividades de geração e de execução
-de casos de teste [2,8]
-%[2] BINDER, R. V., “Testing object-oriented systems
-– Models, patterns, and tools”, Addison-Wesley, 1999.
-%[8] KANER, C., “Improving the maintainability of
-automated test suites”, Proceedings of the
-International Quality Week, 1997. 
-
-Quando executada corretamente, a automação de teste é uma das melhores formas de reduzir o tempo de teste no ciclo de vida do software, diminuindo o custo e aumentando a produtividade do desenvolvimento de software como um todo, além de, conseqüentemente, aumentar a qualidade do produto final
-
-%Caixa-cinza
-%A técnica de teste de caixa-cinza é uma mescla do uso das técnicas de caixa-preta e de caixa-branca. Isso envolve ter acesso a estruturas de dados e algoritmos do %componente a fim de desenvolver os casos de teste, que são executados como na técnica da caixa-preta. Manipular entradas de dados e formatar a saída não é considerado %caixa-cinza pois a entrada e a saída estão claramente fora da caixa-preta. A caixa-cinza pode incluir também o uso de engenharia reversa para determinar por exemplo %os limites superiores e inferiores das classes, além de mensagens de erro.
-%Alguns autores chegam a definir uma técnica de teste caixa cinza, que seria um mesclado do uso das técnicas de caixa preta e caixa branca, mas, como toda execução de %trabalho relacionado à atividade de teste utilizará simultaneamente mais de uma técnica de teste, é recomendável que se fixem os conceitos primários de cada técnica.
-%
-%KOSCIANSKI, A., Soares (2006). M. S. Qualidade de Software Novatec [S.l.]
-%PRESSMAN, R. S. (2002). Engenharia de Software McGraw Hill [S.l.]
-%MYERS, Glenford J. (2004). The Art of Software Testing 2 ed. (Nova Jérsei: John Wiley & Sons). ISBN 0-471-46912-2.
-
-%ferramentas escolhidas
-%por que foram escolhidas
+Para executar os testes funcionais automatizados em aplicações Web, pode-se utilizar ferramentas livres como Selenium\footnote{Selenium. Available at: www.seleniumhq.org.}, Watir\footnote{Watir. Available at: www.watir.com.} ou Geb\footnote{Geb. Available at: www.gebish.org.}. No trabalho anterior\cite{sbqs2015}, onde os testes funcionais se mostraram mais promissores, foi utilizada a ferramenta Selenium, aliada ao Cucumber-JVM\footnote{Cucumber-JVM. Available at: www.github.com/cucumber/cucumber-jvm.} para descrição dos testes. A escolha foi motivada pelo grande número de referências ao Selenium na Web, confirmadas por um trabalho que apresentou resultados satisfatórios com Selenium e Cucumber\cite{sbqs2013}.
 
 \subsection{Teste Funcional Automatizado utilizando \emph{Selenium} e \emph{Cucumber-JVM}}
--funcionamento, elementos  necessários  pro  teste, código
--problema: cirar código
-
-%Para executar testes funcionais em aplicações Web, pode-se utilizar ferramentas livres como Selenium\footnote{Selenium. Available at: www.seleniumhq.org.}, %Watir\footnote{Watir. Available at: www.watir.com.} ou Geb\footnote{Geb. Available at: www.gebish.org.}. Para este trabalho, escolheu-se a ferramenta Selenium, aliada ao Cucumber-JVM\footnote{Cucumber-JVM. Available at: www.github.com/cucumber/cucumber-jvm.} para descrição dos testes. A escolha foi motivada pelo grande número de referências ao Selenium na Web, confirmadas por um trabalho que apresentou resultados satisfatórios com Selenium e Cucumber~\cite{sbqs2013}.
-
-%Com estas ferramentas, o processo para a execução de um teste funcional é composto de: captura da interação do usuário com o navegador (Selenium IDE), exportação do código gerado (Selenium IDE), criação do cenário de teste (Cucumber), criação das definições dos passos do teste (Cucumber), criação dos métodos para cada passo (Java) e execução do teste (Selenium WebDriver). O cenário de teste é a definição, em ordem de execução, dos passos que são executados na aplicação, bem como dos resultados esperados. %Para executar testes funcionais em aplicações Web, pode-se utilizar ferramentas livres como Selenium\footnote{Selenium. Available at: www.seleniumhq.org.}, %Watir\footnote{Watir. Available at: www.watir.com.} ou Geb\footnote{Geb. Available at: www.gebish.org.}. Para este trabalho, escolheu-se a ferramenta Selenium, aliada ao Cucumber-JVM\footnote{Cucumber-JVM. Available at: www.github.com/cucumber/cucumber-jvm.} para descrição dos testes. A escolha foi motivada pelo grande número de referências ao Selenium na Web, confirmadas por um trabalho que apresentou resultados satisfatórios com Selenium e Cucumber~\cite{sbqs2013}.
-
+ \begin{itemize}
+   \item Como é feito o teste;
+   \item Explicação dos elementos principais do teste (cenários e stepDefinition);
+   \item Problema: Criação destes elementos pode ser trabalhoso (processos grandes com muitas tarefas ou com muitos caminhos possíveis).
+ \end{itemize}
+ 
 %Com estas ferramentas, o processo para a execução de um teste funcional é composto de: captura da interação do usuário com o navegador (Selenium IDE), exportação do código gerado (Selenium IDE), criação do cenário de teste (Cucumber), criação das definições dos passos do teste (Cucumber), criação dos métodos para cada passo (Java) e execução do teste (Selenium WebDriver). O cenário de teste é a definição, em ordem de execução, dos passos que são executados na aplicação, bem como dos resultados esperados. 
-
-%\subsection{Teste Funcional utilizando \emph{Cucumber-JVM}}
--funcionamento, elementos  necessários  pro  teste, cenário, stepDefinition
--problema: definir os cenários possíveis
 	
 \section{BPM e Teste Funcional}
--Teste funcional ajuda a aumentar a qualidade do software;
--sistemas bpm = web, permite executar testes funcionais com ferramenta
--Teste é pouco abordado
--Teste é importante
--Trabalhos relacionados;
+%-Teste funcional ajuda a aumentar a qualidade do software;
+%-sistemas bpm = web, permite executar testes funcionais com ferramenta
+%-Teste é pouco abordado
+%-Teste é importante
+%-Trabalhos relacionados;
 %pegar citações
 
 O termo BPM pode ser usado com ênfases diferentes, às vezes com foco em tecnologia (software) e outras vezes em gestão. Mesmo assim, a área tem convergido no entendimento do ciclo de vida de aplicações de BPM, que envolve as atividades de análise, modelagem, execução, monitoramento e otimização~\cite{ABPMP}. 
 
 Os sistemas de BPM (BPMS) têm se afirmado como ferramentas essenciais para suporte a atividades desse ciclo de vida. Atualmente, pode-se dizer que um típico BPMS oferece recursos para definição e modelagem de processos em BPMN, controle da execução e monitoramento de atividades dos processos~\cite{forrester}. Há uma tendência dos BPMS em abreviar o desenvolvimento de software, por exemplo através de geradores de formulários Web associados a tarefas dos processos~\cite{greenresearch}. Nota-se, no entanto, que a preocupação com testes não fica evidente nas ferramentas BPMS. De fato, examinando-se o material promocional e a documentação disponível sobre os principais BPMS, observa-se uma ênfase em etapas de modelagem e execução.
 
-There are some  studies that assess/test compliance of models of processes~\cite{conformancetesting} 
-or evaluate tools based on their features~\cite{comparingbpms} latter being directed to support organizations choosing the ideal BPMS. 
+\begin{itemize}
+\item Teste em geral é pouco abordado em bpm;
+\item Por serem aplicações como qualquer outra, aplicações BPM podem se beneficiar com a execução de testes;
+\item Alguns rabalhos relacionados
+\end{itemize}
 
-Moreover, the importance of the tests is widely recognized in software engineering ~\cite{swebok14}. 
-Whereas BPMS applications are usually Web-based systems, it can be assumed that it can be successfully tested using dedicated approaches, such as load tests or functional testing of the black-box type. There are also those who argue that BPM applications test differs from traditional Web applications testing~\cite{evoke}, but there were no more references to deepen this view. This finding reinforced the motivation for this work. 
+%There are some  studies that assess/test compliance of models of processes~\cite{conformancetesting} 
+
+%Moreover, the importance of the tests is widely recognized in software engineering ~\cite{swebok14}. 
+%Whereas BPMS applications are usually Web-based systems, it can be assumed that it can be successfully tested using dedicated approaches, such as load tests or functional testing of the black-box type. There are also those who argue that BPM applications test differs from traditional Web applications testing~\cite{evoke}, but there were no more references to deepen this view. This finding reinforced the motivation for this work. 
 
 \section{Business Process Model and Notation - \emph{BPMN}}
 O padrão Business Process Model and Notation, ou BPMN, foi criado com o objetivo de fornecer uma notação fácilmente compreensível por todos os usuários, desde os analistas que criam os rascunhos iniciais dos processos até os desenvolvedores responsáveis por implementar os processos e, finalmente, para os usuários que irão gerenciar e monitorar esses processos\cite{model2011notation}. A versão BPMN 2.0, a mais recente, define um padrão XML para arquivos contendo dados sobre o modelo e o funcionamento do processo bem como a sua representação visual\cite{kurzdiagram}, isto permite que o XML seja analisado para obter-se informações importantes sobre os processos. A maioria das ferramentas BPM disponibiliza a exportação do processo em formato XML seguindo o padrão BPMN. No padrão BPMN um processo é descrito como um diagrama de elementos de fluxo, que são: Tasks (Tarefas), Events (Eventos), Gateways e Sequence Flows \cite{kurzdiagram}.
@@ -119,7 +110,7 @@ O padrão Business Process Model and Notation, ou BPMN, foi criado com o objetivo
 %\label{fig:bpmn}
 %\end{figure}
 
-Uma \emph{Activiti} é a menor parte de um processo, e é utilizada quando o processo não pode ser dividido mais detalhadamente. Quando uma \emph{Activiti} está inserida no contexto de um processo, ela é chamada de \emph{Task}. Geralmente as Tasks são executadas por um usuário final ou por uma aplicação. Existem diferentes tipos de Tasks para representar o diferente comportamente que tava tarefa pode representar. Por exemplo, uma \emph{userTask} representa uma tarefa em que um usuário deve executar uma ação.
+Uma \emph{Activiti} é a menor parte de um diagrama BPM, e é utilizada quando o diagrama não pode ser dividido mais detalhadamente. Quando uma \emph{Activiti} está inserida no contexto de um processo, ela é chamada de \emph{Task}. Geralmente as Tasks são executadas por um usuário final ou por uma aplicação. Existem diferentes tipos de Tasks para representar o diferente comportamente que tava tarefa pode representar. Por exemplo, uma \emph{userTask} representa uma tarefa em que um usuário deve executar uma ação.
 %represent. The list of Task types MAY be extended along with any corresponding indicators. \emph{userTask},\emph{manualTask}.
 
 %events
@@ -136,18 +127,20 @@ Um \emph{Event} é algo que "acontece" durante o curso de um processo\cite{model2
 Um elemento \emph{Sequence Flow} é usado para exibir a ordem em que os demais elementos são executados em um processo. Cada \emph{sequenceFlow} possui um atributo \emph{sourceRef} que indica de onde este \emph{sequenceFlow} vem, ou sua "fonte", e um atributo \emph{targetRef} que indica para onde ele vai, ou seja, seu alvo. Cada \emph{sequenceFlow} possui apenas possui apenas uma fonte e um alvo. Analisando os elementos \emph{sequenceFlow} e analisando os dois atributos citados acima é possível identificar todo o fluxo do processo.
 
 \section{BPMN Parser}
--Linguagem, ferramenta,exemplos de diagramas foram obtidos em...
--O que o parser  faz (resumo): tabelinha + criação dos códigos
-arquivo bpmn é exportado
-usa java + parser java para xml
-%colocar link para o java doc
+\begin{itemize}
+\item Objetivo: gerar artefatos para melhoria do teste funcional automzatizado de aplicações bpm;
+\item Informações técnicas (linguagem, etc) + onde foram obtidos os diagramas utilizados para validação;
+\item Resuminho do que ele faz: gera tabelinha + uma parte dos códigos
+\end{itemize}
+
+%arquivo bpmn é exportado
 %onde foram obtidos os diagramas que foram testados nesse trabalho
-The Object Management Group (OMG) has developed a standard Business Process Model and Notation (BPMN).
-The primary goal of BPMN is to provide a notation that is readily understandable by all business users, from the business
-analysts that create the initial drafts of the processes, to the technical developers responsible for implementing the
-technology that will perform those processes, and finally, to the business people who will manage and monitor those
-processes. Thus, BPMN creates a standardized bridge for the gap between the business process design and process
-implementation. 
+%The Object Management Group (OMG) has developed a standard Business Process Model and Notation (BPMN).
+%The primary goal of BPMN is to provide a notation that is readily understandable by all business users, from the business
+%analysts that create the initial drafts of the processes, to the technical developers responsible for implementing the
+%technology that will perform those processes, and finally, to the business people who will manage and monitor those
+%processes. Thus, BPMN creates a standardized bridge for the gap between the business process design and process
+%implementation. 
 
 \subsection{Funcionamento}
 %colocar uma citação pra array de adjacencias
@@ -169,7 +162,7 @@ Para a criação do código para o teste funcional dois arquivos devem ser criados:
 \label{fig:exemplo_cenario}
 \end{figure}
 
-%explicar imagem, os arquivos conteram varios processos e varios métodos, ambos precisam ser completados para a execução do teste
+%explicar imagem, os arquivos conterão varios processos e varios métodos, ambos precisam ser completados para a execução do teste
 
 \subsection{Dificuldades/Limitações}
 Algumas ferramentas exportam o diagrama para o formato BPMN inserindo um ``tipo'' antes no nome de cada tag XML, por exemplo, a tag de nome task pode estar representada como ``semantic:task'' e isso pode impedir que o parser do Java identifique os elementos. Assim, foi necessário preparar o parser para tratar este tipo de situação.
