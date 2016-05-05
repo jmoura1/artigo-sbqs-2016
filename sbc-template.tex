@@ -1,27 +1,26 @@
 \documentclass[12pt]{article}
 
 \usepackage{sbc-template}
-
+\usepackage[utf8]{inputenc}
 \usepackage{graphicx,url}
 
 %\usepackage[brazil]{babel}   
-\usepackage[latin1]{inputenc}  
+%\usepackage[latin1]{inputenc}  
 
      
 \sloppy
 
 
-\title{Gerando cÛdigos para melhoria do Teste Funcional Automatizado de ferramentas de Gerenciamento de Processos de NegÛcio}
-%Uma estratÈgia para geraÁ„o de cÛdigos para Teste Funcional de ferramentas de Gerenciamento de Processos de NegÛcio
-%Gerando cÛdigos para melhoria do Teste Funcional Automatizado de ferramentas de Gerenciamento de Processos de NegÛcio
+\title{Gerando c√≥digos para melhoria do Teste Funcional Automatizado de ferramentas de Gerenciamento de Processos de Neg√≥cio}
+%Uma estrat√©gia para gera√ß√£o de c√≥digos para Teste Funcional de ferramentas de Gerenciamento de Processos de Neg√≥cio
 
-\author{JÈssica Lasch de Moura\inst{1}, Andrea Schwertner Char„o\inst{1}}
+\author{J√©ssica Lasch de Moura\inst{1}, Andrea Schwertner Char√£o\inst{1}}
 
 \address{Centro de Tecnologia -- Universidade Federal de Santa Maria
   (UFSM)\\
   Santa Maria -- RS -- Brazil
 \nextinstitute
-  LaboratÛrio de Sistemas de ComputaÁ„o (LSC) -- Universidade Federal de Santa Maria\\  
+  Laborat√≥rio de Sistemas de Computa√ß√£o (LSC) -- Universidade Federal de Santa Maria\\  
   \email{\{jmoura,andrea\}@inf.ufsm.br}
 }
 \begin{document} 
@@ -29,68 +28,70 @@
 \maketitle
 
 \begin{abstract}
+This paper describes a strategy created to get artifacts used in the implementation of automated functional testing of Business Process Management tools. The objective of this work was to facilitate the tests and improve the scope of the same, in order to improve the applications in question. With this strategy, it was possible to obtain important information about the processes and generate important elements for functional testing, making it the fastest and most complete test case.
 \end{abstract}
      
 \begin{resumo} 
+Este trabalho descreve um estrat√©gia criada para obter artefatos utilizados na execu√ß√£o de testes funcionais automatizados de ferramentas de Gest√£o de Processos de Neg√≥cio. O objetivo deste trabalho era facilitar a execu√ß√£o dos testes bem como melhorar a abrang√™ncia dos mesmos, visando a melhoria das aplica√ß√µes em quest√£o. Com esta estrat√©gia, foi poss√≠vel obter informa√ß√µes importantes sobre os processos e gerar elementos importantes para o teste funcional, tornando a etapa de teste mais r√°pida e completa.
 \end{resumo}
 
-\section{IntroduÁ„o}
+\section{Introdu√ß√£o}
 
  \begin{itemize}
    \item BPM
-   \item Teste com BPM pouco abordado + import‚ncia dos testes;
+   \item Teste com BPM pouco abordado + import√¢ncia dos testes;
    \item Citar trabalho anterior = teste com selenium e cucumber se mostrou mais promissor;
    \begin{itemize}
-	\item Pode ser trabalhoso criar os elementos necess·rios para o teste completo;
+	\item Pode ser trabalhoso criar os elementos necess√°rios para o teste completo;
    \end{itemize}
-   \item Para melhora na criaÁ„o dos testes: analisar o diagrama no formato BPMN, utilizando um parse, para gerar informaÁıes
+   \item Para melhoria na cria√ß√£o dos testes: analisar o diagrama no formato BPMN, atrav√©s do parser criado, para gerar informa√ß√µes
      \begin{itemize}
-	\item Facilitar/tornar mais r·pida a criaÁ„o dos elementos
-	\item Aumento na cobertura dos testes (cria todos cen·rios possÌveis)
+	\item Facilitar/tornar mais r√°pida a cria√ß√£o dos elementos
+	\item Aumento na cobertura dos testes (cria todos cen√°rios poss√≠veis)
    \end{itemize}
-   \item Objetivo:  melhorar e facilitar o teste funcional automatizado de aplicaÁıes bpm;
+   \item Objetivo:  melhorar e facilitar o teste funcional automatizado de aplica√ß√µes bpm;
  \end{itemize}
  
-%Mesmo utilizando ferramentas para teste automatizado, alguns elementos necess·rios podem ter sua criaÁ„o trabalhosa
-%ainda assim, depende de algumas etapas, como a criaÁ„o de casso de testes...
+%Mesmo utilizando ferramentas para teste automatizado, alguns elementos necess√°rios podem ter sua cria√ß√£o trabalhosa
+%ainda assim, depende de algumas etapas, como a cria√ß√£o de casso de testes...
 	
 \section{Teste Funcional de Software}
-O teste funcional È um tipo de teste que permite verificar as saÌdas de um sistema produzidas a partir de entradas prÈ-definidas. Este tipo de teste permite testar as funcionalidades, requerimentos e regras de negÛcio presentes no software\cite{molinari2003testes} verificando a existÍncia de erros, o que auxilia na melhoria da qualidade do software.
+O teste funcional √© um tipo de teste que permite verificar as sa√≠das de um sistema produzidas a partir de entradas pr√©-definidas. Este tipo de teste permite testar as funcionalidades, requerimentos e regras de neg√≥cio presentes no software\cite{molinari2003testes} verificando a exist√™ncia de erros, o que auxilia na melhoria da qualidade do software.
 
-Uma das principais medidas para o teste de software È a cobertura de teste. A cobertura de teste È a medida da abrangÍncia do teste e pode ser expressa pela cobertura dos casos de testes ou pela cobertura do cÛdigo executado. Existem diversos trabalhos que abordam a import‚ncia da cobertura de testes de software\cite{zhu1997software,bieman1996using}, inclusive ligando o crescimento da qualidade e confiabilidade do software ao crescimento da cobertura dos testes\cite{malaiya2002software}.
-%Por esses motivos o aumento da cobertura dos testes de software tambÈm È um assunto bastante abordado\cite{}.
+Uma das principais medidas para o teste de software √© a cobertura de teste. A cobertura de teste √© a medida da abrang√™ncia do teste e pode ser expressa pela cobertura dos casos de testes ou pela cobertura do c√≥digo executado. Existem diversos trabalhos que abordam a import√¢ncia da cobertura de testes de software\cite{zhu1997software,bieman1996using}, inclusive ligando o crescimento da qualidade e confiabilidade do software ao crescimento da cobertura dos testes\cite{malaiya2002software}.
+%Por esses motivos o aumento da cobertura dos testes de software tamb√©m √© um assunto bastante abordado\cite{}.
 
-%Essa cobertura pode se basear em fluxos de controle (instruÁ„o, ramificaÁ„o ou caminhos) ou fluxos de dados. Na cobertura baseada em fluxo de controle, o objetivo È %testar linhas de cÛdigo, condiÁıes de ramificaÁ„o, caminhos que percorrem o cÛdigo ou outros elementos do fluxo de controle do software. Na cobertura baseada em fluxo %de dados, o objetivo È testar se os estados dos dados permanecem v·lidos durante a operaÁ„o do software, por exemplo, se um elemento de dados È definido antes de ser %usado.
+%Essa cobertura pode se basear em fluxos de controle (instru√ß√£o, ramifica√ß√£o ou caminhos) ou fluxos de dados. Na cobertura baseada em fluxo de controle, o objetivo √© %testar linhas de c√≥digo, condi√ß√µes de ramifica√ß√£o, caminhos que percorrem o c√≥digo ou outros elementos do fluxo de controle do software. Na cobertura baseada em fluxo %de dados, o objetivo √© testar se os estados dos dados permanecem v√°lidos durante a opera√ß√£o do software, por exemplo, se um elemento de dados √© definido antes de ser %usado.
 
-No entanto, as atividades executadas para criar testes funcionais com uma boa cobertura podem muitas vezes se tornar exaustivas e trabalhosas, dificultando assim a execuÁ„o dos testes de forma adequada. Com o objetivo de melhorar a qualidade da an·lise e o tempo de execuÁ„o dos testes, foram criados os testes automatizados, que proporcionam a execuÁ„o dos testes mais rapidamente \cite{fantinato2005autotest}. Quando executada corretamente, a automaÁ„o de teste È uma das melhores formas de reduzir o tempo de teste no ciclo de vida do software, diminuindo o custo e aumentando a produtividade do desenvolvimento de software como um todo, alÈm de, conseq¸entemente, aumentar a qualidade do produto final.
+No entanto, as atividades executadas para criar testes funcionais com uma boa cobertura podem muitas vezes se tornar exaustivas e trabalhosas, dificultando assim a execu√ß√£o dos testes de forma adequada. Com o objetivo de melhorar a qualidade da an√°lise e o tempo de execu√ß√£o dos testes, foram criados os testes automatizados, que proporcionam a execu√ß√£o dos testes mais rapidamente \cite{fantinato2005autotest}. Quando executada corretamente, a automa√ß√£o de teste √© uma das melhores formas de reduzir o tempo de teste no ciclo de vida do software, diminuindo o custo e aumentando a produtividade do desenvolvimento de software como um todo, al√©m de, consequentemente, aumentar a qualidade do produto final.
 
-Para executar os testes funcionais automatizados em aplicaÁıes Web, pode-se utilizar ferramentas livres como Selenium\footnote{Selenium. Available at: www.seleniumhq.org.}, Watir\footnote{Watir. Available at: www.watir.com.} ou Geb\footnote{Geb. Available at: www.gebish.org.}. No trabalho anterior\cite{sbqs2015}, onde os testes funcionais se mostraram mais promissores, foi utilizada a ferramenta Selenium, aliada ao Cucumber-JVM\footnote{Cucumber-JVM. Available at: www.github.com/cucumber/cucumber-jvm.} para descriÁ„o dos testes. A escolha foi motivada pelo grande n˙mero de referÍncias ao Selenium na Web, confirmadas por um trabalho que apresentou resultados satisfatÛrios com Selenium e Cucumber\cite{sbqs2013}.
+Para executar os testes funcionais automatizados em aplica√ß√µes Web, pode-se utilizar ferramentas livres como Selenium\footnote{Selenium. Available at: www.seleniumhq.org.}, Watir\footnote{Watir. Available at: www.watir.com.} ou Geb\footnote{Geb. Available at: www.gebish.org.}. No trabalho anterior\cite{sbqs2015}, onde os testes funcionais se mostraram mais promissores, foi utilizada a ferramenta Selenium, aliada ao Cucumber-JVM\footnote{Cucumber-JVM. Available at: www.github.com/cucumber/cucumber-jvm.} para descri√ß√£o dos testes. A escolha foi motivada pelo grande n√∫mero de refer√™ncias ao Selenium na Web, confirmadas por um trabalho que apresentou resultados satisfat√≥rios com Selenium e Cucumber\cite{sbqs2013}.
 
 \subsection{Teste Funcional Automatizado utilizando \emph{Selenium} e \emph{Cucumber-JVM}}
  \begin{itemize}
-   \item Como È feito o teste;
-   \item ExplicaÁ„o dos elementos principais do teste (cen·rios e stepDefinition);
-   \item Problema: CriaÁ„o destes elementos pode ser trabalhoso (processos grandes com muitas tarefas ou com muitos caminhos possÌveis).
+   \item Como √© feito o teste;
+   \item Explica√ß√£o dos elementos principais do teste (cen√°rios e stepDefinition);
+   \item Problema: Cria√ß√£o destes elementos pode ser trabalhoso (processos grandes com muitas tarefas ou com muitos caminhos poss√≠veis).
  \end{itemize}
  
-%Com estas ferramentas, o processo para a execuÁ„o de um teste funcional È composto de: captura da interaÁ„o do usu·rio com o navegador (Selenium IDE), exportaÁ„o do cÛdigo gerado (Selenium IDE), criaÁ„o do cen·rio de teste (Cucumber), criaÁ„o das definiÁıes dos passos do teste (Cucumber), criaÁ„o dos mÈtodos para cada passo (Java) e execuÁ„o do teste (Selenium WebDriver). O cen·rio de teste È a definiÁ„o, em ordem de execuÁ„o, dos passos que s„o executados na aplicaÁ„o, bem como dos resultados esperados. 
+%Com estas ferramentas, o processo para a execu√ß√£o de um teste funcional √© composto de: captura da intera√ß√£o do usu√°rio com o navegador (Selenium IDE), exporta√ß√£o do c√≥digo gerado (Selenium IDE), cria√ß√£o do cen√°rio de teste (Cucumber), cria√ß√£o das defini√ß√µes dos passos do teste (Cucumber), cria√ß√£o dos m√©todos para cada passo (Java) e execu√ß√£o do teste (Selenium WebDriver). O cen√°rio de teste √© a defini√ß√£o, em ordem de execu√ß√£o, dos passos que s√£o executados na aplica√ß√£o, bem como dos resultados esperados. 
 	
 \section{BPM e Teste Funcional}
 %-Teste funcional ajuda a aumentar a qualidade do software;
 %-sistemas bpm = web, permite executar testes funcionais com ferramenta
-%-Teste È pouco abordado
-%-Teste È importante
+%-Teste √© pouco abordado
+%-Teste √© importante
 %-Trabalhos relacionados;
-%pegar citaÁıes
+%pegar cita√ß√µes
 
-O termo BPM pode ser usado com Ínfases diferentes, ‡s vezes com foco em tecnologia (software) e outras vezes em gest„o. Mesmo assim, a ·rea tem convergido no entendimento do ciclo de vida de aplicaÁıes de BPM, que envolve as atividades de an·lise, modelagem, execuÁ„o, monitoramento e otimizaÁ„o~\cite{ABPMP}. 
+O termo BPM pode ser usado com √™nfases diferentes, √†s vezes com foco em tecnologia (software) e outras vezes em gest√£o. Mesmo assim, a √°rea tem convergido no entendimento do ciclo de vida de aplica√ß√µes de BPM, que envolve as atividades de an√°lise, modelagem, execu√ß√£o, monitoramento e otimiza√ß√£o~\cite{ABPMP}. 
 
-Os sistemas de BPM (BPMS) tÍm se afirmado como ferramentas essenciais para suporte a atividades desse ciclo de vida. Atualmente, pode-se dizer que um tÌpico BPMS oferece recursos para definiÁ„o e modelagem de processos em BPMN, controle da execuÁ„o e monitoramento de atividades dos processos~\cite{forrester}. H· uma tendÍncia dos BPMS em abreviar o desenvolvimento de software, por exemplo atravÈs de geradores de formul·rios Web associados a tarefas dos processos~\cite{greenresearch}. Nota-se, no entanto, que a preocupaÁ„o com testes n„o fica evidente nas ferramentas BPMS. De fato, examinando-se o material promocional e a documentaÁ„o disponÌvel sobre os principais BPMS, observa-se uma Ínfase em etapas de modelagem e execuÁ„o.
+Os sistemas de BPM (BPMS) t√™m se afirmado como ferramentas essenciais para suporte a atividades desse ciclo de vida. Atualmente, pode-se dizer que um t√≠pico BPMS oferece recursos para defini√ß√£o e modelagem de processos em BPMN, controle da execu√ß√£o e monitoramento de atividades dos processos~\cite{forrester}. H√° uma tend√™ncia dos BPMS em abreviar o desenvolvimento de software, por exemplo atrav√©s de geradores de formul√°rios Web associados a tarefas dos processos~\cite{greenresearch}. Nota-se, no entanto, que a preocupa√ß√£o com testes n√£o fica evidente nas ferramentas BPMS. De fato, examinando-se o material promocional e a documenta√ß√£o dispon√≠vel sobre os principais BPMS, observa-se uma √™nfase em etapas de modelagem e execu√ß√£o.
 
 \begin{itemize}
-\item Teste em geral È pouco abordado em bpm;
-\item Por serem aplicaÁıes como qualquer outra, aplicaÁıes BPM podem se beneficiar com a execuÁ„o de testes;
-\item Alguns rabalhos relacionados
+\item Teste em geral √© pouco abordado em bpm;
+\item Por serem aplica√ß√µes como qualquer outra, aplica√ß√µes BPM podem se beneficiar com a execu√ß√£o de testes;
+\item Alguns trabalhos relacionados
 \end{itemize}
 
 %There are some  studies that assess/test compliance of models of processes~\cite{conformancetesting} 
@@ -99,41 +100,41 @@ Os sistemas de BPM (BPMS) tÍm se afirmado como ferramentas essenciais para supor
 %Whereas BPMS applications are usually Web-based systems, it can be assumed that it can be successfully tested using dedicated approaches, such as load tests or functional testing of the black-box type. There are also those who argue that BPM applications test differs from traditional Web applications testing~\cite{evoke}, but there were no more references to deepen this view. This finding reinforced the motivation for this work. 
 
 \section{Business Process Model and Notation - \emph{BPMN}}
-O padr„o Business Process Model and Notation, ou BPMN, foi criado com o objetivo de fornecer uma notaÁ„o f·cilmente compreensÌvel por todos os usu·rios, desde os analistas que criam os rascunhos iniciais dos processos atÈ os desenvolvedores respons·veis por implementar os processos e, finalmente, para os usu·rios que ir„o gerenciar e monitorar esses processos\cite{model2011notation}. A vers„o BPMN 2.0, a mais recente, define um padr„o XML para arquivos contendo dados sobre o modelo e o funcionamento do processo bem como a sua representaÁ„o visual\cite{kurzdiagram}, isto permite que o XML seja analisado para obter-se informaÁıes importantes sobre os processos. A maioria das ferramentas BPM disponibiliza a exportaÁ„o do processo em formato XML seguindo o padr„o BPMN. No padr„o BPMN um processo È descrito como um diagrama de elementos de fluxo, que s„o: Tasks (Tarefas), Events (Eventos), Gateways e Sequence Flows \cite{kurzdiagram}.
+O padr√£o Business Process Model and Notation, ou BPMN, foi criado com o objetivo de fornecer uma nota√ß√£o facilmente compreens√≠vel por todos os usu√°rios, desde os analistas que criam os rascunhos iniciais dos processos at√© os desenvolvedores respons√°veis por implementar os processos e, finalmente, para os usu√°rios que ir√£o gerenciar e monitorar esses processos\cite{model2011notation}. A vers√£o BPMN 2.0, a mais recente, define um padr√£o XML para arquivos contendo dados sobre o modelo e o funcionamento do processo bem como a sua representa√ß√£o visual\cite{kurzdiagram}, isto permite que o XML seja analisado para obter-se informa√ß√µes importantes sobre os processos. A maioria das ferramentas BPM disponibiliza a exporta√ß√£o do processo em formato XML seguindo o padr√£o BPMN. No padr√£o BPMN um processo √© descrito como um diagrama de elementos de fluxo, que s√£o: Tasks (Tarefas), Events (Eventos), Gateways e Sequence Flows \cite{kurzdiagram}.
 
-%TambÈm h· convergÍncia sobre o padr„o BPMN (\emph{Business Process Model and Notation}) para expressar a modelagem de processos.
+%Tamb√©m h√° converg√™ncia sobre o padr√£o BPMN (\emph{Business Process Model and Notation}) para expressar a modelagem de processos.
 
 %\begin{figure}[ht]
 %\centering
 %\includegraphics[width=.9\textwidth]{figuras/BPMNBasicSymbols.png}
-%\caption{Principais elementos de um processo de acordo com o padr„o BPMN. Fonte: NobleProg Training Materials}
+%\caption{Principais elementos de um processo de acordo com o padr√£o BPMN. Fonte: NobleProg Training Materials}
 %\label{fig:bpmn}
 %\end{figure}
 
-Uma \emph{Activiti} È a menor parte de um diagrama BPM, e È utilizada quando o diagrama n„o pode ser dividido mais detalhadamente. Quando uma \emph{Activiti} est· inserida no contexto de um processo, ela È chamada de \emph{Task}. Geralmente as Tasks s„o executadas por um usu·rio final ou por uma aplicaÁ„o. Existem diferentes tipos de Tasks para representar o diferente comportamente que tava tarefa pode representar. Por exemplo, uma \emph{userTask} representa uma tarefa em que um usu·rio deve executar uma aÁ„o.
+Uma \emph{Activiti} √© a menor parte de um diagrama BPM, e √© utilizada quando o diagrama n√£o pode ser dividido mais detalhadamente. Quando uma \emph{Activiti} est√° inserida no contexto de um processo, ela √© chamada de \emph{Task}. Geralmente as Tasks s√£o executadas por um usu√°rio final ou por uma aplica√ß√£o. Existem diferentes tipos de Tasks para representar o diferente comportamento que tava tarefa pode representar. Por exemplo, uma \emph{userTask} representa uma tarefa em que um usu√°rio deve executar uma a√ß√£o.
 %represent. The list of Task types MAY be extended along with any corresponding indicators. \emph{userTask},\emph{manualTask}.
 
 %events
-Um \emph{Event} È algo que "acontece" durante o curso de um processo\cite{model2011notation}. Existem trÍs tipos principais de eventos: Start Event (indica o inÌcio do processo), End Event (indica um fim do processo) e Intermediate Events (indica um evento entre o inÌcio e o fim do processo).
+Um \emph{Event} √© algo que "acontece" durante o curso de um processo\cite{model2011notation}. Existem tr√™s tipos principais de eventos: Start Event (indica o in√≠cio do processo), End Event (indica um fim do processo) e Intermediate Events (indica um evento entre o in√≠cio e o fim do processo).
 
 %gateways
-\emph{Gateways} s„o usados para controlar o fluxo do processo. Em gateways do tipo \emph{Exclusive}, apenas um dos caminhos que partem do gateway poder„o ser seguidos, j· em gateways do tipo \emph{Inclusive} um ou mais caminhos podem ser seguidos. Em gateways do tipo \emph{Parallel} todos os caminhos s„o tomados em paralelo.
+\emph{Gateways} s√£o usados para controlar o fluxo do processo. Em gateways do tipo \emph{Exclusive}, apenas um dos caminhos que partem do gateway poder√£o ser seguidos, j√° em gateways do tipo \emph{Inclusive} um ou mais caminhos podem ser seguidos. Em gateways do tipo \emph{Parallel} todos os caminhos s√£o tomados em paralelo.
 
 %A Parallel Gateway is used to synchronize (combine) parallel flows and to create parallel flows.? The Parallel Gateway MUST use a marker that is in the shape of 
 %plus sign and is placed within the Gateway
 %diamond (see Figure 10.110) to distinguish it from other Gateway
 
 %sequence flows
-Um elemento \emph{Sequence Flow} È usado para exibir a ordem em que os demais elementos s„o executados em um processo. Cada \emph{sequenceFlow} possui um atributo \emph{sourceRef} que indica de onde este \emph{sequenceFlow} vem, ou sua "fonte", e um atributo \emph{targetRef} que indica para onde ele vai, ou seja, seu alvo. Cada \emph{sequenceFlow} possui apenas possui apenas uma fonte e um alvo. Analisando os elementos \emph{sequenceFlow} e analisando os dois atributos citados acima È possÌvel identificar todo o fluxo do processo.
+Um elemento \emph{Sequence Flow} √© usado para exibir a ordem em que os demais elementos s√£o executados em um processo. Cada \emph{sequenceFlow} possui um atributo \emph{sourceRef} que indica de onde este \emph{sequenceFlow} vem, ou sua "fonte", e um atributo \emph{targetRef} que indica para onde ele vai, ou seja, seu alvo. Cada \emph{sequenceFlow} possui apenas possui apenas uma fonte e um alvo. Analisando os elementos \emph{sequenceFlow} e analisando os dois atributos citados acima √© poss√≠vel identificar todo o fluxo do processo.
 
 \section{BPMN Parser}
 \begin{itemize}
-\item Objetivo: gerar artefatos para melhoria do teste funcional automzatizado de aplicaÁıes bpm;
-\item InformaÁıes tÈcnicas (linguagem, etc) + onde foram obtidos os diagramas utilizados para validaÁ„o;
-\item Resuminho do que ele faz: gera tabelinha + uma parte dos cÛdigos
+\item Objetivo: gerar artefatos para melhoria do teste funcional automzatizado de aplica√ß√µes bpm;
+\item Informa√ß√µes t√©cnicas (linguagem, etc) + onde foram obtidos os diagramas utilizados para valida√ß√£o;
+\item Resuminho do que ele faz: gera tabelinha + uma parte dos c√≥digos
 \end{itemize}
 
-%arquivo bpmn È exportado
+%arquivo bpmn √© exportado
 %onde foram obtidos os diagramas que foram testados nesse trabalho
 %The Object Management Group (OMG) has developed a standard Business Process Model and Notation (BPMN).
 %The primary goal of BPMN is to provide a notation that is readily understandable by all business users, from the business
@@ -143,29 +144,29 @@ Um elemento \emph{Sequence Flow} È usado para exibir a ordem em que os demais el
 %implementation. 
 
 \subsection{Funcionamento}
-%colocar uma citaÁ„o pra array de adjacencias
-O principal elemento para o funcionamento do parser È o \emph{Sequence Flow}. Por conter os atributos targetRef e sourceRef os elementos deste tipo permitem percorrer todo o diagrama. Ao iniciar o parser, È solicitado ao usu·rio o caminho para o arquivo BPMN e a ID do processo a ser avaliado. Um diagrama pode conter mais de um processo e, nesse caso, o usu·rio pode escolher que todos processos sejam avaliados.
+%colocar uma cita√ß√£o pra array de adjacencias
+O principal elemento para o funcionamento do parser √© o \emph{Sequence Flow}. Por conter os atributos targetRef e sourceRef os elementos deste tipo permitem percorrer todo o diagrama. Ao iniciar o parser, √© solicitado ao usu√°rio o caminho para o arquivo BPMN e a ID do processo a ser avaliado. Um diagrama pode conter mais de um processo e, nesse caso, o usu√°rio pode escolher que todos processos sejam avaliados.
 
-A classe \emph{Node} define um tipo de objeto que guarda informaÁıes b·sicas sobre as tarefas do processo e um \emph{array} de objetos da mesma classe. Durante a execuÁ„o do parser um array de objetos da classe Node È preenchido formando assim um array de adjacÍncias. O mÈtodo principal do parser percorre o processo recursivamente atravÈs dos elementos do tipo \emph{Sequence Flow}, enquanto um tarefa for encontrada, um objeto da classe Node È criado e o mÈtodo È chamado recursivamente de modo a retornar o array de adjacÍncias para este objeto.
+A classe \emph{Node} define um tipo de objeto que guarda informa√ß√µes b√°sicas sobre as tarefas do processo e um \emph{array} de objetos da mesma classe. Durante a execu√ß√£o do parser um array de objetos da classe Node √© preenchido formando assim um array de adjac√™ncias. O m√©todo principal do parser percorre o processo recursivamente atrav√©s dos elementos do tipo \emph{Sequence Flow}, enquanto um tarefa for encontrada, um objeto da classe Node √© criado e o m√©todo √© chamado recursivamente de modo a retornar o array de adjac√™ncias para este objeto.
 
-A partir do array de adjacÍncias s„o criados os caminhos possÌveis pelos quais o processo pode passar. O mÈtodo que cria os caminhos percorre recursivamente o array de adjacÍncias criado anteriormente e "constrÛi" um novo caminho, tendo como condiÁ„o de parada o encontro de uma das ˙ltimas tarefas a serem executadas. Uma tarefa È uma das ˙ltimas quando o elemento que a sucede no fluxo for \emph{End Event}. Ao encontrar uma tarefa final, o caminho È armazenado e È iniciada a construÁ„o de um novo caminho.
+A partir do array de adjac√™ncias s√£o criados os caminhos poss√≠veis pelos quais o processo pode passar. O m√©todo que cria os caminhos percorre recursivamente o array de adjac√™ncias criado anteriormente e "constr√≥i" um novo caminho, tendo como condi√ß√£o de parada o encontro de uma das √∫ltimas tarefas a serem executadas. Uma tarefa √© uma das √∫ltimas quando o elemento que a sucede no fluxo for \emph{End Event}. Ao encontrar uma tarefa final, o caminho √© armazenado e √© iniciada a constru√ß√£o de um novo caminho.
 
-Os caminhos obtidos s„o base para a criaÁ„o dos dois artefatos para o teste funcional: tabela de caminhos possÌveis e cÛdigo para o teste funcional. Para criar a tabela com os caminhos possÌveis, cada tarefa existente no processo representar· uma coluna na tabela e cada caminho representar· uma nova linha. Para cada caminho, se a tarefa estiver presente a coluna ser· marcada com "X" caso contr·rio a coluna ser· marcada com um "0". Caso mais de um processo seja avaliado ao mesmo tempo, a tabela referente ‡ cada processo estar· separada individualmente no arquivo final. Na Tabela \ref{tab:exemplo}, pode ser visto uma tabela resultante da execuÁ„o do parser para um processo com cinco \emph{tasks} e dois caminhos possÌveis. 
+Os caminhos obtidos s√£o base para a cria√ß√£o dos dois artefatos para o teste funcional: tabela de caminhos poss√≠veis e c√≥digo para o teste funcional. Para criar a tabela com os caminhos poss√≠veis, cada tarefa existente no processo representar√° uma coluna na tabela e cada caminho representar√° uma nova linha. Para cada caminho, se a tarefa estiver presente a coluna ser√° marcada com "X" caso contr√°rio a coluna ser√° marcada com um "0". Caso mais de um processo seja avaliado ao mesmo tempo, a tabela referente √† cada processo estar√° separada individualmente no arquivo final. Na Tabela \ref{tab:exemplo}, pode ser visto uma tabela resultante da execu√ß√£o do parser para um processo com cinco \emph{tasks} e dois caminhos poss√≠veis. 
 
 
-Para a criaÁ„o do cÛdigo para o teste funcional dois arquivos devem ser criados: o arquivo contendo os cen·rios e a classe \emph{stepDefinition} contendo os mÈtodos para cada passo do cen·rio. Para criar estes artefatos, cada caminho obtido È considerado um cen·rio diferente. Como trata-se de um teste funcional, apenas tarefas que podem ser executadas por um usu·rio devem ser avaliadas (\emph{userTask},\emph{manualTask}...). Assim, para cada caminho È criado um novo cen·rio utilizando a notaÁ„o do Cucumber e comtemplando apenas as tarefas que podem ser executadas por um usu·rio. O mÈtodo correspondente a cada passo do cen·rio È criado ao mesmo tempo. Na Figura \ref{fig:exemplo_cenario}, podem ser vistos dois cen·rios resultante da execuÁ„o do parser para um processo com dois caminhos possÌveis. 
+Para a cria√ß√£o do c√≥digo para o teste funcional dois arquivos devem ser criados: o arquivo contendo os cen√°rios e a classe \emph{stepDefinition} contendo os m√©todos para cada passo do cen√°rio. Para criar estes artefatos, cada caminho obtido √© considerado um cen√°rio diferente. Como trata-se de um teste funcional, apenas tarefas que podem ser executadas por um usu√°rio devem ser avaliadas (\emph{userTask},\emph{manualTask}...). Assim, para cada caminho √© criado um novo cen√°rio utilizando a nota√ß√£o do Cucumber e comtemplando apenas as tarefas que podem ser executadas por um usu√°rio. O m√©todo correspondente a cada passo do cen√°rio √© criado ao mesmo tempo. Na Figura \ref{fig:exemplo_cenario}, podem ser vistos dois cen√°rios resultante da execu√ß√£o do parser para um processo com dois caminhos poss√≠veis. 
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=.5\textwidth]{figuras/exemplo_cenario.png}
-\caption{Exemplo de cen·rios resultantes}
+\caption{Exemplo de cen√°rios resultantes}
 \label{fig:exemplo_cenario}
 \end{figure}
 
-%explicar imagem, os arquivos conter„o varios processos e varios mÈtodos, ambos precisam ser completados para a execuÁ„o do teste
+%explicar imagem, os arquivos conter√£o varios processos e varios m√©todos, ambos precisam ser completados para a execu√ß√£o do teste
 
-\subsection{Dificuldades/LimitaÁıes}
-Algumas ferramentas exportam o diagrama para o formato BPMN inserindo um ``tipo'' antes no nome de cada tag XML, por exemplo, a tag de nome task pode estar representada como ``semantic:task'' e isso pode impedir que o parser do Java identifique os elementos. Assim, foi necess·rio preparar o parser para tratar este tipo de situaÁ„o.
+\subsection{Dificuldades/Limita√ß√µes}
+Algumas ferramentas exportam o diagrama para o formato BPMN inserindo um ``tipo'' antes no nome de cada tag XML, por exemplo, a tag de nome task pode estar representada como ``semantic:task'' e isso pode impedir que o parser do Java identifique os elementos. Assim, foi necess√°rio preparar o parser para tratar este tipo de situa√ß√£o.
 
 \begin{table}[]
 \centering
@@ -179,46 +180,53 @@ X & X & X & X & X
 \end{table}
 
 
-Na criaÁ„o dos artefatos para o teste funcional s„o levados em conta apenas tarefas que podem ser executadas por um usu·rio. Apesar de utilizarem o mesmo padr„o BPMN, algumas ferramentas podem utilizar nomes diferentes parat representar estas tarefas no arquivo XML. Por isso, dependendo da tarefa que for utilizada, pode ser necess·rio substituir o nome dos tipos a serem utilizados no parser.
+Na cria√ß√£o dos artefatos para o teste funcional s√£o levados em conta apenas tarefas que podem ser executadas por um usu√°rio. Apesar de utilizarem o mesmo padr√£o BPMN, algumas ferramentas podem utilizar nomes diferentes parat representar estas tarefas no arquivo XML. Por isso, dependendo da tarefa que for utilizada, pode ser necess√°rio substituir o nome dos tipos a serem utilizados no parser.
 
-%pode gerar caminhos iguais, por remover boa parte das tarefas, como pdoe ser visto na figura de antes tambÈm
+%pode gerar caminhos iguais, por remover boa parte das tarefas, como pdoe ser visto na figura de antes tamb√©m
 
 %-subprocess -> apenas como uma tarefa, normalmente sao simples, so testa o principal,subprocessos normalmente sao simples
 
-Na criaÁ„o dos caminhos, uma dificuldade ocorreu devido aos desvios causados por elementos do tipo \emph{Gateway}. Para isso, para cada Node criado no array È guardada o tipo do elemento que o antecede. Assim, na criaÁ„o dos caminhos, elementos que partem de um desvio de fluxo precisaram ser tratados para criar os caminhos corretamente, por exemplo: se dois elementos, X e Y, vem de um gateway exclusivo, os caminhos obtidos atÈ estes elementos ser„o duplicados, ou seja, metade dos caminhos passaram apenas por X e metade dos caminhos passar„o apenas por Y.
+Na cria√ß√£o dos caminhos, uma dificuldade ocorreu devido aos desvios causados por elementos do tipo \emph{Gateway}. Para isso, para cada Node criado no array √© guardada o tipo do elemento que o antecede. Assim, na cria√ß√£o dos caminhos, elementos que partem de um desvio de fluxo precisaram ser tratados para criar os caminhos corretamente, por exemplo: se dois elementos, X e Y, vem de um gateway exclusivo, os caminhos obtidos at√© estes elementos ser√£o duplicados, ou seja, metade dos caminhos passaram apenas por X e metade dos caminhos passar√£o apenas por Y.
 
-%Na criaÁ„o dos caminhos, h· uma exceÁ„o para quando existir uma divis„o de fluxo atravÈs de um gateway do tipo inclusivo. Diferente do que acontece com o tipo exclusivo, onde apenas uma opÁ„o de pode ser seguida de cada vez, no caminho incluso as opÁıes podem variar pois um ou mais caminhos podem ser seguidos ao mesmo tempo. Os caminhos em que apenas um fluxo È seguido j· s„o cobertos pela execuÁ„o normal do parser, ent„o, apÛs a criaÁ„o dos caminhos, È identificada a existencia de fluxos inclusivos e, se necess·rio, caminhos adicionais s„o inseridos.
+%Na cria√ß√£o dos caminhos, h√° uma exce√ß√£o para quando existir uma divis√£o de fluxo atrav√©s de um gateway do tipo inclusivo. Diferente do que acontece com o tipo exclusivo, onde apenas uma op√ß√£o de pode ser seguida de cada vez, no caminho incluso as op√ß√µes podem variar pois um ou mais caminhos podem ser seguidos ao mesmo tempo. Os caminhos em que apenas um fluxo √© seguido j√° s√£o cobertos pela execu√ß√£o normal do parser, ent√£o, ap√≥s a cria√ß√£o dos caminhos, √© identificada a existencia de fluxos inclusivos e, se necess√°rio, caminhos adicionais s√£o inseridos.
 
-Devido ao fato de o parser ser executado recursivamente e percorrer o processo baseado no fluxo dos elementos do tipo \emph{sequenceFlow}, ocorreram problemas em processos onde uma parcela do processo tambÈm È executada recursivamente. Estes problemas foram causados devido ao fluxo nunca encontrar um "fim". Para solucionar esses problema foi criado um "delimitador de recurs„o" que define e controla o n˙mero de vezes em que o mesmo \emph{sequenceFlow} ser· executado.
+Devido ao fato de o parser ser executado recursivamente e percorrer o processo baseado no fluxo dos elementos do tipo \emph{sequenceFlow}, ocorreram problemas em processos onde uma parcela do processo tamb√©m √© executada recursivamente. Estes problemas foram causados devido ao fluxo nunca encontrar um "fim". Para solucionar esses problema foi criado um "delimitador de recurs√£o" que define e controla o n√∫mero de vezes em que o mesmo \emph{sequenceFlow} ser√° executado.
 
-%anotaÁıes anteriores
-%ApÛs isso, È iniciada a avaliaÁ„o de cada processo. O parser percorre os elementos do tipo sequenceFlow em busca das primeiras tarefas do processo, ou seja, tarefas que sucedem elementos do tipo startEvent. Para cada tarefa encontrada, ser· criado um objeto da classe definida como ìNodeî que contÈm informaÁıes b·sicas sobre os elementos e mais um array de adjacÍncia. 
-%Ent„o È feita a criaÁ„o dos arrays de adjacÍncia. No mÈtodo chamado createNodes que retorna um objeto do tipo List<Node>, s„o percorridos todos os elementos sequenceFlow partindo das primeiras tarefas e, para cada nova tarefa encontrada, È criado um objeto da classe Node e ent„o o mÈtodo È chamado recursivamente para obter o array de adjacÍncia do elemento em quest„o. O trecho de cÛdigo referente a essa execuÁ„o pode ser visto na Figura X. Este mÈtodo È executado recursivamente atÈ encontrar um elemento do tipo endEvent, ou seja, atÈ encontrar um fim.
-%Assim, tÍm-se uma lista de objetos da classe Node. Os primeiros elementos desta lista ser„o, obrigatÛriamente, as primeiras tarefas que foram encontradas no inÌcio da execuÁ„o. Estes elementos teram as informaÁıes pertinentes mais o array de ajacÍncias, que tambÈm È uma lista de objetos Node. Nesta lista estar„o contidos todos os objetos da classe Node que sucedem a tarefa anterior.
-%ApÛs o documento XML ser devidamente analisado e as tarefas do processo esterem armazenadas no array de objetos Node, È possÌvel criar os artefatos para auxiliar no teste funcional. Uma parte importante para esta etapa È identificar as ˙ltimas tarefas ‡ serem executadas, ou seja, tarefas que antecedem um elemento do tipo endEvent. %Estas tarefas ir„o auxiliar na criaÁ„o dos possÌveis caminhos pelos quais o processo pode passar.
-%Para criar os possÌveis caminhos do processo, o array de adjacÍncias obtido anteriormente È navegado recursivamente atÈ encontrar uma condiÁ„o de parada: a(s) ˙ltimos tarefas a serem executadas. Para cada chamada deste mÈtodo, È recebido o array e os elementos pelos quais esse caminho passou anteriomente, ao encontrar a condiÁ„o de parada, este novo caminho È armazenado e È iniciado um novo caminho. %mÈtodo paths
-%A partir da criaÁ„o dos caminhos, È chamado o mÈtodo fillTable que percorre os caminhos para criar a tabela com os caminhos possÌveis. No cabeÁalho da tabela estar„o presentes os nomes de todas as tarefas do processo e cada linha representa um caminho possÌvel. O mÈtodo fillTable ira percorrer todos os caminhos, comparando cada elemento do caminho com um elemento do processo, se o elemento faz parte deste caminho a coluna ser· marcada com um "X" caso contr·rio, a coluna ser· marcada com um "0". Ao final de toda a execuÁ„o, a tabela ser· salva em um arquivo do tipo excel. Caso exista mais de um processo a ser analisado, as tabelas para cada processo estar„o distribuÌdas individualmente no arquivo excel.
+%anota√ß√µes anteriores
+%Ap√≥s isso, √© iniciada a avalia√ß√£o de cada processo. O parser percorre os elementos do tipo sequenceFlow em busca das primeiras tarefas do processo, ou seja, tarefas que sucedem elementos do tipo startEvent. Para cada tarefa encontrada, ser√° criado um objeto da classe definida como ‚ÄúNode‚Äù que cont√©m informa√ß√µes b√°sicas sobre os elementos e mais um array de adjac√™ncia. 
+%Ent√£o √© feita a cria√ß√£o dos arrays de adjac√™ncia. No m√©todo chamado createNodes que retorna um objeto do tipo List<Node>, s√£o percorridos todos os elementos sequenceFlow partindo das primeiras tarefas e, para cada nova tarefa encontrada, √© criado um objeto da classe Node e ent√£o o m√©todo √© chamado recursivamente para obter o array de adjac√™ncia do elemento em quest√£o. O trecho de c√≥digo referente a essa execu√ß√£o pode ser visto na Figura X. Este m√©todo √© executado recursivamente at√© encontrar um elemento do tipo endEvent, ou seja, at√© encontrar um fim.
+%Assim, t√™m-se uma lista de objetos da classe Node. Os primeiros elementos desta lista ser√£o, obrigat√≥riamente, as primeiras tarefas que foram encontradas no in√≠cio da execu√ß√£o. Estes elementos teram as informa√ß√µes pertinentes mais o array de ajac√™ncias, que tamb√©m √© uma lista de objetos Node. Nesta lista estar√£o contidos todos os objetos da classe Node que sucedem a tarefa anterior.
+%Ap√≥s o documento XML ser devidamente analisado e as tarefas do processo esterem armazenadas no array de objetos Node, √© poss√≠vel criar os artefatos para auxiliar no teste funcional. Uma parte importante para esta etapa √© identificar as √∫ltimas tarefas √† serem executadas, ou seja, tarefas que antecedem um elemento do tipo endEvent. %Estas tarefas ir√£o auxiliar na cria√ß√£o dos poss√≠veis caminhos pelos quais o processo pode passar.
+%Para criar os poss√≠veis caminhos do processo, o array de adjac√™ncias obtido anteriormente √© navegado recursivamente at√© encontrar uma condi√ß√£o de parada: a(s) √∫ltimos tarefas a serem executadas. Para cada chamada deste m√©todo, √© recebido o array e os elementos pelos quais esse caminho passou anteriomente, ao encontrar a condi√ß√£o de parada, este novo caminho √© armazenado e √© iniciado um novo caminho. %m√©todo paths
+%A partir da cria√ß√£o dos caminhos, √© chamado o m√©todo fillTable que percorre os caminhos para criar a tabela com os caminhos poss√≠veis. No cabe√ßalho da tabela estar√£o presentes os nomes de todas as tarefas do processo e cada linha representa um caminho poss√≠vel. O m√©todo fillTable ira percorrer todos os caminhos, comparando cada elemento do caminho com um elemento do processo, se o elemento faz parte deste caminho a coluna ser√° marcada com um "X" caso contr√°rio, a coluna ser√° marcada com um "0". Ao final de toda a execu√ß√£o, a tabela ser√° salva em um arquivo do tipo excel. Caso exista mais de um processo a ser analisado, as tabelas para cada processo estar√£o distribu√≠das individualmente no arquivo excel.
 
 
 \section{Resultados}
+\begin{itemize}
+\item Exemplo de processo, Figura \ref{fig:diagrama_exemplo};
+\item Exemplo dos artefatos obtidos: tabelinha e cen√°rio de teste
+	\begin{itemize}
+	\item Melhoria na cria√ß√£o dos testes (mais r√°pido e mais completo);
+	\item Por conseuqu√™ncia: Melhoria na cobertura dos testes (todos caminhos e cen√°rios poss√≠veis)
+	\item Por consequ√™ncia: auxilia na melhora da qualidade dos sistemas.
+	\end{itemize}
+\end{itemize}
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=.8\paperwidth]{figuras/diagrama_exemplo.png}
 \caption{Exemplo de Processo. Fonte: Object Management Group}
-\label{fig:bpmn}
+\label{fig:diagrama_exemplo}
 \end{figure}
 
-%imagem com exemplo: pedaÁo do processo -> cen·rio -> stepdefinition
+\section{Conclus√£o}
+\begin{itemize}
+\item Mesmo utilizando ferramentas para teste automatizado, cria√ß√£o dos elementos do teste podem ser trabalhosas;
+\item Importante ter uma boa cobertura;
+\item BPMN parser analiza a nota√ß√£o para gerar elementos para teste automatizado = facilita o teste e aumenta a cobertura.
+\end{itemize}
 
-%imagem do processo
-%selecionar um processo e colocar o exemplo inteiro?
-%facilita a criaÁ„o do cÛdigo
-%ajuda a ampliar a cobertura dos testes funcionais
-
-\section{Conclus„o}
-
-\section{References}
+\section{Referencias}
 
 \bibliographystyle{sbc}
 \bibliography{sbc-template}
