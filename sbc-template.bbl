@@ -1,20 +1,72 @@
 \begin{thebibliography}{}
 
-\bibitem[Boulic and Renault 1991]{boulic:91}
-Boulic, R. and Renault, O. (1991).
-\newblock 3d hierarchies for animation.
-\newblock In Magnenat-Thalmann, N. and Thalmann, D., editors, {\em New Trends
-  in Animation and Visualization}. John Wiley {\&} Sons ltd.
+\bibitem[AB 2009]{ABPMP}
+AB (2009).
+\newblock {\em Guide to the business process management common body of
+  knowledge (BPM CBOK{\textregistered}): ABPMP BPM
+  CBOK{\textregistered}-[version 2.0-second release]}.
+\newblock ABPMP.
 
-\bibitem[Knuth 1984]{knuth:84}
-Knuth, D.~E. (1984).
-\newblock {\em The {\TeX} Book}.
-\newblock Addison-Wesley, 15th edition.
+\bibitem[Bieman et~al. 1996]{bieman1996using}
+Bieman, J.~M., Dreilinger, D., and Lin, L. (1996).
+\newblock Using fault injection to increase software test coverage.
+\newblock In {\em Software Reliability Engineering, 1996. Proceedings., Seventh
+  International Symposium on}, pages 166--174. IEEE.
 
-\bibitem[Smith and Jones 1999]{smith:99}
-Smith, A. and Jones, B. (1999).
-\newblock On the complexity of computing.
-\newblock In Smith-Jones, A.~B., editor, {\em Advances in Computer Science},
-  pages 555--566. Publishing Press.
+\bibitem[Chiavegatto et~al. 2013]{sbqs2013}
+Chiavegatto, R. et~al. (2013).
+\newblock Especificação e automação colaborativas de testes utilizando a
+  técnica {BDD}.
+\newblock In {\em XII Simpósio Brasileiro de Qualidade de Software}, pages
+  334--341.
+
+\bibitem[de~Moura and Charão 2015]{sbqs2015}
+de~Moura, J.~L. and Charão, A. (2015).
+\newblock Automação de testes em aplicações de bpms: um relato de
+  experiência.
+\newblock In {\em XIV Simpósio Brasileiro de Qualidade de Software}, pages
+  212--219.
+
+\bibitem[Fantinato et~al. 2005]{fantinato2005autotest}
+Fantinato, M., da~Cunha, A. C.~R., Dias, S.~V., Cardoso, S. A.~M., and Cunha,
+  C. A.~Q. (2005).
+\newblock Autotest--um framework reutiliz{\'a}vel para a automa{\c{c}}{\~a}o de
+  teste funcional de software.
+\newblock {\em Cad. CPqD Tecnologia}, 1(1):119--131.
+
+\bibitem[{Forrester Research} 2013]{forrester}
+{Forrester Research} (2013).
+\newblock The forrester wave: {BPM} suites, {Q1} 2013.
+
+\bibitem[Kurz et~al. ]{kurzdiagram}
+Kurz, M., Menge, F., and Misiak, Z.
+\newblock Diagram interchangeability in bpmn 2.
+
+\bibitem[Malaiya et~al. 2002]{malaiya2002software}
+Malaiya, Y.~K., Li, M.~N., Bieman, J.~M., and Karcich, R. (2002).
+\newblock Software reliability growth with test coverage.
+\newblock {\em Reliability, IEEE Transactions on}, 51(4):420--426.
+
+\bibitem[Model 2011]{model2011notation}
+Model, B.~P. (2011).
+\newblock Notation (bpmn) version 2.0.
+\newblock {\em OMG Specification, Object Management Group}.
+
+\bibitem[Molinari 2003]{molinari2003testes}
+Molinari, L. (2003).
+\newblock {\em Testes de software: produzindo sistemas melhores e mais
+  confi{\'a}veis: qualidade de software: solu{\c{c}}{\~o}es, t{\'e}cnicas e
+  m{\'e}todos}.
+\newblock {\'E}rica.
+
+\bibitem[{Winter Green Research} 2013]{greenresearch}
+{Winter Green Research} (2013).
+\newblock Business process management ({BPM}) cloud, mobile, and patterns:
+  Market shares, strategies, and forecasts, worldwide, 2013 to 2019.
+
+\bibitem[Zhu et~al. 1997]{zhu1997software}
+Zhu, H., Hall, P.~A., and May, J.~H. (1997).
+\newblock Software unit test coverage and adequacy.
+\newblock {\em Acm computing surveys (csur)}, 29(4):366--427.
 
 \end{thebibliography}
