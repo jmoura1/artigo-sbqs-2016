@@ -58,7 +58,7 @@ Este trabalho descreve um estratégia criada para obter artefatos utilizados na 
 \section{Teste Funcional de Software}
 O teste funcional é um tipo de teste que permite verificar as saídas de um sistema produzidas a partir de entradas pré-definidas. Este tipo de teste permite testar as funcionalidades, requerimentos e regras de negócio presentes no software\cite{molinari2003testes} verificando a existência de erros, o que auxilia na melhoria da qualidade do software.
 
-Uma das principais medidas para o teste de software é a cobertura de teste. A cobertura de teste é a medida da abrangência do teste e pode ser expressa pela cobertura dos casos de testes ou pela cobertura do código executado. Existem diversos trabalhos que abordam a importância da cobertura de testes de software\cite{zhu1997software,bieman1996using}, inclusive ligando o crescimento da qualidade e confiabilidade do software ao crescimento da cobertura dos testes\cite{malaiya2002software}.
+Uma das principais medidas para o teste de software é a cobertura de teste. A cobertura de teste mede a abrangência do teste e pode ser expressa pela cobertura dos casos de testes ou pela cobertura do código executado. Existem diversos trabalhos que abordam a importância da cobertura de testes de software\cite{zhu1997software,bieman1996using}, inclusive ligando o crescimento da qualidade e confiabilidade do software ao crescimento da cobertura dos testes\cite{malaiya2002software}.
 %Por esses motivos o aumento da cobertura dos testes de software também é um assunto bastante abordado\cite{}.
 
 %Essa cobertura pode se basear em fluxos de controle (instrução, ramificação ou caminhos) ou fluxos de dados. Na cobertura baseada em fluxo de controle, o objetivo é %testar linhas de código, condições de ramificação, caminhos que percorrem o código ou outros elementos do fluxo de controle do software. Na cobertura baseada em fluxo %de dados, o objetivo é testar se os estados dos dados permanecem válidos durante a operação do software, por exemplo, se um elemento de dados é definido antes de ser %usado.
@@ -74,7 +74,7 @@ Para executar os testes funcionais automatizados em aplicações Web, pode-se ut
    \item Problema: Criação destes elementos pode ser trabalhoso (processos grandes com muitas tarefas ou com muitos caminhos possíveis).
  \end{itemize}
  
-%Com estas ferramentas, o processo para a execução de um teste funcional é composto de: captura da interação do usuário com o navegador (Selenium IDE), exportação do código gerado (Selenium IDE), criação do cenário de teste (Cucumber), criação das definições dos passos do teste (Cucumber), criação dos métodos para cada passo (Java) e execução do teste (Selenium WebDriver). O cenário de teste é a definição, em ordem de execução, dos passos que são executados na aplicação, bem como dos resultados esperados. 
+Com estas ferramentas, o processo para a execução de um teste funcional é composto de: captura da interação do usuário com o navegador (Selenium IDE), exportação do código gerado (Selenium IDE), criação do cenário de teste (Cucumber), criação das definições dos passos do teste (Cucumber), criação dos métodos para cada passo (Java) e execução do teste (Selenium WebDriver). O cenário de teste é a definição, em ordem de execução, dos passos que são executados na aplicação, bem como dos resultados esperados. %detalhar mais
 	
 \section{BPM e Teste Funcional}
 %-Teste funcional ajuda a aumentar a qualidade do software;
@@ -200,11 +200,10 @@ Devido ao fato de o parser ser executado recursivamente e percorrer o processo b
 %Para criar os possíveis caminhos do processo, o array de adjacências obtido anteriormente é navegado recursivamente até encontrar uma condição de parada: a(s) últimos tarefas a serem executadas. Para cada chamada deste método, é recebido o array e os elementos pelos quais esse caminho passou anteriomente, ao encontrar a condição de parada, este novo caminho é armazenado e é iniciado um novo caminho. %método paths
 %A partir da criação dos caminhos, é chamado o método fillTable que percorre os caminhos para criar a tabela com os caminhos possíveis. No cabeçalho da tabela estarão presentes os nomes de todas as tarefas do processo e cada linha representa um caminho possível. O método fillTable ira percorrer todos os caminhos, comparando cada elemento do caminho com um elemento do processo, se o elemento faz parte deste caminho a coluna será marcada com um "X" caso contrário, a coluna será marcada com um "0". Ao final de toda a execução, a tabela será salva em um arquivo do tipo excel. Caso exista mais de um processo a ser analisado, as tabelas para cada processo estarão distribuídas individualmente no arquivo excel.
 
-
 \section{Resultados}
 \begin{itemize}
 \item Exemplo de processo, Figura \ref{fig:diagrama_exemplo};
-\item Exemplo dos artefatos obtidos: tabelinha e cenário de teste
+\item Exemplo dos artefatos obtidos: tabelinha e cenário de teste (apenas necessário completar com os códigos obtidos no selenium)
 	\begin{itemize}
 	\item Melhoria na criação dos testes (mais rápido e mais completo);
 	\item Por conseuquência: Melhoria na cobertura dos testes (todos caminhos e cenários possíveis)
@@ -222,11 +221,14 @@ Devido ao fato de o parser ser executado recursivamente e percorrer o processo b
 \section{Conclusão}
 \begin{itemize}
 \item Mesmo utilizando ferramentas para teste automatizado, criação dos elementos do teste podem ser trabalhosas;
+\begin{itemize}
+\item O parser criado auxilia nesse ponto.
+\end{itemize}
 \item Importante ter uma boa cobertura;
 \item BPMN parser analiza a notação para gerar elementos para teste automatizado = facilita o teste e aumenta a cobertura.
 \end{itemize}
 
-\section{Referencias}
+\section{Referências}
 
 \bibliographystyle{sbc}
 \bibliography{sbc-template}
