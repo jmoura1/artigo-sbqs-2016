@@ -55,50 +55,6 @@ Este trabalho descreve um estratégia criada para obter artefatos utilizados na 
 %Mesmo utilizando ferramentas para teste automatizado, alguns elementos necessários podem ter sua criação trabalhosa
 %ainda assim, depende de algumas etapas, como a criação de casso de testes...
 	
-\section{Teste Funcional de Software}
-O teste funcional é um tipo de teste que permite verificar as saídas de um sistema produzidas a partir de entradas pré-definidas. Este tipo de teste permite testar as funcionalidades, requerimentos e regras de negócio presentes no software\cite{molinari2003testes} verificando a existência de erros, o que auxilia na melhoria da qualidade do software.
-
-Uma das principais medidas para o teste de software é a cobertura de teste. A cobertura de teste mede a abrangência do teste e pode ser expressa pela cobertura dos casos de testes ou pela cobertura do código executado. Existem diversos trabalhos que abordam a importância da cobertura de testes de software\cite{zhu1997software,bieman1996using}, inclusive ligando o crescimento da qualidade e confiabilidade do software ao crescimento da cobertura dos testes\cite{malaiya2002software}.
-%Por esses motivos o aumento da cobertura dos testes de software também é um assunto bastante abordado\cite{}.
-
-%Essa cobertura pode se basear em fluxos de controle (instrução, ramificação ou caminhos) ou fluxos de dados. Na cobertura baseada em fluxo de controle, o objetivo é %testar linhas de código, condições de ramificação, caminhos que percorrem o código ou outros elementos do fluxo de controle do software. Na cobertura baseada em fluxo %de dados, o objetivo é testar se os estados dos dados permanecem válidos durante a operação do software, por exemplo, se um elemento de dados é definido antes de ser %usado.
-
-No entanto, as atividades executadas para criar testes funcionais com uma boa cobertura podem muitas vezes se tornar exaustivas e trabalhosas, dificultando assim a execução dos testes de forma adequada. Com o objetivo de melhorar a qualidade da análise e o tempo de execução dos testes, foram criados os testes automatizados, que proporcionam a execução dos testes mais rapidamente \cite{fantinato2005autotest}. Quando executada corretamente, a automação de teste é uma das melhores formas de reduzir o tempo de teste no ciclo de vida do software, diminuindo o custo e aumentando a produtividade do desenvolvimento de software como um todo, além de, consequentemente, aumentar a qualidade do produto final.
-
-Para executar os testes funcionais automatizados em aplicações Web, pode-se utilizar ferramentas livres como Selenium\footnote{Selenium. Available at: www.seleniumhq.org.}, Watir\footnote{Watir. Available at: www.watir.com.} ou Geb\footnote{Geb. Available at: www.gebish.org.}. No trabalho anterior\cite{sbqs2015}, onde os testes funcionais se mostraram mais promissores, foi utilizada a ferramenta Selenium, aliada ao Cucumber-JVM\footnote{Cucumber-JVM. Available at: www.github.com/cucumber/cucumber-jvm.} para descrição dos testes. A escolha foi motivada pelo grande número de referências ao Selenium na Web, confirmadas por um trabalho que apresentou resultados satisfatórios com Selenium e Cucumber\cite{cucumberandselenium,sbqs2013}.
-
-%Selenium is composed of multiple software tools. Each has a specific role.
-
-%For this work, we picked up the Selenium tool that is an integrated development environment for automated test scripts, it is implemented as a Firefox extension, and allows to record, edit, and debug tests. Also, combined with Selenium, we picked up the Cucumber-JVM\footnote{Cucumber-JVM. Available at: www.github.com/cucumber/cucumber-jvm.} tool for a description of the tests, Cucumber is a tool that provides a high-level interface that allows to write tests in natural language.
-
-\subsection{Teste Funcional Automatizado utilizando \emph{Selenium} e \emph{Cucumber-JVM}}
-O processo para a execução de um teste funcional é composto de cinco etapas: captura da interação do usuário com a aplicação e exportação do código gerado, criação dos cenários de teste, criação das definições dos passos de teste, implementação dos métodos para cada passo e, por fim, execução do teste.
-
-Para efetuar a captura da interação do usuário com a aplicação é utilizado o Selenium IDE (\emph{Integrated Development Environment}), que permite gravar as ações do usuário conforme elas são gravadas. Assim, a etapa que deseja ser testada deve ser executada para que os passos sejam gravados. Após a captura da interação é possível exportar o \emph{script} utilizando diversas linguagens de programação disponíveis, neste caso foi escolhida a linguagem Java.
-
-Os testes utilizando o Cucumber são compostos, basicamemte, por dois arquivos: arquivos que especificam as funcionalidades \emph{features} e por arquivos de definição de passos \emph{steps}. Os arquivos com as funcionalidades são escritos utilizando a linguagem Gherkin\cite{gherkin} e são compostos por cenários, os cenários representam são uma fração da aplicação que vai ser testada. Um cenário também pode ser descrito como a definição, em ordem de execução, das etapas que são executados nessa fração aplicação, bem como dos resultados esperados para validar a aplicação. Por exemplo, para testar apenas o login em uma aplicação, já é possível obter dois cenários possíveis: (1) dados de acessos corretos e sucesso no login e (2) dados de acesso incorretos e mensagem de erro.
-
-%precisa analisar os casos
-%preicsa criar na mão cada cenário
-% trabalhoso caso se queira testar os diversos caminhos que um processo pode ter e também se o processo for extenso
-
-%/Selenium 2 (aka. Selenium WebDriver)
-%Selenium 2 is the future direction of the project and the newest addition to the Selenium toolkit. This brand new automation tool provides all sorts of awesome features, including a more %%cohesive and object oriented API as well as an answer to the limitations of the old implementation.
-
-%Selenium 2.0 is the product of that effort. It supports the WebDriver API and underlying technology, along with the Selenium 1 technology underneath the WebDriver API for maximum flexibility in porting your tests. In addition, Selenium 2 still runs Selenium 1’s Selenium RC interface for backwards compatibility.
-
-
-%cenário de BDD. Ou seja, descrevemos o que (comportamento) do sistema com cenários de critérios de aceite, mas quando vamos implementar seus detalhes e testar o como ele implementa essa funcionalidade, usamos TDD.
-
-
- \begin{itemize}
-   \item Como é feito o teste;
-   \item Explicação dos elementos principais do teste (cenários e stepDefinition);
-   \item Problema: Criação destes elementos pode ser trabalhoso (processos grandes com muitas tarefas ou com muitos caminhos possíveis).
- \end{itemize}
- 
-%Com estas ferramentas, o processo para a execução de um teste funcional é composto de: captura da interação do usuário com o navegador (Selenium IDE), exportação do código gerado (Selenium IDE), criação do cenário de teste (Cucumber), criação das definições dos passos do teste (Cucumber), criação dos métodos para cada passo (Java) e execução do teste (Selenium WebDriver). O cenário de teste é a definição, em ordem de execução, dos passos que são executados na aplicação, bem como dos resultados esperados. 
-	
 \section{BPM e Teste Funcional}
 %-Teste funcional ajuda a aumentar a qualidade do software;
 %-sistemas bpm = web, permite executar testes funcionais com ferramenta
@@ -150,9 +106,59 @@ Um \emph{Event} é algo que "acontece" durante o curso de um processo\cite{model
 %sequence flows
 Um elemento \emph{Sequence Flow} é usado para exibir a ordem em que os demais elementos são executados em um processo. Cada \emph{sequenceFlow} possui um atributo \emph{sourceRef} que indica de onde este \emph{sequenceFlow} vem, ou sua "fonte", e um atributo \emph{targetRef} que indica para onde ele vai, ou seja, seu alvo. Cada \emph{sequenceFlow} possui apenas possui apenas uma fonte e um alvo. Analisando os elementos \emph{sequenceFlow} e analisando os dois atributos citados acima é possível identificar todo o fluxo do processo.
 
+
+\section{Teste Funcional de Software}
+O teste funcional é um tipo de teste que permite verificar as saídas de um sistema produzidas a partir de entradas pré-definidas. Este tipo de teste permite testar as funcionalidades, requerimentos e regras de negócio presentes no software\cite{molinari2003testes} verificando a existência de erros, o que auxilia na melhoria da qualidade do software.
+
+Uma das principais medidas para o teste de software é a cobertura de teste. A cobertura de teste mede a abrangência do teste e pode ser expressa pela cobertura dos casos de testes ou pela cobertura do código executado. Existem diversos trabalhos que abordam a importância da cobertura de testes de software\cite{zhu1997software,bieman1996using}, inclusive ligando o crescimento da qualidade e confiabilidade do software ao crescimento da cobertura dos testes\cite{malaiya2002software}.
+%Por esses motivos o aumento da cobertura dos testes de software também é um assunto bastante abordado\cite{}.
+
+%Essa cobertura pode se basear em fluxos de controle (instrução, ramificação ou caminhos) ou fluxos de dados. Na cobertura baseada em fluxo de controle, o objetivo é %testar linhas de código, condições de ramificação, caminhos que percorrem o código ou outros elementos do fluxo de controle do software. Na cobertura baseada em fluxo %de dados, o objetivo é testar se os estados dos dados permanecem válidos durante a operação do software, por exemplo, se um elemento de dados é definido antes de ser %usado.
+
+No entanto, as atividades executadas para criar testes funcionais com uma boa cobertura podem muitas vezes se tornar exaustivas e trabalhosas, dificultando assim a execução dos testes de forma adequada. Com o objetivo de melhorar a qualidade da análise e o tempo de execução dos testes, foram criados os testes automatizados, que proporcionam a execução dos testes mais rapidamente \cite{fantinato2005autotest}. Quando executada corretamente, a automação de teste é uma das melhores formas de reduzir o tempo de teste no ciclo de vida do software, diminuindo o custo e aumentando a produtividade do desenvolvimento de software como um todo, além de, consequentemente, aumentar a qualidade do produto final.
+
+Para executar os testes funcionais automatizados em aplicações Web, pode-se utilizar ferramentas livres como Selenium\footnote{Selenium. Available at: www.seleniumhq.org.}, Watir\footnote{Watir. Available at: www.watir.com.} ou Geb\footnote{Geb. Available at: www.gebish.org.}. No trabalho anterior\cite{sbqs2015}, onde os testes funcionais se mostraram mais promissores, foi utilizada a ferramenta Selenium, aliada ao Cucumber-JVM\footnote{Cucumber-JVM. Available at: www.github.com/cucumber/cucumber-jvm.} para descrição dos testes. A escolha foi motivada pelo grande número de referências ao Selenium na Web, confirmadas por um trabalho que apresentou resultados satisfatórios com Selenium e Cucumber\cite{pannutest,sbqs2013}.
+
+%Selenium is composed of multiple software tools. Each has a specific role.
+
+%For this work, we picked up the Selenium tool that is an integrated development environment for automated test scripts, it is implemented as a Firefox extension, and allows to record, edit, and debug tests. Also, combined with Selenium, we picked up the Cucumber-JVM\footnote{Cucumber-JVM. Available at: www.github.com/cucumber/cucumber-jvm.} tool for a description of the tests, Cucumber is a tool that provides a high-level interface that allows to write tests in natural language.
+
+\subsection{Teste Funcional Automatizado utilizando \emph{Selenium} e \emph{Cucumber-JVM}}
+O processo para a execução de um teste funcional é composto de cinco etapas: captura da interação do usuário com a aplicação e exportação do código gerado, criação dos cenários de teste, criação das definições dos passos de teste, implementação dos métodos para cada passo e, por fim, execução do teste.
+
+Para efetuar a captura da interação do usuário com a aplicação é utilizado o Selenium IDE (\emph{Integrated Development Environment}), que permite gravar as ações do usuário conforme elas são gravadas. Assim, a etapa que deseja ser testada deve ser executada para que os passos sejam gravados. Após a captura da interação é possível exportar o \emph{script} utilizando diversas linguagens de programação disponíveis, neste caso foi escolhida a linguagem Java.
+
+Os testes utilizando o Cucumber são compostos, basicamemte, por dois arquivos: arquivos que especificam as funcionalidades \emph{features} e por arquivos de definição de passos \emph{steps}. 
+
+Os arquivos com as funcionalidades são escritos utilizando a linguagem Gherkin\cite{gherkin} e são compostos por cenários, os cenários representam uma fração da aplicação que vai ser testada. Um cenário também pode ser descrito como a definição, em ordem de execução, das etapas que são executados nessa fração aplicação, bem como dos resultados esperados para validar a aplicação. Por exemplo, para testar apenas o login em uma aplicação, já é possível obter dois cenários possíveis: (a) dados de acessos corretos e sucesso no login e (b) dados de acesso incorretos e mensagem de erro. 
+
+Para que cada etapa do cenário seja executada, é necessária a criação de \emph{steps} que irão traduzir os passos definidos na linguagem Gherkin para ações que vão interagir com o sistema. Cada \emph{step}, geralmente, irá chamar um método Java que irá efetivamente executar a interação com a aplicação. A implementação destes métodos pode ser feita apenas utilizando o código extraído através do Selenium após a captura das ações do usuário.
+
+No entanto, mesmo utilizando o Cucumber e Selenium para facilitar a criação dos testes, ainda é preciso analisar o processo e extrair os cenários de teste que devem ser criados manualmente no arquivo de \emph{features}. Além dos cenários, também deve ser criado manualmente o arquivo de \emph{steps}, contendo uma "passo" correspondente a cada etapa de todos os cenários criados. Esta etapa pode ser trabalhosa, principalmente quando for necessário testar todos diversos cenários que um processo pode ter ou quando o processo for extenso.
+
+
+%When Cucumber executes a Step in a Scenario it will look for a matching Step Definition to execute.
+
+%A Step Definition is a small piece of code with a pattern attached to it. The pattern is used to link the step definition to all the matching Steps, and the code is what Cucumber will execute when it sees a Gherkin Step.
+
+%/Selenium 2 (aka. Selenium WebDriver)
+%Selenium 2 is the future direction of the project and the newest addition to the Selenium toolkit. This brand new automation tool provides all sorts of awesome features, including a more %%cohesive and object oriented API as well as an answer to the limitations of the old implementation.
+
+%Selenium 2.0 is the product of that effort. It supports the WebDriver API and underlying technology, along with the Selenium 1 technology underneath the WebDriver API for maximum flexibility in porting your tests. In addition, Selenium 2 still runs Selenium 1’s Selenium RC interface for backwards compatibility.
+
+%cenário de BDD. Ou seja, descrevemos o que (comportamento) do sistema com cenários de critérios de aceite, mas quando vamos implementar seus detalhes e testar o como ele implementa essa funcionalidade, usamos TDD.
+
+
+% \begin{itemize}
+%   \item Como é feito o teste;
+%   \item Explicação dos elementos principais do teste (cenários e stepDefinition);
+%   \item Problema: Criação destes elementos pode ser trabalhoso (processos grandes com muitas tarefas ou com muitos caminhos possíveis).
+% \end{itemize}
+
+
 \section{BPMN Parser}
 \begin{itemize}
-\item Objetivo: gerar artefatos para melhoria do teste funcional automzatizado de aplicações bpm;
+\item Objetivo: gerar artefatos para melhoria do teste funcional automzatizado de aplicações bpm; gerar arquivo de features e de steps;
 \item Informações técnicas (linguagem, etc) + onde foram obtidos os diagramas utilizados para validação;
 \item Resuminho do que ele faz: gera tabelinha + uma parte dos códigos
 \end{itemize}

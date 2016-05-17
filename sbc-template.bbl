@@ -20,6 +20,10 @@ Chiavegatto, R. et~al. (2013).
 \newblock In {\em XII Simpósio Brasileiro de Qualidade de Software}, pages
   334--341.
 
+\bibitem[{Cucumber Limited} 2015]{gherkin}
+{Cucumber Limited} (2015).
+\newblock {Gherkin Reference}.
+
 \bibitem[de~Moura and Charão 2015]{sbqs2015}
 de~Moura, J.~L. and Charão, A. (2015).
 \newblock Automação de testes em aplicações de bpms: um relato de
@@ -58,6 +62,10 @@ Molinari, L. (2003).
   confi{\'a}veis: qualidade de software: solu{\c{c}}{\~o}es, t{\'e}cnicas e
   m{\'e}todos}.
 \newblock {\'E}rica.
+
+\bibitem[Pannu ]{pannutest}
+Pannu, Y.~S.
+\newblock Test automation using cucumber and selenium webdriver.
 
 \bibitem[{Winter Green Research} 2013]{greenresearch}
 {Winter Green Research} (2013).
