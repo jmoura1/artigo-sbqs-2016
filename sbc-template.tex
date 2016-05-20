@@ -3,6 +3,7 @@
 \usepackage{sbc-template}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx,url}
+\usepackage[pdftex]{hyperref}
 
 %\usepackage[brazil]{babel}   
 %\usepackage[latin1]{inputenc}  
@@ -117,7 +118,7 @@ Uma das principais medidas para o teste de software é a cobertura de teste. A c
 
 No entanto, as atividades executadas para criar testes funcionais com uma boa cobertura podem muitas vezes se tornar exaustivas e trabalhosas, dificultando assim a execução dos testes de forma adequada. Com o objetivo de melhorar a qualidade da análise e o tempo de execução dos testes, foram criados os testes automatizados, que proporcionam a execução dos testes mais rapidamente \cite{fantinato2005autotest}. Quando executada corretamente, a automação de teste é uma das melhores formas de reduzir o tempo de teste no ciclo de vida do software, diminuindo o custo e aumentando a produtividade do desenvolvimento de software como um todo, além de, consequentemente, aumentar a qualidade do produto final.
 
-Para executar os testes funcionais automatizados em aplicações Web, pode-se utilizar ferramentas livres como Selenium\footnote{Selenium. Available at: www.seleniumhq.org.}, Watir\footnote{Watir. Available at: www.watir.com.} ou Geb\footnote{Geb. Available at: www.gebish.org.}. No trabalho anterior\cite{sbqs2015}, onde os testes funcionais se mostraram mais promissores, foi utilizada a ferramenta Selenium, aliada ao Cucumber-JVM\footnote{Cucumber-JVM. Available at: www.github.com/cucumber/cucumber-jvm.} para descrição dos testes. A escolha foi motivada pelo grande número de referências ao Selenium na Web, confirmadas por um trabalho que apresentou resultados satisfatórios com Selenium e Cucumber\cite{pannutest,sbqs2013}.
+Para executar os testes funcionais automatizados em aplicações Web, pode-se utilizar ferramentas livres como Selenium\cite{selenium}, Watir\cite{watir} ou Geb\cite{geb}. No trabalho anterior\cite{sbqs2015}, onde os testes funcionais se mostraram mais promissores, foi utilizada a ferramenta Selenium, aliada ao Cucumber-JVM\cite{cucumber} para descrição dos testes. A escolha foi motivada pelo grande número de referências ao Selenium na Web, confirmadas por um trabalho que apresentou resultados satisfatórios com Selenium e Cucumber\cite{pannutest,sbqs2013}.
 
 %Selenium is composed of multiple software tools. Each has a specific role.
 
@@ -150,11 +151,17 @@ Assim, mesmo utilizando o Cucumber e Selenium para facilitar a criação dos tes
 % \end{itemize}
 
 \section{BPMN Parser}
-\begin{itemize}
-\item Objetivo: gerar artefatos para melhoria do teste funcional automatizado de aplicações bpm; gerar arquivo de features e de steps;
-\item Informações técnicas (linguagem, etc) + onde foram obtidos os diagramas utilizados para validação;
-\item Resuminho do que ele faz: gera tabelinha + uma parte dos códigos
-\end{itemize}
+O objetivo deste trabalho é melhorar e facilitar o teste funcional automatizado de aplicações BPM. A criação dos cenários de teste utilizados pelo Cucumber é uma etapa importante para a melhoria do teste, pois estes podem definir ou limitar o que será testado, interferindo assim na qualidade e na cobertura dos testes. No entanto a criação dos arquivos de \emph{features} contendo os cenários e do arquivo de \emph{steps} pode ser trabalhosa, como foi mencionado na seção anterior.
+
+Com o objetivo de facilitar a criação dos artefatos utilizados no teste funcional com o Cucumber-JVM, o arquivo de cenários e o arquivo de \emph{steps}, decidiu-se analisar os arquivos XML no formato BPMN exportados pelas ferramentas BPMS para extrair destes arquivos informações úteis. 
+
+Para analisar os arquivos foi desenvolvido um \emph{parser} que percorre os arquivos XML e manipula as informações necessárias. O \emph{parser} foi criado utilizando a linguagem Java, principalmente por esta linguagem já possuir uma ferramenta sólida para a análise de documentos XML\cite{javadom}.  Os processos utilizados para a validação do parser foram obtidos no site da \emph{Object Management Group} (OMG) e estão disponíveis em \href{https://colocar link}{colocar link}. Basicamente, o \emph{parser} criado percorre o arquivo BPMN e analisa os elementos através da nomentaclatura padrão das \emph{tags} no arquivo e então executa uma lógica para criar os diferentes cenários de teste. Ao fim da execução são criados os arquivos de \emph{features} e \emph{steps} para o teste funcional. Juntamente com os arquivos para o teste, é gerado um arquivo Excel contendo uma tabela com os todos os possíveis cenários/caminhos do processo, facilitando a visualização do que será testado.
+
+%\begin{itemize}
+%\item Objetivo: gerar artefatos para melhoria do teste funcional automatizado de aplicações bpm; gerar arquivo de features e de steps;
+%\item Informações técnicas (linguagem, etc) + onde foram obtidos os diagramas utilizados para validação;
+%\item Resuminho do que ele faz: gera tabelinha + uma parte dos códigos
+%\end{itemize}
 
 %arquivo bpmn é exportado
 %onde foram obtidos os diagramas que foram testados nesse trabalho
@@ -163,9 +170,9 @@ Assim, mesmo utilizando o Cucumber e Selenium para facilitar a criação dos tes
 %analysts that create the initial drafts of the processes, to the technical developers responsible for implementing the
 %technology that will perform those processes, and finally, to the business people who will manage and monitor those
 %processes. Thus, BPMN creates a standardized bridge for the gap between the business process design and process
-%implementation. 
+%implementation.
 
-\subsection{Funcionamento}
+\subsection{Funcionamento do \emph{parser}}
 %colocar uma citação pra array de adjacencias
 O principal elemento para o funcionamento do parser é o \emph{Sequence Flow}. Por conter os atributos targetRef e sourceRef os elementos deste tipo permitem percorrer todo o diagrama. Ao iniciar o parser, é solicitado ao usuário o caminho para o arquivo BPMN e a ID do processo a ser avaliado. Um diagrama pode conter mais de um processo e, nesse caso, o usuário pode escolher que todos processos sejam avaliados.
 
@@ -174,7 +181,6 @@ A classe \emph{Node} define um tipo de objeto que guarda informações básicas 
 A partir do array de adjacências são criados os caminhos possíveis pelos quais o processo pode passar. O método que cria os caminhos percorre recursivamente o array de adjacências criado anteriormente e "constrói" um novo caminho, tendo como condição de parada o encontro de uma das últimas tarefas a serem executadas. Uma tarefa é uma das últimas quando o elemento que a sucede no fluxo for \emph{End Event}. Ao encontrar uma tarefa final, o caminho é armazenado e é iniciada a construção de um novo caminho.
 
 Os caminhos obtidos são base para a criação dos dois artefatos para o teste funcional: tabela de caminhos possíveis e código para o teste funcional. Para criar a tabela com os caminhos possíveis, cada tarefa existente no processo representará uma coluna na tabela e cada caminho representará uma nova linha. Para cada caminho, se a tarefa estiver presente a coluna será marcada com "X" caso contrário a coluna será marcada com um "0". Caso mais de um processo seja avaliado ao mesmo tempo, a tabela referente à cada processo estará separada individualmente no arquivo final. Na Tabela \ref{tab:exemplo}, pode ser visto uma tabela resultante da execução do parser para um processo com cinco \emph{tasks} e dois caminhos possíveis. 
-
 
 Para a criação do código para o teste funcional dois arquivos devem ser criados: o arquivo contendo os cenários e a classe \emph{stepDefinition} contendo os métodos para cada passo do cenário. Para criar estes artefatos, cada caminho obtido é considerado um cenário diferente. Como trata-se de um teste funcional, apenas tarefas que podem ser executadas por um usuário devem ser avaliadas (\emph{userTask},\emph{manualTask}...). Assim, para cada caminho é criado um novo cenário utilizando a notação do Cucumber e comtemplando apenas as tarefas que podem ser executadas por um usuário. O método correspondente a cada passo do cenário é criado ao mesmo tempo. Na Figura \ref{fig:exemplo_cenario}, podem ser vistos dois cenários resultante da execução do parser para um processo com dois caminhos possíveis. 
 
