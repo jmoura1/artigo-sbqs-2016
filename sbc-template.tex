@@ -229,8 +229,16 @@ Devido ao fato de o parser ser executado recursivamente e percorrer o processo b
 %A partir da criação dos caminhos, é chamado o método fillTable que percorre os caminhos para criar a tabela com os caminhos possíveis. No cabeçalho da tabela estarão presentes os nomes de todas as tarefas do processo e cada linha representa um caminho possível. O método fillTable ira percorrer todos os caminhos, comparando cada elemento do caminho com um elemento do processo, se o elemento faz parte deste caminho a coluna será marcada com um "X" caso contrário, a coluna será marcada com um "0". Ao final de toda a execução, a tabela será salva em um arquivo do tipo excel. Caso exista mais de um processo a ser analisado, as tabelas para cada processo estarão distribuídas individualmente no arquivo excel.
 
 \section{Resultados}
+%trocar imagem de exemplo
+%tanto o diagrama9 quanto o diagrama 4 tem sub processos, pode gerar pra eles também
+Com a analise do arquivo BPMN através do parser criado foi possível obter dois arquivos essenciais para o teste funcional automatizado utilizando o Selenium e o Cucumber-JVM: o arquivo de \emph{features} contendo os cenários e o arquivo de \emph{steps} contendo métodos que para efetuar a execução de cada etapa do cenário. 
+
+Por exemplo, o processo na Figura \ref{fig:diagrama_exemplo} possui diversos \emph{gateways} de diferentes tipos, gerando assim várias divisões de fluxo e caminhos que poderiam ser seguidos. Para executar o teste completo do processo, testando todas as possibilidades e com boa cobertura, seria necessário planejar os cenários de teste e criá-los manualmente.
+
+Executando o parser criado utilizando o arquivo BPMN referente ao diagrama da Figura \ref{fig:diagrama_exemplo} como exemplo 
+
 \begin{itemize}
-\item Exemplo de processo, Figura \ref{fig:diagrama_exemplo};
+%\item Exemplo de processo, Figura \ref{fig:diagrama_exemplo};
 \item Exemplo dos artefatos obtidos: tabelinha e cenário de teste (apenas necessário completar com os códigos obtidos no selenium)
 	\begin{itemize}
 	\item Melhoria na criação dos testes (mais rápido e mais completo);
