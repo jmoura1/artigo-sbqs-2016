@@ -5,7 +5,7 @@
 \usepackage{graphicx,url}
 \usepackage[pdftex]{hyperref}
 
-%\usepackage[brazil]{babel}   
+\usepackage[brazil]{babel}   
 %\usepackage[latin1]{inputenc}  
 
      
@@ -220,6 +220,8 @@ Na criação dos caminhos, uma dificuldade ocorreu devido aos desvios causados p
 
 Devido ao fato de o parser ser executado recursivamente e percorrer o processo baseado no fluxo dos elementos do tipo \emph{sequenceFlow}, ocorreram problemas em processos onde uma parcela do processo também é executada recursivamente. Estes problemas foram causados devido ao fluxo nunca encontrar um "fim". Para solucionar esses problema foi criado um "delimitador de recursão" que define e controla o número de vezes em que o mesmo \emph{sequenceFlow} será executado.
 
+%Outra dificuldade: como um processo pode ser executado por diferentes usuários, os cenários também são, então os metódos java teram que executar a troca de usuário quando necessário para executar a tarefa do cenário (fazer login, logout e login ....): identificar usuários e prever
+
 %anotações anteriores
 %Após isso, é iniciada a avaliação de cada processo. O parser percorre os elementos do tipo sequenceFlow em busca das primeiras tarefas do processo, ou seja, tarefas que sucedem elementos do tipo startEvent. Para cada tarefa encontrada, será criado um objeto da classe definida como “Node” que contém informações básicas sobre os elementos e mais um array de adjacência. 
 %Então é feita a criação dos arrays de adjacência. No método chamado createNodes que retorna um objeto do tipo List<Node>, são percorridos todos os elementos sequenceFlow partindo das primeiras tarefas e, para cada nova tarefa encontrada, é criado um objeto da classe Node e então o método é chamado recursivamente para obter o array de adjacência do elemento em questão. O trecho de código referente a essa execução pode ser visto na Figura X. Este método é executado recursivamente até encontrar um elemento do tipo endEvent, ou seja, até encontrar um fim.
@@ -229,30 +231,41 @@ Devido ao fato de o parser ser executado recursivamente e percorrer o processo b
 %A partir da criação dos caminhos, é chamado o método fillTable que percorre os caminhos para criar a tabela com os caminhos possíveis. No cabeçalho da tabela estarão presentes os nomes de todas as tarefas do processo e cada linha representa um caminho possível. O método fillTable ira percorrer todos os caminhos, comparando cada elemento do caminho com um elemento do processo, se o elemento faz parte deste caminho a coluna será marcada com um "X" caso contrário, a coluna será marcada com um "0". Ao final de toda a execução, a tabela será salva em um arquivo do tipo excel. Caso exista mais de um processo a ser analisado, as tabelas para cada processo estarão distribuídas individualmente no arquivo excel.
 
 \section{Resultados}
-%trocar imagem de exemplo
-%tanto o diagrama9 quanto o diagrama 4 tem sub processos, pode gerar pra eles também
-Com a analise do arquivo BPMN através do parser criado foi possível obter dois arquivos essenciais para o teste funcional automatizado utilizando o Selenium e o Cucumber-JVM: o arquivo de \emph{features} contendo os cenários e o arquivo de \emph{steps} contendo métodos que para efetuar a execução de cada etapa do cenário. 
+Com a análise do arquivo BPMN através do parser criado foi possível obter dois arquivos essenciais para o teste funcional automatizado utilizando o Selenium e o Cucumber-JVM: o arquivo de \emph{features} contendo os cenários e o arquivo de \emph{steps} contendo métodos que para efetuar a execução de cada etapa do cenário. 
 
-Por exemplo, o processo na Figura \ref{fig:diagrama_exemplo} possui diversos \emph{gateways} de diferentes tipos, gerando assim várias divisões de fluxo e caminhos que poderiam ser seguidos. Para executar o teste completo do processo, testando todas as possibilidades e com boa cobertura, seria necessário planejar os cenários de teste e criá-los manualmente.
+\begin{figure}[ht]
+%\centering
+\includegraphics[width=.8\paperwidth]{figuras/diagrama_exemplo.png}
+\caption{Exemplo de Processo. Adaptado de: Object Management Group}
+\label{fig:diagrama_exemplo}
+\end{figure}
 
-Executando o parser criado utilizando o arquivo BPMN referente ao diagrama da Figura \ref{fig:diagrama_exemplo} como exemplo 
+Por exemplo, o processo na Figura \ref{fig:diagrama_exemplo} possui \emph{gateways} de diferentes tipos, gerando assim várias divisões de fluxo e aumentando os caminhos que podem ser seguidos. Para executar o teste completo do processo, testando todas as possibilidades e com boa cobertura, seria necessário planejar os cenários de teste e criá-los manualmente. Para criar os cenários também é necessário identificar quais tarefas são executadas por um usuário e o processo possui várias \emph{tasks}. Por fim, também seria necessário criar os \emph{steps} para cada etapa do cenário manualmente.
+
+\begin{figure}[ht]
+%\centering
+\includegraphics[width=.8\paperwidth]{figuras/cenario_resultado.png}
+\caption{Cenários obtidos através do arquivo BPMN}
+\label{fig:cenario_resultado}
+\end{figure}
+
+Executando o parser criado utilizando o arquivo BPMN referente ao diagrama da Figura \ref{fig:diagrama_exemplo} como exemplo, obtemos os cenários de teste representados na Figura \ref{fig:cenario_resultado}. Nestes cenários...
+%como foi mencionado, apenas tarefas executadas por usuários são levadas para o teste funcional
+
+Para cada etapa nos cenários criados será criado um método correspondente dentro do arquivo de \emph{steps} chamado \emph{stepDefinition}. Por exemplo, para a etapa X será criado um método com um nome genérico e contendo a anotação Given X. Os métodos poderão ser preenchidos posteriormente com os dados gravados pelo Selenium na etapa de captura da interação com a aplicação.
+
+Neste exemplo, apenas um processo foi analisado, mas arquivos BPMN podem conter vários processos. Neste caso, se for necessário gerar os dados para todos os processos dentro de um arquivo, os arquivos de \emph{features} e \emph{steps} conterão, respectivamente, os cenários e métodos para todos os processos dentro do arquivo BPMN.
+%falar e colocar a tabelinhas, alem dos dois arquivos consegue extrair a tabelinha
 
 \begin{itemize}
 %\item Exemplo de processo, Figura \ref{fig:diagrama_exemplo};
-\item Exemplo dos artefatos obtidos: tabelinha e cenário de teste (apenas necessário completar com os códigos obtidos no selenium)
-	\begin{itemize}
+%item Exemplo dos artefatos obtidos: tabelinha e cenário de teste (apenas necessário completar com os códigos obtidos no selenium)
 	\item Melhoria na criação dos testes (mais rápido e mais completo);
 	\item Por consequência: Melhoria na cobertura dos testes (todos caminhos e cenários possíveis)
 	\item Por consequência: auxilia na melhora da qualidade dos sistemas.
-	\end{itemize}
 \end{itemize}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.8\paperwidth]{figuras/diagrama_exemplo.png}
-\caption{Exemplo de Processo. Fonte: Object Management Group}
-\label{fig:diagrama_exemplo}
-\end{figure}
+Pode se dizer que este trabalho atingiu seu objetivo...
 
 \section{Conclusão}
 \begin{itemize}
