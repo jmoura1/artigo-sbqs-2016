@@ -61,8 +61,6 @@ Este trabalho descreve um estratégia criada para obter artefatos utilizados na 
 %-sistemas bpm = web, permite executar testes funcionais com ferramenta
 %-Teste é pouco abordado
 %-Teste é importante
-%-Trabalhos relacionados;
-%pegar citações
 
 O termo BPM pode ser usado com ênfases diferentes, às vezes com foco em tecnologia (software) e outras vezes em gestão. Mesmo assim, a área tem convergido no entendimento do ciclo de vida de aplicações de BPM, que envolve as atividades de análise, modelagem, execução, monitoramento e otimização~\cite{ABPMP}. 
 
@@ -74,10 +72,14 @@ Os sistemas de BPM (BPMS) têm se afirmado como ferramentas essenciais para supo
 \item Alguns trabalhos relacionados
 \end{itemize}
 
+%-Trabalhos relacionados;
+%pegar citações
 %There are some  studies that assess/test compliance of models of processes~\cite{conformancetesting} 
 
 %Moreover, the importance of the tests is widely recognized in software engineering ~\cite{swebok14}. 
 %Whereas BPMS applications are usually Web-based systems, it can be assumed that it can be successfully tested using dedicated approaches, such as load tests or functional testing of the black-box type. There are also those who argue that BPM applications test differs from traditional Web applications testing~\cite{evoke}, but there were no more references to deepen this view. This finding reinforced the motivation for this work. 
+
+Existem trabalhos que chamam a atenção para a importância e para a as dificuldades trazidas por um bom teste, bem como trazem alternativas para a melhoria da seleção de casos de teste\cite{bohmer2015genetic}. Esses trabalhos fortalecem a ideia da importância de artefatos para facilitar a criação de testes para processos ou sistemas BPM, no entanto, os trabalhos geralmente abordam a criação de casos de teste baseados em modelos de processo e não em sistemas em si, não é descrita uma forma de automatizar ou executar os casos de teste criados. Existem também trabalhos que visam maneiras de automatizar e melhorar o monitoramento da conformidade dos modelos de processos \cite{ly2015compliance,van2012replaying} e que, novamente, são mais voltados para os processos em si e sua administração do que para sistema/software.
 
 \section{Business Process Model and Notation - \emph{BPMN}}
 O padrão Business Process Model and Notation, ou BPMN, foi criado com o objetivo de fornecer uma notação facilmente compreensível por todos os usuários, desde os analistas que criam os rascunhos iniciais dos processos até os desenvolvedores responsáveis por implementar os processos e, finalmente, para os usuários que irão gerenciar e monitorar esses processos\cite{model2011notation}. A versão BPMN 2.0, a mais recente, define um padrão XML para arquivos contendo dados sobre o modelo e o funcionamento do processo bem como a sua representação visual\cite{kurzdiagram}, isto permite que o XML seja analisado para obter-se informações importantes sobre os processos. A maioria das ferramentas BPM disponibiliza a exportação do processo em formato XML seguindo o padrão BPMN. No padrão BPMN um processo é descrito como um diagrama de elementos de fluxo, que são: Tasks (Tarefas), Events (Eventos), Gateways e Sequence Flows \cite{kurzdiagram}.
@@ -222,6 +224,7 @@ Devido ao fato de o parser ser executado recursivamente e percorrer o processo b
 
 
 %o cenário contem qual tarefa vai ser executada e em que ordem, mais algumas etapas ainda precisam ser preenchidas
+%alguns caminhos podem se repetir pois apenas tarefas executadas por usuario são levadas em conta, poderia faz pra não tratar essas tarefas
 
 %anotações anteriores
 %Após isso, é iniciada a avaliação de cada processo. O parser percorre os elementos do tipo sequenceFlow em busca das primeiras tarefas do processo, ou seja, tarefas que sucedem elementos do tipo startEvent. Para cada tarefa encontrada, será criado um objeto da classe definida como “Node” que contém informações básicas sobre os elementos e mais um array de adjacência. 
@@ -257,21 +260,29 @@ Como foi mencionado anteriormente, apenas tarefas executadas por usuários são 
 
 %o cenário contem qual tarefa vai ser executada e em que ordem, mais algumas etapas ainda precisam ser preenchidas
 
-Para cada etapa nos cenários criados será criado um método correspondente dentro do arquivo de \emph{steps} chamado \emph{stepDefinition}. Por exemplo, para a etapa X será criado um método com um nome genérico e contendo a anotação Given X. Os métodos poderão ser preenchidos posteriormente com os dados gravados pelo Selenium na etapa de captura da interação com a aplicação.
+Para cada etapa nos cenários criados será criado um método correspondente dentro do arquivo de \emph{steps} chamado \emph{stepDefinition}. Uma parte do arquivo de \emph{steps} resultante da análise do processo em questão pode ser vista na Figura \ref{fig:steps_resultado}. Como pode ser visto nesta figura, para a etapa \emph{I am on the task Decide if normal post or special shipment} foi criado um método com um nome genérico e contendo a anotação \emph{@Given("\^{}I am on the task Decide if normal post or special shipment\textdollar{}") 
+}. Os métodos podem ser preenchidos posteriormente com os dados gravados pelo Selenium na etapa de captura da interação com a aplicação.
+
+%preencher e colocar imagem do step definition
+\begin{figure}[ht]
+%\centering
+\includegraphics[width=.8\paperwidth]{figuras/steps.png}
+\caption{Métodos obtidos através do arquivo BPMN}
+\label{fig:steps_resultado}
+\end{figure}
 
 Neste exemplo, apenas um processo foi analisado, mas arquivos BPMN podem conter vários processos. Neste caso, se for necessário gerar os dados para todos os processos dentro de um arquivo, os arquivos de \emph{features} e \emph{steps} conterão, respectivamente, os cenários e métodos para todos os processos dentro do arquivo BPMN.
 
-%falar e colocar a tabelinhas, alem dos dois arquivos consegue extrair a tabelinha
 
-\begin{itemize}
+%\begin{itemize}
 %\item Exemplo de processo, Figura \ref{fig:diagrama_exemplo};
 %item Exemplo dos artefatos obtidos: tabelinha e cenário de teste (apenas necessário completar com os códigos obtidos no selenium)
-	\item Melhoria na criação dos testes (mais rápido e mais completo);
-	\item Por consequência: Melhoria na cobertura dos testes (todos caminhos e cenários possíveis)
-	\item Por consequência: auxilia na melhora da qualidade dos sistemas.
-\end{itemize}
+%	\item Melhoria na criação dos testes (mais rápido e mais completo);
+%	\item Por consequência: Melhoria na cobertura dos testes (todos caminhos e cenários possíveis)
+%	\item Por consequência: auxilia na melhora da qualidade dos sistemas.
+%\end{itemize}
 
-Pode se dizer que este trabalho atingiu seu objetivo...
+Com estes resultados se dizer que este trabalho atingiu seu objetivo, pois foi possível obter dois arquivos muito importantes para a execução do teste funcional automatizado: o arquivo com os cenários de teste e o arquivo com os métodos para executar cada etapa dos cenários. A criação automatizada dos dois arquivos permite facilitar e melhorar a criação dos testes para os sistemas BPM, diminuindo o tempo de análise dos processos bem como tornando o teste mais completo ao mesmo tempo em que verifica todos os possíveis fluxos que um processo pode seguir. Assim, a qualidade e a cobertura dos testes também é melhorada pois todos os caminhos e cenários possíveis com tarefas executadas por usuários são criados. Por consequencia, a qualidade dos sistemas também pode ser beneficiada com um processo de teste mais completo e facilitado.
 
 \section{Conclusão}
 \begin{itemize}
@@ -281,6 +292,7 @@ Pode se dizer que este trabalho atingiu seu objetivo...
 \end{itemize}
 \item Importante ter uma boa cobertura;
 \item BPMN parser analiza a notação para gerar elementos para teste automatizado = facilita o teste e aumenta a cobertura.
+\item Trabalhos futuros (tirar repeticoes de cenários, tentar gerar mais coisas,..)
 \end{itemize}
 
 \section{Referências}
