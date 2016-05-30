@@ -82,22 +82,22 @@ Os sistemas de BPM (BPMS) têm se afirmado como ferramentas essenciais para supo
 Existem trabalhos que chamam a atenção para a importância e para a as dificuldades trazidas por um bom teste, bem como trazem alternativas para a melhoria da seleção de casos de teste\cite{bohmer2015genetic}. Esses trabalhos fortalecem a ideia da importância de artefatos para facilitar a criação de testes para processos ou sistemas BPM, no entanto, os trabalhos geralmente abordam a criação de casos de teste baseados em modelos de processo e não em sistemas em si, não é descrita uma forma de automatizar ou executar os casos de teste criados. Existem também trabalhos que visam maneiras de automatizar e melhorar o monitoramento da conformidade dos modelos de processos \cite{ly2015compliance,van2012replaying} e que, novamente, são mais voltados para os processos em si e sua administração do que para sistema/software.
 
 \section{Business Process Model and Notation - \emph{BPMN}}
-O padrão Business Process Model and Notation, ou BPMN, foi criado com o objetivo de fornecer uma notação facilmente compreensível por todos os usuários, desde os analistas que criam os rascunhos iniciais dos processos até os desenvolvedores responsáveis por implementar os processos e, finalmente, para os usuários que irão gerenciar e monitorar esses processos\cite{model2011notation}. A versão BPMN 2.0, a mais recente, define um padrão XML para arquivos contendo dados sobre o modelo e o funcionamento do processo bem como a sua representação visual\cite{kurzdiagram}, isto permite que o XML seja analisado para obter-se informações importantes sobre os processos. A maioria das ferramentas BPM disponibiliza a exportação do processo em formato XML seguindo o padrão BPMN. No padrão BPMN um processo é descrito como um diagrama de elementos de fluxo, que são: Tasks (Tarefas), Events (Eventos), Gateways e Sequence Flows \cite{kurzdiagram}.
+O padrão Business Process Model and Notation, ou BPMN, foi criado com o objetivo de fornecer uma notação facilmente compreensível por todos os usuários, desde os analistas que criam os rascunhos iniciais dos processos até os desenvolvedores responsáveis por implementar os processos e, finalmente, para os usuários que irão gerenciar e monitorar esses processos\cite{model2011notation}. A versão BPMN 2.0, a mais recente, define um padrão XML para arquivos contendo dados sobre o modelo e o funcionamento do processo bem como a sua representação visual\cite{kurzdiagram}, isto permite que o XML seja analisado para obter-se informações importantes sobre os processos. A maioria das ferramentas BPM disponibiliza a exportação do processo em formato XML seguindo o padrão BPMN. No padrão BPMN um processo é descrito como um diagrama de elementos de fluxo, que são: Tasks (Tarefas), Events (Eventos), Gateways e Sequence Flows \cite{kurzdiagram}. Na Figura \ref{fig:bpmn}, podem ser vistos os principais elementos que compoem um diagrama BPMN e que serão importantes para este trabalho.
 
 %Também há convergência sobre o padrão BPMN (\emph{Business Process Model and Notation}) para expressar a modelagem de processos.
 
-%\begin{figure}[ht]
-%\centering
-%\includegraphics[width=.9\textwidth]{figuras/BPMNBasicSymbols.png}
-%\caption{Principais elementos de um processo de acordo com o padrão BPMN. Fonte: NobleProg Training Materials}
-%\label{fig:bpmn}
-%\end{figure}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.9\textwidth]{figuras/bpmn.png}
+\caption{Principais elementos de um processo de acordo com o padrão BPMN. Fonte: NobleProg Training Materials}
+\label{fig:bpmn}
+\end{figure}
 
-Uma \emph{Activiti} é a menor parte de um diagrama BPM, e é utilizada quando o diagrama não pode ser dividido mais detalhadamente. Quando uma \emph{Activiti} está inserida no contexto de um processo, ela é chamada de \emph{Task}. Geralmente as Tasks são executadas por um usuário final ou por uma aplicação. Existem diferentes tipos de Tasks para representar os diferentes comportamentos que cada tarefa pode representar. Por exemplo, uma \emph{userTask} representa uma tarefa em que um usuário deve executar uma ação.
+Uma \emph{Activiti} é a menor parte de um diagrama BPM, e é utilizada quando o diagrama não pode ser dividido mais detalhadamente. Quando uma \emph{Activiti} está inserida no contexto de um processo, ela é chamada de \emph{Task}. Geralmente as Tasks são executadas por um usuário final ou por uma aplicação. Existem diferentes tipos de Tasks para representar os diferentes comportamentos que cada tarefa pode representar. Por exemplo, uma \emph{userTask} representa uma tarefa em que um usuário deve executar uma ação. Um elemento do tipo \emph{SubProcess} é uma abstração de um pequeno conjunto de \emph{Tasks}.
 %represent. The list of Task types MAY be extended along with any corresponding indicators. \emph{userTask},\emph{manualTask}.
 
 %events
-Um \emph{Event} é algo que "acontece" durante o curso de um processo\cite{model2011notation}. Existem três tipos principais de eventos: Start Event (indica o início do processo), End Event (indica um fim do processo) e Intermediate Events (indica um evento entre o início e o fim do processo).
+Um \emph{Event} é algo que "acontece" durante o curso de um processo\cite{model2011notation}. Existem três tipos principais de eventos: \emph{Start Event} (indica o início do processo), \emph{End Event} (indica um fim do processo) e \emph{Intermediate Events} (indica um evento entre o início e o fim do processo, se for do tipo \emph{Timer} pode indicar uma condição temporal).
 
 %gateways
 \emph{Gateways} são usados para controlar o fluxo do processo. Em gateways do tipo \emph{Exclusive}, apenas um dos caminhos que partem do gateway poderão ser seguidos, já em gateways do tipo \emph{Inclusive} um ou mais caminhos podem ser seguidos. Em gateways do tipo \emph{Parallel} todos os caminhos são tomados em paralelo.
@@ -271,8 +271,27 @@ Para cada etapa nos cenários criados será criado um método correspondente den
 \label{fig:steps_resultado}
 \end{figure}
 
-Neste exemplo, apenas um processo foi analisado, mas arquivos BPMN podem conter vários processos. Neste caso, se for necessário gerar os dados para todos os processos dentro de um arquivo, os arquivos de \emph{features} e \emph{steps} conterão, respectivamente, os cenários e métodos para todos os processos dentro do arquivo BPMN.
+Neste exemplo, apenas um processo foi analisado, mas arquivos BPMN podem conter vários processos. Neste caso, se for necessário gerar os dados para todos os processos dentro de um arquivo, os arquivos de \emph{features} e \emph{steps} conterão, respectivamente, os cenários e métodos para todos os processos dentro do arquivo BPMN. 
 
+Na Tabela \ref{tab:resultado} pode ser vista a tabela de caminhos possíveis obtida através do arquivo BPMN. Nesta tabela, cada coluna representa uma tarefa do diagrama e cada linha representa um caminho possível, facilitando a visualização do processo. Todas as tarefas do diagrama estão contidas na tabela, não apenas as executadas por usuários.
+
+\begin{table}[]
+\centering
+\caption{Tabela obtida através do arquivo BPMN}
+\label{tab:resultado}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{cccccccc}
+
+%Decide if normal post or special shipment & Request quotes from carriers & Assign a carrier \& prepare paperwork & Check if extra insurance is necessary & Take out extra insurance & Fill in a Post label & Package goods & Add paperwork and move package to pick area \\
+Decide if normal... & Request quotes... & Assign a carrier \& prepare paperwork & Check if extra... & Take out extra insurance & Fill in a Post label & Package goods & Add paperwork and...\\
+X & X & X & 0 & 0 & 0 & X & X \\
+X & 0 & 0 & X & X & 0 & X & X \\
+X & 0 & 0 & X & 0 & X & X & X \\
+X & 0 & 0 & 0 & 0 & 0 & X & X \\
+X & 0 & 0 & X & X & X & X & X
+\end{tabular}%
+}
+\end{table}
 
 %\begin{itemize}
 %\item Exemplo de processo, Figura \ref{fig:diagrama_exemplo};
@@ -292,7 +311,7 @@ Com estes resultados se dizer que este trabalho atingiu seu objetivo, pois foi p
 \end{itemize}
 \item Importante ter uma boa cobertura;
 \item BPMN parser analiza a notação para gerar elementos para teste automatizado = facilita o teste e aumenta a cobertura.
-\item Trabalhos futuros (tirar repeticoes de cenários, tentar gerar mais coisas,..)
+\item Trabalhos futuros (tirar repeticoes de cenários, tentar gerar mais coisas/informações, tabelinha só com tarefas executadas pelos usuários..)
 \end{itemize}
 
 \section{Referências}
