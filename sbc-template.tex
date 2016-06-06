@@ -177,14 +177,6 @@ Devido ao fato da ferramenta ser executada recursivamente e percorrer o processo
 %o cenário contem qual tarefa vai ser executada e em que ordem, mais algumas etapas ainda precisam ser preenchidas
 %alguns caminhos podem se repetir pois apenas tarefas executadas por usuario são levadas em conta, poderia faz pra não tratar essas tarefas
 
-%anotações anteriores
-%Após isso, é iniciada a avaliação de cada processo. O parser percorre os elementos do tipo sequenceFlow em busca das primeiras tarefas do processo, ou seja, tarefas que sucedem elementos do tipo startEvent. Para cada tarefa encontrada, será criado um objeto da classe definida como “Node” que contém informações básicas sobre os elementos e mais um array de adjacência. 
-%Então é feita a criação dos arrays de adjacência. No método chamado createNodes que retorna um objeto do tipo List<Node>, são percorridos todos os elementos sequenceFlow partindo das primeiras tarefas e, para cada nova tarefa encontrada, é criado um objeto da classe Node e então o método é chamado recursivamente para obter o array de adjacência do elemento em questão. O trecho de código referente a essa execução pode ser visto na Figura X. Este método é executado recursivamente até encontrar um elemento do tipo endEvent, ou seja, até encontrar um fim.
-%Assim, têm-se uma lista de objetos da classe Node. Os primeiros elementos desta lista serão, obrigatóriamente, as primeiras tarefas que foram encontradas no início da execução. Estes elementos teram as informações pertinentes mais o array de ajacências, que também é uma lista de objetos Node. Nesta lista estarão contidos todos os objetos da classe Node que sucedem a tarefa anterior.
-%Após o documento XML ser devidamente analisado e as tarefas do processo esterem armazenadas no array de objetos Node, é possível criar os artefatos para auxiliar no teste funcional. Uma parte importante para esta etapa é identificar as últimas tarefas à serem executadas, ou seja, tarefas que antecedem um elemento do tipo endEvent. %Estas tarefas irão auxiliar na criação dos possíveis caminhos pelos quais o processo pode passar.
-%Para criar os possíveis caminhos do processo, o array de adjacências obtido anteriormente é navegado recursivamente até encontrar uma condição de parada: a(s) últimos tarefas a serem executadas. Para cada chamada deste método, é recebido o array e os elementos pelos quais esse caminho passou anteriomente, ao encontrar a condição de parada, este novo caminho é armazenado e é iniciado um novo caminho. %método paths
-%A partir da criação dos caminhos, é chamado o método fillTable que percorre os caminhos para criar a tabela com os caminhos possíveis. No cabeçalho da tabela estarão presentes os nomes de todas as tarefas do processo e cada linha representa um caminho possível. O método fillTable ira percorrer todos os caminhos, comparando cada elemento do caminho com um elemento do processo, se o elemento faz parte deste caminho a coluna será marcada com um "X" caso contrário, a coluna será marcada com um "0". Ao final de toda a execução, a tabela será salva em um arquivo do tipo excel. Caso exista mais de um processo a ser analisado, as tabelas para cada processo estarão distribuídas individualmente no arquivo excel.
-
 \section{Teste Funcional de Software}
 O teste funcional é um tipo de teste que permite verificar as saídas de um sistema produzidas a partir de entradas pré-definidas. Este tipo de teste permite testar as funcionalidades, requerimentos e regras de negócio presentes no software\cite{molinari2003testes} verificando a existência de erros, o que auxilia na melhoria da qualidade do software.
 
@@ -196,10 +188,6 @@ Uma das principais medidas para o teste de software é a cobertura de teste. A c
 No entanto, as atividades executadas para criar testes funcionais com uma boa cobertura podem muitas vezes se tornar exaustivas e trabalhosas, dificultando assim a execução dos testes de forma adequada. Com o objetivo de melhorar a qualidade da análise e o tempo de execução dos testes, foram criados os testes automatizados, que proporcionam a execução dos testes mais rapidamente \cite{fantinato2005autotest}. Quando executada corretamente, a automação de teste é uma das melhores formas de reduzir o tempo de teste no ciclo de vida do software, diminuindo o custo e aumentando a produtividade do desenvolvimento de software como um todo, além de, consequentemente, aumentar a qualidade do produto final.
 
 Para executar os testes funcionais automatizados em aplicações Web, pode-se utilizar ferramentas livres como Selenium\cite{selenium}, Watir\cite{watir} ou Geb\cite{geb}. No trabalho anterior\cite{sbqs2015}, onde os testes funcionais se mostraram mais promissores, foi utilizada a ferramenta Selenium, aliada ao Cucumber-JVM\cite{cucumber} para descrição dos testes. A escolha foi motivada pelo grande número de referências ao Selenium na Web, confirmadas por um trabalho que apresentou resultados satisfatórios com Selenium e Cucumber\cite{pannutest,sbqs2013}.
-
-%Selenium is composed of multiple software tools. Each has a specific role.
-
-%For this work, we picked up the Selenium tool that is an integrated development environment for automated test scripts, it is implemented as a Firefox extension, and allows to record, edit, and debug tests. Also, combined with Selenium, we picked up the Cucumber-JVM\footnote{Cucumber-JVM. Available at: www.github.com/cucumber/cucumber-jvm.} tool for a description of the tests, Cucumber is a tool that provides a high-level interface that allows to write tests in natural language.
 
 \subsection{Teste Funcional Automatizado utilizando \emph{Selenium} e \emph{Cucumber-JVM}}
 O processo para a execução de um teste funcional utilizando o Selenium aliado ao Cucumber-JVM é composto de cinco etapas: captura da interação do usuário com a aplicação e exportação do código gerado, criação dos cenários de teste, criação das definições dos passos de teste, implementação dos métodos para cada passo e, por fim, execução do teste.
@@ -215,22 +203,21 @@ Para que cada etapa do cenário seja executada, é necessária a criação de \e
 
 Assim, mesmo utilizando o Cucumber e Selenium para facilitar a criação dos testes, ainda é preciso analisar o processo e extrair os cenários de teste que devem ser criados manualmente no arquivo de \emph{features}. Além dos cenários, também deve ser criado manualmente o arquivo de \emph{steps}, contendo uma "passo" correspondente a cada etapa de todos os cenários criados. Esta etapa pode ser trabalhosa, principalmente quando for necessário testar todos diversos cenários que um processo pode ter ou quando o processo for extenso.
 
-%exemplo de uso, escrever aqui
-%A criação dos cenários de teste utilizados pelo Cucumber é uma etapa importante para a melhoria do teste, pois estes podem definir ou limitar o que será testado, interferindo assim na qualidade e na cobertura dos testes. No entanto a criação dos arquivos de \emph{features} contendo os cenários e do arquivo de \emph{steps} pode ser trabalhosa, como foi mencionado na seção anterior. %tem que reescreevr se for usar
+\subsection{Uma opção de uso da ferramenta: criação dos elementos utilizados no teste funcional}
+A geração da tabela com informações relevantes para o teste do processo foi a principal motivação da criação da ferramenta. No entanto, além das análises que a própria tabela possibilita, também é possível utilizar a ferramenta criada para gerar outros artefatos conforme a necessidade de cada domínio. No caso deste trabalho, por o teste funcional automatizado utilizando o Selenium e o Cucumber se mostrou promissor em um trabalho anterior \cite{sbqs2015}, decidiu-se por avaliar a possibilidade de aproveitar a ferramenta criada para também gerar elementos importantes para o teste: o arquivo de \emph{features} contendo os cenários cenários e o arquivo de \emph{steps}.
+
+O arquivo contendo os cenários de teste é essencial para o teste funcional com o Cucumber, no entanto a criação dos arquivos de \emph{features} contendo os cenários e do arquivo de \emph{steps} pode ser trabalhosa, como foi mencionado na seção anterior. Para criar estes artefatos, foram adicionadas algumas funcionalidades na ferramenta para que os dados já obtidos fossem tratados. Assim, cada caminho/fluxo que foi obtido pela ferramenta, e consta na tabela de saída, foi considerado um cenário diferente. Como trata-se de um teste funcional, apenas tarefas que podem ser executadas por um usuário foram ser avaliadas (\emph{userTask},\emph{manualTask}...). Assim, para cada fluxo é criado um novo cenário no arquivo de \emph{features} utilizando a notação do Cucumber e comtemplando apenas as tarefas que podem ser executadas por um usuário. O método correspondente a cada passo do cenário é criado ao mesmo tempo e inserido no arquivo de \emph{steps}. Na Figura \ref{fig:exemplo_cenario}, podem ser vistos dois cenários resultante da execução do parser para um processo com dois caminhos possíveis. 
 
 %Com o objetivo de facilitar a criação dos artefatos utilizados no teste funcional com o Cucumber-JVM, o arquivo de cenários e o arquivo de \emph{steps}, decidiu-se analisar os arquivos XML no formato BPMN exportados pelas ferramentas BPMS para extrair destes arquivos informações úteis. 
 
 %Ao fim da execução são criados os arquivos de \emph{features} e \emph{steps} para o teste funcional. Juntamente com os arquivos para o teste, é gerado um arquivo Excel contendo uma tabela com os todos os possíveis cenários/caminhos do processo, facilitando a visualização do que será testado.
 
-
-%Para a criação do código para o teste funcional dois arquivos devem ser criados: o arquivo contendo os cenários e a classe \emph{stepDefinition} contendo os métodos para cada passo do cenário. Para criar estes artefatos, cada caminho obtido é considerado um cenário diferente. Como trata-se de um teste funcional, apenas tarefas que podem ser executadas por um usuário devem ser avaliadas (\emph{userTask},\emph{manualTask}...). Assim, para cada caminho é criado um novo cenário utilizando a notação do Cucumber e comtemplando apenas as tarefas que podem ser executadas por um usuário. O método correspondente a cada passo do cenário é criado ao mesmo tempo. Na Figura \ref{fig:exemplo_cenario}, podem ser vistos dois cenários resultante da execução do parser para um processo com dois caminhos possíveis. 
-
-%\begin{figure}[ht]
-%\centering
-%\includegraphics[width=.5\textwidth]{figuras/exemplo_cenario.png}
-%\caption{Exemplo de cenários resultantes}
-%\label{fig:exemplo_cenario}
-%\end{figure}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.5\textwidth]{figuras/exemplo_cenario.png}
+\caption{Exemplo de cenários resultantes}
+\label{fig:exemplo_cenario}
+\end{figure}
 
 \section{Resultados}
 Com a análise do arquivo BPMN através do parser criado foi possível obter dois arquivos essenciais para o teste funcional automatizado utilizando o Selenium e o Cucumber-JVM: o arquivo de \emph{features} contendo os cenários e o arquivo de \emph{steps} contendo métodos que para efetuar a execução de cada etapa do cenário. 
