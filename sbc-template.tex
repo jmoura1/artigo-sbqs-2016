@@ -4,7 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx,url}
 \usepackage[pdftex]{hyperref}
-
+\usepackage{listings}
 \usepackage[brazil]{babel}   
 %\usepackage[latin1]{inputenc}  
 
@@ -117,7 +117,7 @@ O objetivo deste trabalho é melhorar e facilitar o teste funcional automatizado
 
 Com o objetivo de obter maiores informações que pudessem auxiliar no processo de teste, decidiu-se analisar os arquivos XML no formato BPMN exportados pelas ferramentas BPMS para extrair destes arquivos informações úteis. Para tratar essas informações, optou-se por analisar o processo de modo a transforma-lo em uma tabela contendo todos os possíveis fluxos ou caminhos que podem ser executados no processo para então serem realizadas as devidas análises. 
 
-Para analisar os arquivos foi desenvolvida uma ferramenta que percorre os arquivos XML e manipula as informações necessárias. A ferramenta foi criada utilizando a linguagem Java, principalmente por esta linguagem já possuir uma opção sólida para a análise de documentos XML\cite{javadom}.  Os processos utilizados para a validação foram obtidos no site da \emph{Object Management Group} (OMG) e estão disponíveis no \href{http://www.omg.org/spec/BPMN/20100602/2010-06-03/}{site} da organização. Basicamente, a ferramenta criada percorre o arquivo BPMN e analisa os elementos através da nomentaclatura padrão das \emph{tags} no arquivo e então executa uma lógica para criar os diferentes cenários de teste. Ao fim da execução, é gerado um arquivo Excel contendo uma tabela com os todos os possíveis cenários/caminhos do processo.
+Para analisar os arquivos foi desenvolvida uma ferramenta que percorre os arquivos XML e manipula as informações necessárias. A ferramenta foi criada utilizando a linguagem Java, principalmente por esta linguagem já possuir uma opção sólida para a análise de documentos XML\cite{javadom}. Basicamente, a ferramenta criada percorre o arquivo BPMN e analisa os elementos através da nomentaclatura padrão das \emph{tags} no arquivo e então executa uma lógica para criar os diferentes cenários de teste. Ao fim da execução, é gerado um arquivo Excel contendo uma tabela com os todos os possíveis cenários/caminhos do processo.
 
 %\begin{itemize}
 %\item Objetivo: gerar artefatos para melhoria do teste funcional automatizado de aplicações bpm; gerar arquivo de features e de steps;
@@ -174,9 +174,6 @@ Na criação dos caminhos, uma dificuldade ocorreu devido aos desvios causados p
 Devido ao fato da ferramenta ser executada recursivamente e percorrer o processo baseado no fluxo dos elementos do tipo \emph{sequenceFlow}, ocorreram problemas em processos onde uma parcela do processo também é executada recursivamente. Estes problemas foram causados devido ao fluxo nunca encontrar um "fim". Para solucionar esses problema foi criado um "delimitador de recursão" que define e controla o número de vezes em que o mesmo \emph{sequenceFlow} será executado.
 
 
-%o cenário contem qual tarefa vai ser executada e em que ordem, mais algumas etapas ainda precisam ser preenchidas
-%alguns caminhos podem se repetir pois apenas tarefas executadas por usuario são levadas em conta, poderia faz pra não tratar essas tarefas
-
 \section{Teste Funcional de Software}
 O teste funcional é um tipo de teste que permite verificar as saídas de um sistema produzidas a partir de entradas pré-definidas. Este tipo de teste permite testar as funcionalidades, requerimentos e regras de negócio presentes no software\cite{molinari2003testes} verificando a existência de erros, o que auxilia na melhoria da qualidade do software.
 
@@ -206,58 +203,31 @@ Assim, mesmo utilizando o Cucumber e Selenium para facilitar a criação dos tes
 \subsection{Uma opção de uso da ferramenta: criação dos elementos utilizados no teste funcional}
 A geração da tabela com informações relevantes para o teste do processo foi a principal motivação da criação da ferramenta. No entanto, além das análises que a própria tabela possibilita, também é possível utilizar a ferramenta criada para gerar outros artefatos conforme a necessidade de cada domínio. No caso deste trabalho, por o teste funcional automatizado utilizando o Selenium e o Cucumber se mostrou promissor em um trabalho anterior \cite{sbqs2015}, decidiu-se por avaliar a possibilidade de aproveitar a ferramenta criada para também gerar elementos importantes para o teste: o arquivo de \emph{features} contendo os cenários cenários e o arquivo de \emph{steps}.
 
-O arquivo contendo os cenários de teste é essencial para o teste funcional com o Cucumber, no entanto a criação dos arquivos de \emph{features} contendo os cenários e do arquivo de \emph{steps} pode ser trabalhosa, como foi mencionado na seção anterior. Para criar estes artefatos, foram adicionadas algumas funcionalidades na ferramenta para que os dados já obtidos fossem tratados. Assim, cada caminho/fluxo que foi obtido pela ferramenta, e consta na tabela de saída, foi considerado um cenário diferente. Como trata-se de um teste funcional, apenas tarefas que podem ser executadas por um usuário foram ser avaliadas (\emph{userTask},\emph{manualTask}...). Assim, para cada fluxo é criado um novo cenário no arquivo de \emph{features} utilizando a notação do Cucumber e comtemplando apenas as tarefas que podem ser executadas por um usuário. O método correspondente a cada passo do cenário é criado ao mesmo tempo e inserido no arquivo de \emph{steps}. Na Figura \ref{fig:exemplo_cenario}, podem ser vistos dois cenários resultante da execução do parser para um processo com dois caminhos possíveis. 
+O arquivo contendo os cenários de teste é essencial para o teste funcional com o Cucumber, no entanto a criação dos arquivos de \emph{features} contendo os cenários e do arquivo de \emph{steps} pode ser trabalhosa, como foi mencionado na seção anterior. Para criar estes artefatos, foram adicionadas algumas funcionalidades na ferramenta para que os dados já obtidos fossem tratados. Assim, cada caminho/fluxo que foi obtido pela ferramenta, e consta na tabela de saída, foi considerado um cenário diferente. Como trata-se de um teste funcional, apenas tarefas que podem ser executadas por um usuário foram ser avaliadas (\emph{userTask},\emph{manualTask}...). Assim, para cada fluxo é criado um novo cenário no arquivo de \emph{features} utilizando a notação do Cucumber e comtemplando apenas as tarefas que podem ser executadas por um usuário. O método correspondente a cada passo do cenário é criado ao mesmo tempo e inserido no arquivo de \emph{steps}. %Na Figura \ref{fig:exemplo_cenario}, podem ser vistos dois cenários resultante da execução do parser para um processo com dois caminhos possíveis. 
 
-%Com o objetivo de facilitar a criação dos artefatos utilizados no teste funcional com o Cucumber-JVM, o arquivo de cenários e o arquivo de \emph{steps}, decidiu-se analisar os arquivos XML no formato BPMN exportados pelas ferramentas BPMS para extrair destes arquivos informações úteis. 
+%colocar código aqui
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[width=.5\textwidth]{figuras/exemplo_cenario.png}
+%\caption{Exemplo de cenários resultantes}
+%\label{fig:exemplo_cenario}
+%\end{figure}
 
-%Ao fim da execução são criados os arquivos de \emph{features} e \emph{steps} para o teste funcional. Juntamente com os arquivos para o teste, é gerado um arquivo Excel contendo uma tabela com os todos os possíveis cenários/caminhos do processo, facilitando a visualização do que será testado.
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.5\textwidth]{figuras/exemplo_cenario.png}
-\caption{Exemplo de cenários resultantes}
-\label{fig:exemplo_cenario}
-\end{figure}
-
-\section{Resultados}
-Com a análise do arquivo BPMN através do parser criado foi possível obter dois arquivos essenciais para o teste funcional automatizado utilizando o Selenium e o Cucumber-JVM: o arquivo de \emph{features} contendo os cenários e o arquivo de \emph{steps} contendo métodos que para efetuar a execução de cada etapa do cenário. 
-
+\section{Avaliação}
 \begin{figure}[ht]
 %\centering
-\includegraphics[width=.8\paperwidth]{figuras/diagrama_exemplo.png}
+\includegraphics[width=.9\textwidth]{figuras/diagrama_exemplo.png}
 \caption{Exemplo de Processo. Adaptado de: Object Management Group}
 \label{fig:diagrama_exemplo}
 \end{figure}
 
-Por exemplo, o processo na Figura \ref{fig:diagrama_exemplo} possui \emph{gateways} de diferentes tipos, gerando assim várias divisões de fluxo e aumentando os caminhos que podem ser seguidos. Para executar o teste completo do processo, testando todas as possibilidades e com boa cobertura, seria necessário planejar os cenários de teste e criá-los manualmente. Para criar os cenários também é necessário identificar quais tarefas são executadas por um usuário e o processo possui várias \emph{tasks}. Por fim, também seria necessário criar os \emph{steps} para cada etapa do cenário manualmente.
+Para avaliar a ferramenta foram buscados processos já existentes, de diferentes domínios, contendo ao menos quatro tarefas e uma divisão de fluxo ou \emph{gateway}, também era interessante que os processos selecionados tivessem algumas diferenças de notação para verificar como a ferramenta trataria essas diferenças. Assim, os processos utilizados para a validação foram obtidos no site da \emph{Object Management Group} (OMG) e estão disponíveis no \href{http://www.omg.org/spec/BPMN/20100602/2010-06-03/}{site} da organização.
 
-\begin{figure}[ht]
-%\centering
-\includegraphics[width=.8\paperwidth]{figuras/cenario_resultado.png}
-\caption{Cenários obtidos através do arquivo BPMN}
-\label{fig:cenario_resultado}
-\end{figure}
 
-Executando o parser criado utilizando o arquivo BPMN referente ao diagrama da Figura \ref{fig:diagrama_exemplo} como exemplo, obtemos os cenários de teste representados na Figura \ref{fig:cenario_resultado}. Para o teste funcional do processo, três cenários são possíveis, representando as duas principais divisões de fluxo encontradas no processo. A primeira divisão de fluxo formada pelo \emph{gateway} do tipo paralelo logo no início do processo, está contida no cenário de forma que os cenários \emph{Hardware Retailer 0} e \emph{Hardware Retailer 1} fazem parte de um fluxo e o cenário \emph{Hardware Retailer 2} representa o segundo fluxo possível. A segunda divisão de fluxo no processo da Figura \ref{fig:diagrama_exemplo} é formada pelo \emph{gateway} do tipo exclusivo, e essa divisão é representada pelos cenários \emph{Hardware Retailer 0} e \emph{Hardware Retailer 1}. Há ainda uma terceira divisão de fluxo no processo, esta divisão não foi levada em conta pelo parser pois as tarefas subsequentes a essa divisão não são tarefas executadas pelo usuário.
+Com a análise do arquivo BPMN através da ferramenta criada foi possível obter um elemento importante para o teste funcional de aplicações BPM: a tabela relacionando as tarefas e os fluxos possíveis dentro de um processo. Por exemplo, o processo na Figura \ref{fig:diagrama_exemplo} possui \emph{gateways} de diferentes tipos, gerando assim várias divisões de fluxo e aumentando os caminhos que podem ser seguidos. 
 
-Como foi mencionado anteriormente, apenas tarefas executadas por usuários são levadas em conta para o teste funcional, e por isso nem todas as tarefas do processo estarão presentes nos cenários de teste.
-
-%o cenário contem qual tarefa vai ser executada e em que ordem, mais algumas etapas ainda precisam ser preenchidas
-
-Para cada etapa nos cenários criados será criado um método correspondente dentro do arquivo de \emph{steps} chamado \emph{stepDefinition}. Uma parte do arquivo de \emph{steps} resultante da análise do processo em questão pode ser vista na Figura \ref{fig:steps_resultado}. Como pode ser visto nesta figura, para a etapa \emph{I am on the task Decide if normal post or special shipment} foi criado um método com um nome genérico e contendo a anotação \emph{@Given("\^{}I am on the task Decide if normal post or special shipment\textdollar{}") 
-}. Os métodos podem ser preenchidos posteriormente com os dados gravados pelo Selenium na etapa de captura da interação com a aplicação.
-
-%preencher e colocar imagem do step definition
-\begin{figure}[ht]
-%\centering
-\includegraphics[width=.8\paperwidth]{figuras/steps.png}
-\caption{Métodos obtidos através do arquivo BPMN}
-\label{fig:steps_resultado}
-\end{figure}
-
-Neste exemplo, apenas um processo foi analisado, mas arquivos BPMN podem conter vários processos. Neste caso, se for necessário gerar os dados para todos os processos dentro de um arquivo, os arquivos de \emph{features} e \emph{steps} conterão, respectivamente, os cenários e métodos para todos os processos dentro do arquivo BPMN. 
-
-Na Tabela \ref{tab:resultado} pode ser vista a tabela de caminhos possíveis obtida através do arquivo BPMN. Nesta tabela, cada coluna representa uma tarefa do diagrama e cada linha representa um caminho possível, facilitando a visualização do processo. Todas as tarefas do diagrama estão contidas na tabela, não apenas as executadas por usuários.
+%analise da tabelinha (que consegue gargalo...blabla)
+Ao executar a ferramenta utilizando o arquivo BPMN referente ao processo da Figura  \ref{fig:diagrama_exemplo} foi obtida a Tabela \ref{tab:resultado}. Nesta tabela, cada coluna representa uma tarefa do diagrama e cada linha representa um caminho possível, facilitando a visualização do processo. 
 
 \begin{table}[]
 \centering
@@ -277,6 +247,78 @@ X & 0 & 0 & X & X & X & X & X
 }
 \end{table}
 
+A criação da tabela diminui o tempo de análise dos processos e também torna o teste mais completo ao mesmo tempo em que verifica todos os possíveis fluxos que um processo pode seguir. A tabela criada também permite análises de diversos fatores importantes para a execução dos processos como: gargalos, quais tarefas poderão ser mais frequentemente executadas, entre outros. Por exemplo, na Tabela \ref{tab:resultado} pode-se dizer que a primeira e as duas últimas tarefas do processo são gargalos, pois todas os fluxos possíveis passarão por essas tarefas. 
+
+Extra: criação dos códigos.
+%Para executar o teste completo do processo, testando todas as possibilidades e com boa cobertura, seria necessário planejar os cenários de teste e criá-los manualmente.
+
+ %Para criar os cenários também é necessário identificar quais tarefas são executadas por um usuário e o processo possui várias \emph{tasks}. Por fim, também seria necessário criar os \emph{steps} para cada etapa do cenário manualmente.
+ 
+%plus: gerar códigos, mas pode gerar outras coisas pra outroas casos .o arquivo de \emph{features} contendo os cenários e o arquivo de \emph{steps} contendo métodos que para efetuar a execução de cada etapa do cenário.  colocar imagem do código e do cenário aqui
+
+
+
+\begin{lstlisting}[language=Java]
+Feature: Testing BPM Processes  
+ 
+Scenario: Hardware Retailer 0 
+Given I am on task Decide if normal post or special shipment 
+When 
+Then 
+When I am on task Assign a carrier & prepare paperwork 
+Then 
+When I am on task Add paperwork and move package to pick area 
+Then 
+ 
+ 
+Scenario: Hardware Retailer 1 
+Given I am on task Decide if normal post or special shipment 
+When 
+Then 
+When I am on task Check if extra insurance is necessary 
+Then 
+When I am on task Add paperwork and move package to pick area 
+Then 
+ 
+Scenario: Hardware Retailer 2
+When I am on task Package goods 
+Then 
+When I am on task Add paperwork and move package to pick area 
+Then 
+
+\end{lstlisting}
+
+%Executando o parser criado utilizando o arquivo BPMN referente ao diagrama da Figura \ref{fig:diagrama_exemplo} como exemplo, obtemos os cenários de teste representados na Figura \ref{fig:cenario_resultado}. Para o teste funcional do processo, três cenários são possíveis, representando as duas principais divisões de fluxo encontradas no processo. A primeira divisão de fluxo formada pelo \emph{gateway} do tipo paralelo logo no início do processo, está contida no cenário de forma que os cenários \emph{Hardware Retailer 0} e \emph{Hardware Retailer 1} fazem parte de um fluxo e o cenário \emph{Hardware Retailer 2} representa o segundo fluxo possível. A segunda divisão de fluxo no processo da Figura \ref{fig:diagrama_exemplo} é formada pelo \emph{gateway} do tipo exclusivo, e essa divisão é representada pelos cenários \emph{Hardware Retailer 0} e \emph{Hardware Retailer 1}. Há ainda uma terceira divisão de fluxo no processo, esta divisão não foi levada em conta pelo parser pois as tarefas subsequentes a essa divisão não são tarefas executadas pelo usuário.
+
+%Como foi mencionado anteriormente, apenas tarefas executadas por usuários são levadas em conta para o teste funcional, e por isso nem todas as tarefas do processo estarão presentes nos cenários de teste.
+
+%Para cada etapa nos cenários criados será criado um método correspondente dentro do arquivo de \emph{steps} chamado \emph{stepDefinition}. Uma parte do arquivo de \emph{steps} resultante da análise do processo em questão pode ser vista na Figura \ref{fig:steps_resultado}. Como pode ser visto nesta figura, para a etapa \emph{I am on the task Decide if normal post or special shipment} foi criado um método com um nome genérico e contendo a anotação \emph{@Given("\^{}I am on the task Decide if normal post or special shipment\textdollar{}")}. Os métodos podem ser preenchidos posteriormente com os dados gravados pelo Selenium na etapa de captura da interação com a aplicação.
+
+%resultados
+% A criação automatizada dos dois arquivos permite facilitar e melhorar a criação dos testes para os sistemas BPM, diminuindo o tempo de análise dos processos bem como tornando o teste mais completo ao mesmo tempo em que verifica todos os possíveis fluxos que um processo pode seguir. Assim, a qualidade e a cobertura dos testes também é melhorada pois todos os caminhos e cenários possíveis com tarefas executadas por usuários são criados. Por consequência, a qualidade dos sistemas também pode ser beneficiada com um processo de teste mais completo e facilitado.
+
+\begin{lstlisting}[language=Java]
+import cucumber.api.java.en.*;
+import cucumber.runtime.PendingException;
+public class StepsDefinition{
+@Before
+public void beforeScenario(){}
+@After
+public void afterScenario(){} 
+//Methods for process Hardware Retailer
+@Given("^I am on the task Decide if normal post or special shipment$") 
+public void method0() throws Exception {} 
+@when("^name$") 
+public void method1() throws Exception {} 
+@Then("^name$") 
+public void method2() throws Exception {} 
+@When("^I am on the task Assign a carrier & prepare paperwork$") 
+public void method3() throws Exception {} 
+\end{lstlisting}
+
+%Neste exemplo, apenas um processo foi analisado, mas arquivos BPMN podem conter vários processos. Neste caso, se for necessário gerar os dados para todos os processos dentro de um arquivo, os arquivos de \emph{features} e \emph{steps} conterão, respectivamente, os cenários e métodos para todos os processos dentro do arquivo BPMN. 
+
+
 %\begin{itemize}
 %\item Exemplo de processo, Figura \ref{fig:diagrama_exemplo};
 %item Exemplo dos artefatos obtidos: tabelinha e cenário de teste (apenas necessário completar com os códigos obtidos no selenium)
@@ -285,7 +327,10 @@ X & 0 & 0 & X & X & X & X & X
 %	\item Por consequência: auxilia na melhora da qualidade dos sistemas.
 %\end{itemize}
 
-Com estes resultados se dizer que este trabalho atingiu seu objetivo, pois foi possível obter dois arquivos muito importantes para a execução do teste funcional automatizado: o arquivo com os cenários de teste e o arquivo com os métodos para executar cada etapa dos cenários. A criação automatizada dos dois arquivos permite facilitar e melhorar a criação dos testes para os sistemas BPM, diminuindo o tempo de análise dos processos bem como tornando o teste mais completo ao mesmo tempo em que verifica todos os possíveis fluxos que um processo pode seguir. Assim, a qualidade e a cobertura dos testes também é melhorada pois todos os caminhos e cenários possíveis com tarefas executadas por usuários são criados. Por consequencia, a qualidade dos sistemas também pode ser beneficiada com um processo de teste mais completo e facilitado.
+Mini conclusão.
+%Com estes resultados se dizer que este trabalho atingiu seu objetivo, pois foi possível obter dois arquivos muito importantes para a execução do teste funcional automatizado: o arquivo com os cenários de teste e o arquivo com os métodos para executar cada etapa dos cenários. A criação automatizada dos dois arquivos permite facilitar e melhorar a criação dos testes para os sistemas BPM, diminuindo o tempo de análise dos processos bem como tornando o teste mais completo ao mesmo tempo em que verifica todos os possíveis fluxos que um processo pode seguir. Assim, a qualidade e a cobertura dos testes também é melhorada pois todos os caminhos e cenários possíveis com tarefas executadas por usuários são criados. Por consequência, a qualidade dos sistemas também pode ser beneficiada com um processo de teste mais completo e facilitado.
+
+
 
 \section{Conclusão}
 \begin{itemize}
@@ -295,7 +340,7 @@ Com estes resultados se dizer que este trabalho atingiu seu objetivo, pois foi p
 \end{itemize}
 \item Importante ter uma boa cobertura;
 \item BPMN parser analiza a notação para gerar elementos para teste automatizado = facilita o teste e aumenta a cobertura.
-\item Trabalhos futuros (tirar repeticoes de cenários, tentar gerar mais coisas/informações, tabelinha só com tarefas executadas pelos usuários..)
+\item Trabalhos futuros (tirar repeticoes de cenários, tentar gerar mais coisas/informações, verificar outras opções pra utilizar)
 \end{itemize}
 
 \section{Referências}
