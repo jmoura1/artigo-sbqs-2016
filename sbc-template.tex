@@ -12,8 +12,10 @@
 \sloppy
 
 
-\title{Gerando código para melhoria do Teste Funcional Automatizado de ferramentas de Gerenciamento de Processos de Negócio}
+\title{Uma abordagem para melhoria do Teste Funcional Automatizado de aplicações de Gerenciamento de Processos de Negócio apoiada na notação BPMN}
 %Uma estratégia para geração de códigos para Teste Funcional de ferramentas de Gerenciamento de Processos de Negócio
+%Uma abordagem para melhoria do Teste Funcional Automatizado de aplicações de Gerenciamento de Processos de Negócio apoiada na notação BPMN
+%apoiada em bpmn
 
 \author{Jéssica Lasch de Moura\inst{1}, Andrea Schwertner Charão\inst{1}}
 
@@ -57,6 +59,10 @@ Este trabalho descreve um estratégia criada para obter artefatos úteis para a 
 %ainda assim, depende de algumas etapas, como a criação de casso de testes...
 \section{Business Process Management - \emph{BPM}}
 
+O termo BPM pode ser usado com ênfases diferentes, às vezes com foco em tecnologia (software) e outras vezes em gestão. Mesmo assim, a área tem convergido no entendimento do ciclo de vida de aplicações de BPM, que envolve as atividades de análise, modelagem, execução, monitoramento e otimização~\cite{ABPMP}. 
+
+Os sistemas de BPM (BPMS) têm se afirmado como ferramentas essenciais para suporte a atividades desse ciclo de vida. Atualmente, pode-se dizer que um típico BPMS oferece recursos para definição e modelagem de processos em BPMN, controle da execução e monitoramento de atividades dos processos~\cite{forrester}. Há uma tendência dos BPMS em abreviar o desenvolvimento de software, por exemplo através de geradores de formulários Web associados a tarefas dos processos~\cite{greenresearch}. 
+
 \subsection{Business Process Model and Notation - \emph{BPMN}}
 O padrão Business Process Model and Notation, ou BPMN, foi criado com o objetivo de fornecer uma notação facilmente compreensível por todos os usuários, desde os analistas que criam os rascunhos iniciais dos processos até os desenvolvedores responsáveis por implementar os processos e, finalmente, para os usuários que irão gerenciar e monitorar esses processos\cite{model2011notation}. A versão BPMN 2.0, a mais recente, define um padrão XML para arquivos contendo dados sobre o modelo e o funcionamento do processo bem como a sua representação visual\cite{kurzdiagram}, isto permite que o XML seja analisado para obter-se informações importantes sobre os processos. A maioria das ferramentas BPM disponibiliza a exportação do processo em formato XML seguindo o padrão BPMN. No padrão BPMN um processo é descrito como um diagrama de elementos de fluxo, que são: Tasks (Tarefas), Events (Eventos), Gateways e Sequence Flows \cite{kurzdiagram}. Na Figura \ref{fig:bpmn}, podem ser vistos os principais elementos que compoem um diagrama BPMN e que serão importantes para este trabalho.
 
@@ -86,65 +92,36 @@ Um \emph{Event} é algo que "acontece" durante o curso de um processo\cite{model
 Um elemento \emph{Sequence Flow} é usado para exibir a ordem em que os demais elementos são executados em um processo. Cada \emph{sequenceFlow} possui um atributo \emph{sourceRef} que indica de onde este \emph{sequenceFlow} vem, ou sua "fonte", e um atributo \emph{targetRef} que indica para onde ele vai, ou seja, seu alvo. Cada \emph{sequenceFlow} possui apenas possui apenas uma fonte e um alvo. Analisando os elementos \emph{sequenceFlow} e analisando os dois atributos citados acima é possível identificar todo o fluxo do processo.
 
 \subsection{BPM e Teste}
-%-Teste funcional ajuda a aumentar a qualidade do software;
-%-sistemas bpm = web, permite executar testes funcionais com ferramenta
-%-Teste é pouco abordado
-%-Teste é importante
 
-O termo BPM pode ser usado com ênfases diferentes, às vezes com foco em tecnologia (software) e outras vezes em gestão. Mesmo assim, a área tem convergido no entendimento do ciclo de vida de aplicações de BPM, que envolve as atividades de análise, modelagem, execução, monitoramento e otimização~\cite{ABPMP}. 
+Os sistemas BPM geralmente oferecerem recursos para definição e modelagem de processos em BPMN, controle da execução e monitoramento de atividades dos processos~\cite{forrester}. Nota-se, no entanto, que a preocupação com testes não fica evidente nas ferramentas BPMS. De fato, examinando-se o material promocional e a documentação disponível sobre os principais BPMS, observa-se uma ênfase em etapas de modelagem e execução. Visivelmente, tais recursos são um diferencial no desenvolvimento de aplicações de BPM, em comparação ao desenvolvimento de software em geral. No entanto, aplicações de BPM também estão sujeitas a defeitos e, por isso, podem se beneficiar de avanços na área de testes de software.
 
-Os sistemas de BPM (BPMS) têm se afirmado como ferramentas essenciais para suporte a atividades desse ciclo de vida. Atualmente, pode-se dizer que um típico BPMS oferece recursos para definição e modelagem de processos em BPMN, controle da execução e monitoramento de atividades dos processos~\cite{forrester}. Há uma tendência dos BPMS em abreviar o desenvolvimento de software, por exemplo através de geradores de formulários Web associados a tarefas dos processos~\cite{greenresearch}. Nota-se, no entanto, que a preocupação com testes não fica evidente nas ferramentas BPMS. De fato, examinando-se o material promocional e a documentação disponível sobre os principais BPMS, observa-se uma ênfase em etapas de modelagem e execução.
+%Além disso, a comunidade científica de BPM também se preocupa com aspectos de qualidade e ausência de erros em processos.
+%Considerando que aplicações de BPMS são geralmente sistemas baseados na Web, pode-se supor que sejam testadas com sucesso usando-se abordagens consagradas, como por exemplo testes de carga ou testes funcionais do tipo caixa-preta. Há também quem argumente que o teste de aplicações de BPM difira do teste de aplicações Web tradicionais~\cite{evoke}, porém não foram encontrad
 
-\begin{itemize}
-\item Teste em geral é pouco abordado em bpm;
-\item Por serem aplicações como qualquer outra, aplicações BPM podem se beneficiar com a execução de testes;
-\item Alguns trabalhos relacionados
-\end{itemize}
+Existem trabalhos que chamam a atenção para a importância e para a as dificuldades trazidas pela execução de testes, bem como trazem alternativas para a melhoria da seleção de casos de teste\cite{bohmer2015genetic}. Esses trabalhos fortalecem a ideia da importância de artefatos para facilitar a criação de testes para processos ou sistemas BPM, no entanto, os trabalhos geralmente abordam a criação de casos de teste baseados em modelos de processo e não em sistemas em si, não é descrita uma forma de automatizar ou executar os casos de teste criados. Existem também trabalhos que visam maneiras de automatizar e melhorar o monitoramento da conformidade dos modelos de processos \cite{ly2015compliance,van2012replaying} e que, novamente, são mais voltados para os processos em si e sua administração do que para sistema/software.
 
-%-Trabalhos relacionados;
-%pegar citações
-%There are some  studies that assess/test compliance of models of processes~\cite{conformancetesting} 
-
-%Moreover, the importance of the tests is widely recognized in software engineering ~\cite{swebok14}. 
-%Whereas BPMS applications are usually Web-based systems, it can be assumed that it can be successfully tested using dedicated approaches, such as load tests or functional testing of the black-box type. There are also those who argue that BPM applications test differs from traditional Web applications testing~\cite{evoke}, but there were no more references to deepen this view. This finding reinforced the motivation for this work. 
-
-Existem trabalhos que chamam a atenção para a importância e para a as dificuldades trazidas por um bom teste, bem como trazem alternativas para a melhoria da seleção de casos de teste\cite{bohmer2015genetic}. Esses trabalhos fortalecem a ideia da importância de artefatos para facilitar a criação de testes para processos ou sistemas BPM, no entanto, os trabalhos geralmente abordam a criação de casos de teste baseados em modelos de processo e não em sistemas em si, não é descrita uma forma de automatizar ou executar os casos de teste criados. Existem também trabalhos que visam maneiras de automatizar e melhorar o monitoramento da conformidade dos modelos de processos \cite{ly2015compliance,van2012replaying} e que, novamente, são mais voltados para os processos em si e sua administração do que para sistema/software.
-
-
-
-\section{Gerador de(?)}
+\section{Descrição da abordagem}
 O objetivo deste trabalho é melhorar e facilitar o teste funcional automatizado de aplicações BPM. Um aspecto importante para o teste funcional são quais fluxos ou etapas serão testadas, pois estes podem definir ou limitar o teste, interferindo assim na qualidade e na cobertura dos testes. No entanto, a construção dessas informações pode ser uma tarefa complexa.
 
 Com o objetivo de obter maiores informações que pudessem auxiliar no processo de teste, decidiu-se analisar os arquivos XML no formato BPMN exportados pelas ferramentas BPMS para extrair destes arquivos informações úteis. Para tratar essas informações, optou-se por analisar o processo de modo a transforma-lo em uma tabela contendo todos os possíveis fluxos ou caminhos que podem ser executados no processo para então serem realizadas as devidas análises. 
 
-Para analisar os arquivos foi desenvolvida uma ferramenta que percorre os arquivos XML e manipula as informações necessárias. A ferramenta foi criada utilizando a linguagem Java, principalmente por esta linguagem já possuir uma opção sólida para a análise de documentos XML\cite{javadom}. Basicamente, a ferramenta criada percorre o arquivo BPMN e analisa os elementos através da nomentaclatura padrão das \emph{tags} no arquivo e então executa uma lógica para criar os diferentes cenários de teste. Ao fim da execução, é gerado um arquivo Excel contendo uma tabela com os todos os possíveis cenários/caminhos do processo.
+Para analisar os arquivos foi elaborada um estratégia que percorre os arquivos XML e manipula as informações necessárias. Nesta abordagem, foi utilizada a linguagem Java, principalmente por esta linguagem já possuir uma opção sólida para a análise de documentos XML\cite{javadom}. Basicamente, o arquivo BPMN é percorrido e os elementos são analisados através da nomentaclatura padrão das \emph{tags} no arquivo e então executada uma lógica para criar os diferentes cenários de teste. Ao fim da execução, é gerado um arquivo Excel contendo uma tabela com os todos os possíveis cenários/caminhos do processo.
 
-%\begin{itemize}
-%\item Objetivo: gerar artefatos para melhoria do teste funcional automatizado de aplicações bpm; gerar arquivo de features e de steps;
-%\item Informações técnicas (linguagem, etc) + onde foram obtidos os diagramas utilizados para validação;
-%\item Resuminho do que ele faz: gera tabelinha + uma parte dos códigos
-%\end{itemize}
+%colcoar imagem aqui
 
-%arquivo bpmn é exportado
-%onde foram obtidos os diagramas que foram testados nesse trabalho
-%The Object Management Group (OMG) has developed a standard Business Process Model and Notation (BPMN).
-%The primary goal of BPMN is to provide a notation that is readily understandable by all business users, from the business
-%analysts that create the initial drafts of the processes, to the technical developers responsible for implementing the
-%technology that will perform those processes, and finally, to the business people who will manage and monitor those
-%processes. Thus, BPMN creates a standardized bridge for the gap between the business process design and process
-%implementation.
+\subsection{Funcionamento da estratégia criada}
 
-\subsection{Funcionamento do(?)}
-%colocar uma citação pra array de adjacencias
-O principal elemento para o funcionamento da ferramenta é o \emph{Sequence Flow}. Por conter os atributos targetRef e sourceRef os elementos deste tipo permitem percorrer todo o diagrama. Ao iniciar a execução, é solicitado ao usuário o caminho para o arquivo BPMN e a ID do processo a ser avaliado. Um diagrama pode conter mais de um processo e, nesse caso, o usuário pode escolher que todos processos sejam avaliados.
+%O principal elemento para o funcionamento da ferramenta é o \emph{Sequence Flow}. Por conter os atributos targetRef e sourceRef os elementos deste tipo permitem percorrer todo o diagrama. Ao iniciar a execução, é solicitado ao usuário o caminho para o arquivo BPMN e a ID do processo a ser avaliado. Um diagrama pode conter mais de um processo e, nesse caso, o usuário pode escolher que todos processos sejam avaliados.
 
-A classe \emph{Node} define um tipo de objeto que guarda informações básicas sobre as tarefas do processo e um \emph{array} de objetos da mesma classe. Durante a execução do um array de objetos da classe Node é preenchido formando assim um array de adjacências. O método principal percorre o processo recursivamente através dos elementos do tipo \emph{Sequence Flow}, enquanto um tarefa for encontrada, um objeto da classe Node é criado e o método é chamado recursivamente de modo a retornar o array de adjacências para este objeto.
+O elemento BPMN mais importante para esta estratégia de análise é o \emph{Sequence Flow}. Por conter os atributos targetRef e sourceRef os elementos deste tipo permitem percorrer todo o diagrama. Ao iniciar a execução, é solicitado ao usuário o caminho para o arquivo BPMN e a ID do processo a ser avaliado. Um diagrama pode conter mais de um processo e, nesse caso, o usuário pode escolher que todos processos sejam avaliados.
 
-A partir do array de adjacências são criados os caminhos possíveis pelos quais o processo pode passar. O método que cria os caminhos percorre recursivamente o array de adjacências criado anteriormente e "constrói" um novo caminho, tendo como condição de parada o encontro de uma das últimas tarefas a serem executadas. Uma tarefa é uma das últimas quando o elemento que a sucede no fluxo for \emph{End Event}. Ao encontrar uma tarefa final, o caminho é armazenado e é iniciada a construção de um novo caminho.
+Foi criada a classe \emph{Node} que define um tipo de objeto que guarda informações básicas sobre as tarefas do processo e um \emph{array} de objetos da mesma classe. Durante a execução, um array de objetos da classe Node é preenchido formando assim um array de adjacências. O método principal percorre o processo recursivamente através dos elementos do tipo \emph{Sequence Flow}, enquanto um tarefa for encontrada, um objeto da classe Node é criado e o método é chamado recursivamente de modo a retornar o array de adjacências para este objeto.
 
-Os caminhos obtidos são base para a criação da tabela de caminhos possíveis. Para criar a tabela com os caminhos possíveis, cada tarefa existente no processo representará uma coluna na tabela e cada caminho representará uma nova linha. Para cada caminho, se a tarefa estiver presente a coluna será marcada com "X" caso contrário a coluna será marcada com um "0". Caso mais de um processo seja avaliado ao mesmo tempo, a tabela referente à cada processo estará separada individualmente no arquivo final. 
+A partir do array de adjacências são criados os caminhos possíveis pelos quais o processo pode passar. O método que cria os caminhos percorre recursivamente o array de adjacências criado anteriormente e "constrói" um novo caminho, tendo como condição de parada o encontro de uma das últimas tarefas a serem executadas. Uma tarefa é uma das últimas quando o elemento que a sucede no fluxo for elemento do tipo\emph{End Event}. Ao encontrar uma tarefa final, o caminho é armazenado e é iniciada a construção de um novo caminho.
 
-Na Tabela \ref{tab:exemplo}, pode ser visto uma tabela resultante da execução do parser para um processo com cinco \emph{tasks} e dois caminhos possíveis. Com a geração desta tabela podem ser realizadas diversas análisas sobre o processo: número de fluxos possíveis, identificar gargalos, etc.
+Os caminhos obtidos são base para a criação da tabela de caminhos/fluxos possíveis. Para criar a tabela, cada tarefa existente no processo representará uma coluna na tabela e cada caminho representará uma nova linha. Para cada caminho, se a tarefa estiver presente a coluna será marcada com "X" caso contrário a coluna será marcada com um "0". Caso mais de um processo seja avaliado ao mesmo tempo, a tabela referente à cada processo estará separada individualmente no arquivo final. 
+
+Na Tabela \ref{tab:exemplo}, pode ser visto uma tabela resultante da execução dessa estratégia para um processo com cinco \emph{tasks} e dois caminhos possíveis. Com a geração desta tabela podem ser realizadas diversas análisas sobre o processo: número de fluxos possíveis, identificar gargalos, etc.
 
 \begin{table}[]
 \centering
@@ -158,23 +135,23 @@ X & X & X & X & X
 \end{table}
 
 \subsection{Dificuldades/Limitações}
-Algumas ferramentas exportam o diagrama para o formato BPMN inserindo um ``tipo'' antes no nome de cada tag XML, por exemplo, a tag de nome task pode estar representada como ``semantic:task'' e isso pode impedir que o parser do Java identifique os elementos. Assim, foi necessário preparar o parser para tratar este tipo de situação.
+A maioria das dificuldades encontradas são relacionadas à estrutura dos processos e como a implementação interpretaria essas características. Na criação dos fluxos possíveis, uma dificuldade ocorreu devido aos desvios causados por elementos do tipo \emph{Gateway}. Para isso, para cada Node criado no array é guardado o tipo do elemento que o antecede. Assim, na criação dos caminhos, elementos que partem de um desvio de fluxo precisaram ser tratados para criar os caminhos corretamente, por exemplo: se dois elementos, X e Y, vem de um \emph{gateway} do tipo  exclusivo, os caminhos obtidos até estes elementos serão duplicados, ou seja, metade dos caminhos passaram apenas por X e metade dos caminhos passarão apenas por Y.
+
+%Na criação dos caminhos, há uma exceção para quando existir uma divisão de fluxo através de um gateway do tipo inclusivo. Diferente do que acontece com o tipo exclusivo, onde apenas uma opção de pode ser seguida de cada vez, no caminho incluso as opções podem variar pois um ou mais caminhos podem ser seguidos ao mesmo tempo. Os caminhos em que apenas um fluxo é seguido já são cobertos pela execução normal do parser, então, após a criação dos caminhos, é identificada a existencia de fluxos inclusivos e, se necessário, caminhos adicionais são inseridos.
+
+Devido ao fato da estratégia implementada ser executada recursivamente e percorrer o processo baseado no fluxo dos elementos do tipo \emph{SequenceFlow}, ocorreram problemas em processos onde uma parcela do processo também é executada recursivamente. Estes problemas foram causados devido ao fluxo nunca encontrar um "fim". Para solucionar esses problema foi criado um "delimitador de recursão" que define e controla o número de vezes em que o mesmo \emph{SequenceFlow} será executado.
+
+Algumas ferramentas exportam o diagrama para o formato BPMN inserindo um ``tipo'' antes no nome de cada tag XML, por exemplo, a tag de nome task pode estar representada como ``semantic:task'' e isso pode impedir que o parser XML do Java identifique os elementos. Assim, foi necessário preparar métodos para tratar este tipo de situação removendo os elementos encontrados antes dos nomes de \emph{tags}.
 
 %Na criação dos artefatos para o teste funcional são levados em conta apenas tarefas que podem ser executadas por um usuário. 
-Apesar de utilizarem o mesmo padrão BPMN, algumas ferramentas podem utilizar nomes diferentes para representar tarefas no arquivo XML. Por isso, dependendo do BPMS que for utilizado, pode ser necessário substituir o nome das tarefas tratadas no código da ferramenta.
+Apesar de utilizarem o mesmo padrão BPMN, algumas ferramentas podem utilizar nomes diferentes para representar tarefas no arquivo XML. Por isso, dependendo do BPMS que for utilizado, pode ser necessário substituir o nome das tarefas tratadas diretamente no código.
 
 %pode gerar caminhos iguais, por remover boa parte das tarefas, como pdoe ser visto na figura de antes também
 
 %-subprocess -> apenas como uma tarefa, normalmente sao simples, so testa o principal,subprocessos normalmente sao simples
 
-Na criação dos caminhos, uma dificuldade ocorreu devido aos desvios causados por elementos do tipo \emph{Gateway}. Para isso, para cada Node criado no array é guardada o tipo do elemento que o antecede. Assim, na criação dos caminhos, elementos que partem de um desvio de fluxo precisaram ser tratados para criar os caminhos corretamente, por exemplo: se dois elementos, X e Y, vem de um gateway exclusivo, os caminhos obtidos até estes elementos serão duplicados, ou seja, metade dos caminhos passaram apenas por X e metade dos caminhos passarão apenas por Y.
 
-%Na criação dos caminhos, há uma exceção para quando existir uma divisão de fluxo através de um gateway do tipo inclusivo. Diferente do que acontece com o tipo exclusivo, onde apenas uma opção de pode ser seguida de cada vez, no caminho incluso as opções podem variar pois um ou mais caminhos podem ser seguidos ao mesmo tempo. Os caminhos em que apenas um fluxo é seguido já são cobertos pela execução normal do parser, então, após a criação dos caminhos, é identificada a existencia de fluxos inclusivos e, se necessário, caminhos adicionais são inseridos.
-
-Devido ao fato da ferramenta ser executada recursivamente e percorrer o processo baseado no fluxo dos elementos do tipo \emph{sequenceFlow}, ocorreram problemas em processos onde uma parcela do processo também é executada recursivamente. Estes problemas foram causados devido ao fluxo nunca encontrar um "fim". Para solucionar esses problema foi criado um "delimitador de recursão" que define e controla o número de vezes em que o mesmo \emph{sequenceFlow} será executado.
-
-
-\section{Teste Funcional de Software}
+\section{Teste Funcional de Software e um exemplo de uso da abordagem}
 O teste funcional é um tipo de teste que permite verificar as saídas de um sistema produzidas a partir de entradas pré-definidas. Este tipo de teste permite testar as funcionalidades, requerimentos e regras de negócio presentes no software\cite{molinari2003testes} verificando a existência de erros, o que auxilia na melhoria da qualidade do software.
 
 Uma das principais medidas para o teste de software é a cobertura de teste. A cobertura de teste mede a abrangência do teste e pode ser expressa pela cobertura dos casos de testes ou pela cobertura do código executado. Existem diversos trabalhos que abordam a importância da cobertura de testes de software\cite{zhu1997software,bieman1996using}, inclusive ligando o crescimento da qualidade e confiabilidade do software ao crescimento da cobertura dos testes\cite{malaiya2002software}.
@@ -346,7 +323,7 @@ A criação automatizada da tabela e dos dois arquivos permite facilitar e melho
 \item Importante ter uma boa cobertura;
 \item BPMN parser analiza a notação para gerar elementos para teste automatizado = facilita o teste e aumenta a cobertura.
 \item tabelinha + teste com selenium, mas pode ser utilizada de outras formas 
-\item Trabalhos futuros (tirar repeticoes de cenários, tentar gerar mais coisas/informações, verificar outras opções pra utilizar)
+\item Trabalhos futuros (tirar repeticoes de cenários, tentar gerar mais coisas/informações, verificar outras opções pra utilizar), criar um "dicionário" com o maior numero possível de nomes distintos para cada tag e automatizar esse interpretação
 \end{itemize}
 
 \section{Referências}
