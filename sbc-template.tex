@@ -31,32 +31,39 @@
 \maketitle
 
 \begin{abstract}
-This paper describes a strategy created to get useful artifacts for the implementation of automated functional testing of Business Process Management tools. The objective of this work was to facilitate the tests and improve the scope of the same, in order to improve the applications in question. With this strategy, it was possible to obtain important information about the processes and generate important elements for functional testing, making it the fastest and most complete test case.
+This paper describes an approach designed to get useful artifacts for the execution of automated functional testing in Business Process Management tools with the support of BPMN notation. The objective of this work was to facilitate and improve the scope of the tests, in order to improve the applications in question. With this approach, it was possible to obtain important information about the processes and generate important elements for functional testing, making the test stage faster and more complete.
 \end{abstract}
      
 \begin{resumo} 
-Este trabalho descreve um estratégia criada para obter artefatos úteis para a execução de testes funcionais automatizados de ferramentas de Gestão de Processos de Negócio. O objetivo deste trabalho era facilitar a execução dos testes bem como melhorar a abrangência dos mesmos, visando a melhoria das aplicações em questão. Com esta estratégia, foi possível obter informações importantes sobre os processos e gerar elementos importantes para o teste funcional, tornando a etapa de teste mais rápida e completa.
+Este trabalho descreve uma abordagem criada para obter artefatos úteis para a execução de testes funcionais automatizados de ferramentas de Gestão de Processos de Negócio com o apoio da notação BPMN. O objetivo deste trabalho era facilitar a execução dos testes bem como melhorar a abrangência dos mesmos, visando a melhoria das aplicações em questão. Com esta approach, foi possível obter informações importantes sobre os processos e gerar elementos importantes para o teste funcional, tornando a etapa de teste mais rápida e completa.
 \end{resumo}
 
 \section{Introdução}
 
+A gestão de processos de negócio (\emph{Business Process Management} -- BPM) tem suscitado o interesse de empresas e da comunidade científica, tanto por seus benefícios como por seus desafios. Designa-se por BPM o conjunto de conceitos, métodos e técnicas para suportar a modelagem, administração, configuração e análise de processos de negócio~\cite{weske}. %BPMN 
+
+Algumas tarefas como verificação e testes ainda são consideradas um desafio na área de BPM~\cite{aalst2013survey}. De fato, o teste automatizado de aplicações BPM é pouco abordado, tanto pela comunidade da área de BPM~\cite{weske} como da área de testes de software~\cite{graham2012experiences}. Devido a isso, em um trabalho anterior \cite{sbqs2015} foram realizados testes de carga e teste funcional em uma aplicação BPM utilizando soluções já consagradas no teste de aplicações Web. Neste trabalho, o teste funcional utilizando as ferramentas Selenium e Cucumber se mostrou mais promissor.
+
+No trabalho anterior, também percebeu-se que a análise necessária para delimitar os aspectos necessários para realizar um bom teste funcional automatizado pode ser complexa. Assim, com a intenção de melhorar a análise, execução e qualidade dos testes decidiu-se por analisar os arquivos BPMN para verificar a possibilidade de extrair informações  e artefatos importantes para os testes.
+
+%falar que pode ser usado para vários processos/casos
+
  \begin{itemize}
-   \item BPM
-   \item Teste com BPM pouco abordado + importância dos testes;
-   \item Citar trabalho anterior (abordagem utilizadas para ferramentas web em geral)= teste com selenium e cucumber se mostrou mais promissor;
-   \begin{itemize}
-	\item Pode ser trabalhoso criar os elementos necessários para o teste completo;
-   \end{itemize}
-   \item Para melhoria na criação dos testes: analisar o diagrama no formato BPMN, através do parser criado, para gerar informações
-     \begin{itemize}
+  % \item BPM
+ %  \item Teste com BPM pouco abordado + importância dos testes;
+  % \item Citar trabalho anterior (abordagem utilizadas para ferramentas web em geral)= teste com selenium e cucumber se mostrou mais promissor;
+  % \begin{itemize}
+	%\item Pode ser trabalhoso criar os elementos necessários para o teste completo;
+  % \end{itemize}
+  % \item Para melhoria na criação dos testes: analisar o diagrama no formato BPMN, através do parser criado, para gerar informações
+    % \begin{itemize}
 	\item Facilitar/tornar mais rápida a criação dos elementos
 	\item Aumento na cobertura dos testes (cria todos cenários possíveis)
-   \end{itemize}
+   %\end{itemize}
    \item Objetivo:  melhorar e facilitar o teste funcional automatizado de aplicações bpm;
- \end{itemize}
+\end{itemize}
  
-%Mesmo utilizando ferramentas para teste automatizado, alguns elementos necessários podem ter sua criação trabalhosa
-%ainda assim, depende de algumas etapas, como a criação de casso de testes...
+
 \section{Business Process Management - \emph{BPM}}
 
 O termo BPM pode ser usado com ênfases diferentes, às vezes com foco em tecnologia (software) e outras vezes em gestão. Mesmo assim, a área tem convergido no entendimento do ciclo de vida de aplicações de BPM, que envolve as atividades de análise, modelagem, execução, monitoramento e otimização~\cite{ABPMP}. 
