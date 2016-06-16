@@ -79,7 +79,7 @@ Um \emph{Event} é algo que "acontece" durante o curso de um processo\cite{model
 %diamond (see Figure 10.110) to distinguish it from other Gateway
 
 %sequence flows
-Um elemento \emph{Sequence Flow} é usado para exibir a ordem em que os demais elementos são executados em um processo. Cada \emph{sequenceFlow} possui um atributo \emph{sourceRef} que indica de onde este \emph{sequenceFlow} vem, ou sua "fonte", e um atributo \emph{targetRef} que indica para onde ele vai, ou seja, seu alvo. Cada \emph{sequenceFlow} possui apenas possui apenas uma fonte e um alvo. Analisando os elementos \emph{sequenceFlow} e analisando os dois atributos citados acima é possível identificar todo o fluxo do processo.
+Um elemento \emph{Sequence Flow} é usado para exibir a ordem em que os demais elementos são executados em um processo. Cada \emph{sequenceFlow} possui apenas possui apenas uma fonte e um alvo. Analisando os elementos \emph{sequenceFlow} é possível identificar todo o fluxo do processo.
 
 \subsection{BPM e Teste}
 
@@ -99,7 +99,7 @@ Com o objetivo de obter maiores informações que pudessem auxiliar no processo 
 \label{fig:abordagem1}
 \end{figure}
 
-Para analisar os arquivos foi elaborada um estratégia que percorre os arquivos XML e manipula as informações necessárias.  Nesta abordagem, foi utilizada a linguagem Java, principalmente por esta linguagem já possuir uma opção sólida para a análise de documentos XML\cite{javadom}. A visão geral da abordagem pode ser vista na Figura \ref{fig:abordagem1}. Basicamente, o arquivo BPMN é utilizado como entrada e, enquanto o arquivo é percorrido, os elementos são analisados através da nomenclatura padrão das \emph{tags} e então é executada uma lógica para criar os diferentes cenários de teste. Ao fim da execução, é gerado um arquivo Excel contendo uma tabela com os todos os possíveis cenários/caminhos do processo.
+Para analisar os arquivos foi elaborada um estratégia que percorre os arquivos XML e manipula as informações necessárias. A visão geral da abordagem pode ser vista na Figura \ref{fig:abordagem1}. Basicamente, o arquivo BPMN é utilizado como entrada e, enquanto o arquivo é percorrido, os elementos são analisados através da nomenclatura padrão das \emph{tags} e então é executada uma lógica para criar os diferentes cenários de teste. Ao fim da execução, é gerado um arquivo Excel contendo uma tabela com os todos os possíveis cenários/caminhos do processo.
 
 %colcoar imagem aqui
 
@@ -107,7 +107,7 @@ Para analisar os arquivos foi elaborada um estratégia que percorre os arquivos 
 
 %O principal elemento para o funcionamento da ferramenta é o \emph{Sequence Flow}. Por conter os atributos targetRef e sourceRef os elementos deste tipo permitem percorrer todo o diagrama. Ao iniciar a execução, é solicitado ao usuário o caminho para o arquivo BPMN e a ID do processo a ser avaliado. Um diagrama pode conter mais de um processo e, nesse caso, o usuário pode escolher que todos processos sejam avaliados.
 
-O elemento BPMN mais importante para esta estratégia de análise é o \emph{Sequence Flow}. Por conter os atributos targetRef e sourceRef os elementos deste tipo permitem percorrer todo o diagrama. Ao iniciar a execução, é solicitado ao usuário o caminho para o arquivo BPMN e a ID do processo a ser avaliado. Um diagrama pode conter mais de um processo e, nesse caso, o usuário pode escolher que todos processos sejam avaliados.
+Nesta abordagem, foi utilizada a linguagem Java, principalmente por esta linguagem já possuir uma opção sólida para a análise de documentos XML\cite{javadom}. O elemento BPMN mais importante para esta estratégia de análise é o \emph{Sequence Flow}. Cada \emph{Sequence Flow} possui um atributo \emph{sourceRef} que indica de onde este \emph{sequenceFlow} vem, ou sua "fonte", e um atributo \emph{targetRef} que indica para onde ele vai, ou seja, seu alvo. Por conter esses atributos os elementos deste tipo permitem percorrer todo o diagrama. Ao iniciar a execução, é solicitado ao usuário o caminho para o arquivo BPMN e a ID do processo a ser avaliado. Um diagrama pode conter mais de um processo e, nesse caso, o usuário pode escolher que todos processos sejam avaliados.
 
 Foi criada a classe \emph{Node} que define um tipo de objeto que guarda informações básicas sobre as tarefas do processo e um \emph{array} de objetos da mesma classe. Durante a execução, um \emph{array} de objetos da classe Node é preenchido formando assim um \emph{array} de adjacências. O método principal percorre o processo recursivamente através dos elementos do tipo \emph{Sequence Flow}, enquanto um tarefa for encontrada, um objeto da classe Node é criado e o método é chamado recursivamente de modo a retornar o \emph{array} de adjacências para este objeto.
 
