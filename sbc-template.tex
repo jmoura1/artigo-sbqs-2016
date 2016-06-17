@@ -12,10 +12,17 @@
 \sloppy
 
 
-\title{Uma abordagem para melhoria do Teste Funcional Automatizado de aplicações de Gerenciamento de Processos de Negócio apoiada na notação BPMN}
+\title{Uma abordagem para geração de dados para Teste Funcional Automatizado de aplicações de Gerenciamento de Processos de Negócio apoiada na notação BPMN}
 %Uma estratégia para geração de códigos para Teste Funcional de ferramentas de Gerenciamento de Processos de Negócio
 %Uma abordagem para melhoria do Teste Funcional Automatizado de aplicações de Gerenciamento de Processos de Negócio apoiada na notação BPMN
 %apoiada em bpmn
+%Uma abordagem para melhoria do Teste Funcional Automatizado de aplicações de Gerenciamento de Processos de Negócio apoiada na notação BPMN
+%Uma abordagem para geração de dados para Teste Funcional Automatizado de aplicações de Gerenciamento de Processos de Negócio apoiada na notação BPMN
+
+%http://cvs.labsoft.ufsc.br/publications/monografia_petroski.pdf
+%http://www.lbd.dcc.ufmg.br/colecoes/sbes/1993/0022.pdf "Uma estratégia para geração de dados de teste"
+%http://www.lbd.dcc.ufmg.br/colecoes/sbqs/2010/TT6_iure_fe.pdf Geração de Dados para Testes de Desempenho e Estresse a
+Partir de Testes Funcionais 
 
 \author{Jéssica Lasch de Moura\inst{1}, Andrea Schwertner Charão\inst{1}}
 
@@ -31,21 +38,20 @@
 \maketitle
 
 \begin{abstract}
-This paper describes an approach designed to get useful artifacts for the execution of automated functional testing in Business Process Management tools with the support of BPMN notation. The objective of this work was to facilitate and improve the scope of the tests, in order to improve the applications in question. With this approach, it was possible to obtain important information about the processes and generate important elements for functional testing, making the test stage faster and more complete.
+This paper describes an approach designed to get useful data for the execution of automated functional testing in Business Process Management tools with the support of BPMN notation. The objective of this work was to facilitate and improve the scope of the tests, in order to improve the applications in question. With this approach, it was possible to obtain important information about the processes and generate important elements for functional testing, making the test stage faster and more complete.
 \end{abstract}
      
 \begin{resumo} 
-Este trabalho descreve uma abordagem criada para obter artefatos úteis para a execução de testes funcionais automatizados de ferramentas de Gestão de Processos de Negócio com o apoio da notação BPMN. O objetivo deste trabalho era facilitar a execução dos testes bem como melhorar a abrangência dos mesmos, visando a melhoria das aplicações em questão. Com esta approach, foi possível obter informações importantes sobre os processos e gerar elementos importantes para o teste funcional, tornando a etapa de teste mais rápida e completa.
+Este trabalho descreve uma abordagem criada para obter dados úteis para a execução de testes funcionais automatizados de ferramentas de Gestão de Processos de Negócio com o apoio da notação BPMN. O objetivo deste trabalho era facilitar a execução dos testes bem como melhorar a abrangência dos mesmos, visando a melhoria das aplicações em questão. Com esta approach, foi possível obter informações importantes sobre os processos e gerar elementos importantes para o teste funcional, tornando a etapa de teste mais rápida e completa.
 \end{resumo}
 
 \section{Introdução}
 
 A gestão de processos de negócio (\emph{Business Process Management} -- BPM) tem suscitado o interesse de empresas e da comunidade científica, tanto por seus benefícios como por seus desafios. Designa-se por BPM o conjunto de conceitos, métodos e técnicas para suportar a análise, modelagem, execução, monitoramento e otimização dos processos de negócio~\cite{weske}. \emph{BPMN} ou \emph{Business Process Management and Notation} é uma notação que fornece a capacidade de compreender processos de negócio em uma notação gráfica e a capacidade de exportar esses processos de uma forma padrão\cite{bpmn}.
 
-%BPMN 
 Algumas tarefas como verificação e testes ainda são consideradas um desafio na área de BPM~\cite{aalst2013survey}. De fato, o teste automatizado de aplicações BPM é pouco abordado, tanto pela comunidade da área de BPM~\cite{weske} como da área de testes de software~\cite{graham2012experiences}. Devido a isso, em um trabalho anterior \cite{sbqs2015} foram realizados testes de carga e teste funcional em uma aplicação BPM utilizando soluções já consagradas no teste de aplicações Web. Neste trabalho, o teste funcional utilizando as ferramentas Selenium e Cucumber se mostrou mais promissor.
 
-No trabalho anterior, também percebeu-se que a análise necessária para delimitar os aspectos necessários para realizar um bom teste funcional automatizado pode ser complexa. Assim, com a intenção de melhorar a análise, execução e qualidade dos testes decidiu-se por analisar os arquivos BPMN para verificar a possibilidade de extrair informações e artefatos importantes para os testes. Em relação ao formato das informações obtidas, decidiu-se extrair uma tabela definindo informações importantes sobre os fluxos do processo. A extração das informações nesse formato permite que esses dados possam ser aproveitadas em diversos casos e, inclusive, permitindo gerar outros elementos.
+No trabalho anterior, também percebeu-se que a análise necessária para delimitar os aspectos necessários para realizar um bom teste funcional automatizado pode ser complexa. Assim, com a intenção de melhorar a análise, execução e qualidade dos testes decidiu-se por analisar os arquivos BPMN para verificar a possibilidade de extrair informações importantes para os testes. Em relação ao formato das informações obtidas, decidiu-se extrair uma tabela definindo informações importantes sobre os fluxos do processo. A extração das informações nesse formato permite que esses dados possam ser aproveitadas em diversos casos e, inclusive, permitindo gerar outros elementos.
 
 Assim, o objetivo desse trabalho foi melhorar e facilitar o teste funcional de aplicações BPM possibilitando a criação e execução de teste mais completos e com boa cobertura.
 
@@ -72,7 +78,7 @@ Uma \emph{Activiti} é a menor parte de um diagrama BPM, e é utilizada quando o
 Um \emph{Event} é algo que "acontece" durante o curso de um processo\cite{model2011notation}. Existem três tipos principais de eventos: \emph{Start Event} (indica o início do processo), \emph{End Event} (indica um fim do processo) e \emph{Intermediate Events} (indica um evento entre o início e o fim do processo).
 
 %gateways
-\emph{Gateways} são usados para controlar o fluxo do processo. Em gateways do tipo \emph{Exclusive}, apenas um dos caminhos que partem do gateway poderão ser seguidos, já em gateways do tipo \emph{Inclusive} um ou mais caminhos podem ser seguidos. Em gateways do tipo \emph{Parallel} todos os caminhos são tomados em paralelo.
+\emph{Gateways} são usados para controlar o fluxo do processo. Em gateways do tipo \emph{Exclusive}, apenas um dos fluxos que partem do gateway poderão ser seguidos, já em gateways do tipo \emph{Inclusive} um ou mais fluxos podem ser seguidos. Em gateways do tipo \emph{Parallel} todos os fluxos são tomados em paralelo.
 
 %A Parallel Gateway is used to synchronize (combine) parallel flows and to create parallel flows.? The Parallel Gateway MUST use a marker that is in the shape of 
 %plus sign and is placed within the Gateway
@@ -85,12 +91,12 @@ Um elemento \emph{Sequence Flow} é usado para exibir a ordem em que os demais e
 
 Os sistemas BPM geralmente oferecerem recursos para definição e modelagem de processos em BPMN, controle da execução e monitoramento de atividades dos processos~\cite{forrester}. Nota-se, no entanto, que a preocupação com testes não fica evidente nas ferramentas BPMS. De fato, examinando-se o material promocional e a documentação disponível sobre os principais BPMS, observa-se uma ênfase em etapas de modelagem e execução. Visivelmente, tais recursos são um diferencial no desenvolvimento de aplicações de BPM, em comparação ao desenvolvimento de software em geral. No entanto, aplicações de BPM também estão sujeitas a defeitos e, por isso, podem se beneficiar de avanços na área de testes de software.
 
-Existem trabalhos que chamam a atenção para a importância e para a as dificuldades trazidas pela execução de testes, bem como trazem alternativas para a melhoria da seleção de casos de teste\cite{bohmer2015genetic}. Esses trabalhos fortalecem a ideia da importância de artefatos para facilitar a criação de testes para processos ou sistemas BPM, no entanto, os trabalhos geralmente abordam a criação de casos de teste baseados em modelos de processo e não em sistemas em si, não é descrita uma forma de automatizar ou executar os casos de teste criados. Existem também trabalhos que visam maneiras de automatizar e melhorar o monitoramento da conformidade dos modelos de processos \cite{ly2015compliance,van2012replaying} e que, novamente, são mais voltados para os processos em si e sua administração do que para sistema/software.
+Existem trabalhos que chamam a atenção para a importância e para a as dificuldades trazidas pela execução de testes, bem como trazem alternativas para a melhoria da seleção de casos de teste\cite{bohmer2015genetic}. Esses trabalhos fortalecem a ideia da importância de informações para facilitar a criação de testes para processos ou sistemas BPM, no entanto, os trabalhos geralmente abordam a criação de casos de teste baseados em modelos de processo e não em sistemas em si, não é descrita uma forma de automatizar ou executar os casos de teste criados. Existem também trabalhos que visam maneiras de automatizar e melhorar o monitoramento da conformidade dos modelos de processos \cite{ly2015compliance,van2012replaying} e que, novamente, são mais voltados para os processos em si e sua administração do que para sistema/software.
 
 \section{Descrição da abordagem}
 O objetivo deste trabalho é melhorar e facilitar o teste funcional automatizado de aplicações BPM. Um aspecto importante para o teste funcional são quais fluxos ou etapas serão testadas, pois estes podem definir ou limitar o teste, interferindo assim na qualidade e na cobertura dos testes. No entanto, a construção dessas informações pode ser uma tarefa complexa.
 
-Com o objetivo de obter maiores informações que pudessem auxiliar no processo de teste, decidiu-se analisar os arquivos XML no formato BPMN exportados pelas ferramentas BPMS para extrair destes arquivos informações úteis. Para tratar essas informações, optou-se por analisar o processo de modo a transforma-lo em uma tabela contendo todos os possíveis fluxos ou caminhos que podem ser executados no processo para então serem realizadas as devidas análises. 
+Com o objetivo de obter maiores informações que pudessem auxiliar no processo de teste, decidiu-se analisar os arquivos XML no formato BPMN exportados pelas ferramentas BPMS para extrair destes arquivos informações úteis. Para tratar essas informações, optou-se por analisar o processo de modo a transforma-lo em uma tabela contendo todos os possíveis fluxos que podem ser executados no processo para então serem realizadas as devidas análises. 
 
 \begin{figure}[ht]
 \centering
@@ -99,7 +105,7 @@ Com o objetivo de obter maiores informações que pudessem auxiliar no processo 
 \label{fig:abordagem1}
 \end{figure}
 
-Para analisar os arquivos foi elaborada um estratégia que percorre os arquivos XML e manipula as informações necessárias. A visão geral da abordagem pode ser vista na Figura \ref{fig:abordagem1}. Basicamente, o arquivo BPMN é utilizado como entrada e, enquanto o arquivo é percorrido, os elementos são analisados através da nomenclatura padrão das \emph{tags} e então é executada uma lógica para criar os diferentes cenários de teste. Ao fim da execução, é gerado um arquivo Excel contendo uma tabela com os todos os possíveis cenários/caminhos do processo.
+Para analisar os arquivos foi elaborada um estratégia que percorre os arquivos XML e manipula as informações necessárias. A visão geral da abordagem pode ser vista na Figura \ref{fig:abordagem1}. Basicamente, o arquivo BPMN é utilizado como entrada e, enquanto o arquivo é percorrido, os elementos são analisados através da nomenclatura padrão das \emph{tags} e então é executada uma lógica para criar os diferentes cenários de teste. Ao fim da execução, é gerado um arquivo Excel contendo uma tabela com os todos os possíveis cenários/fluxos do processo.
 
 %colcoar imagem aqui
 
@@ -111,11 +117,11 @@ Nesta abordagem, foi utilizada a linguagem Java, principalmente por esta linguag
 
 Foi criada a classe \emph{Node} que define um tipo de objeto que guarda informações básicas sobre as tarefas do processo e um \emph{array} de objetos da mesma classe. Durante a execução, um \emph{array} de objetos da classe Node é preenchido formando assim um \emph{array} de adjacências. O método principal percorre o processo recursivamente através dos elementos do tipo \emph{Sequence Flow}, enquanto um tarefa for encontrada, um objeto da classe Node é criado e o método é chamado recursivamente de modo a retornar o \emph{array} de adjacências para este objeto.
 
-A partir do \emph{array} de adjacências são criados os caminhos possíveis pelos quais o processo pode passar. O método que cria os caminhos percorre recursivamente o \emph{array} de adjacências criado anteriormente e "constrói" um novo caminho, tendo como condição de parada o encontro de uma das últimas tarefas a serem executadas. Uma tarefa é uma das últimas quando o elemento que a sucede no fluxo for elemento do tipo\emph{End Event}. Ao encontrar uma tarefa final, o caminho é armazenado e é iniciada a construção de um novo caminho.
+A partir do \emph{array} de adjacências são criados os fluxos possíveis pelos quais o processo pode passar. O método que cria os fluxos percorre recursivamente o \emph{array} de adjacências criado anteriormente e "constrói" um novo fluxo possível, tendo como condição de parada o encontro de uma das últimas tarefas a serem executadas. Uma tarefa é uma das últimas quando o elemento que a sucede no fluxo for elemento do tipo\emph{End Event}. Ao encontrar uma tarefa final, a informação é armazenada e é iniciada a construção de um novo fluxo possível.
 
-Os caminhos obtidos são base para a criação da tabela de caminhos/fluxos possíveis. Para criar a tabela, cada tarefa existente no processo representará uma coluna na tabela e cada caminho representará uma nova linha. Para cada caminho, se a tarefa estiver presente a coluna será marcada com "X" caso contrário a coluna será marcada com um "0". Caso mais de um processo seja avaliado ao mesmo tempo, a tabela referente à cada processo estará separada individualmente no arquivo final. 
+Os fluxos obtidos são base para a criação da tabela. Para criar a tabela, cada tarefa existente no processo representará uma coluna na tabela e cada fluxo representará uma nova linha. Para cada fluxo, se a tarefa estiver presente a coluna será marcada com "X" caso contrário a coluna será marcada com um "0". Caso mais de um processo seja avaliado ao mesmo tempo, a tabela referente à cada processo estará separada individualmente no arquivo final. 
 
-Na Tabela \ref{tab:exemplo}, pode ser visto uma tabela resultante da execução dessa estratégia para um processo com cinco \emph{tasks} e dois caminhos possíveis. Com a geração desta tabela podem ser realizadas diversas análises sobre o processo: número de fluxos possíveis, identificar gargalos, etc.
+Na Tabela \ref{tab:exemplo}, pode ser visto uma tabela resultante da execução dessa estratégia para um processo com cinco \emph{tasks} e dois fluxos possíveis. Com a geração desta tabela podem ser realizadas diversas análises sobre o processo: número de fluxos possíveis, identificar gargalos, etc.
 
 \begin{table}[]
 \centering
@@ -129,9 +135,9 @@ X & X & X & X & X
 \end{table}
 
 \subsection{Dificuldades/Limitações}
-A maioria das dificuldades encontradas são relacionadas à estrutura dos processos e como a implementação interpretaria essas características. Na criação dos fluxos possíveis, uma dificuldade ocorreu devido aos desvios causados por elementos do tipo \emph{Gateway}. Para isso, para cada Node criado no \emph{array} é guardado o tipo do elemento que o antecede. Assim, na criação dos caminhos, elementos que partem de um desvio de fluxo precisaram ser tratados para criar os caminhos corretamente, por exemplo: se dois elementos, X e Y, vem de um \emph{gateway} do tipo  exclusivo, os caminhos obtidos até estes elementos serão duplicados, ou seja, metade dos caminhos passaram apenas por X e metade dos caminhos passarão apenas por Y.
+A maioria das dificuldades encontradas são relacionadas à estrutura dos processos e como a implementação interpretaria essas características. Na criação dos fluxos possíveis, uma dificuldade ocorreu devido aos desvios causados por elementos do tipo \emph{Gateway}. Para isso, para cada Node criado no \emph{array} é guardado o tipo do elemento que o antecede. Assim, na criação dos fluxos, elementos que partem de um desvio de fluxo precisaram ser tratados para criar os fluxos corretamente, por exemplo: se dois elementos, X e Y, vem de um \emph{gateway} do tipo  exclusivo, os fluxos obtidos até estes elementos serão duplicados, ou seja, metade dos fluxos passaram apenas por X e metade dos fluxos passarão apenas por Y.
 
-%Na criação dos caminhos, há uma exceção para quando existir uma divisão de fluxo através de um gateway do tipo inclusivo. Diferente do que acontece com o tipo exclusivo, onde apenas uma opção de pode ser seguida de cada vez, no caminho incluso as opções podem variar pois um ou mais caminhos podem ser seguidos ao mesmo tempo. Os caminhos em que apenas um fluxo é seguido já são cobertos pela execução normal do parser, então, após a criação dos caminhos, é identificada a existencia de fluxos inclusivos e, se necessário, caminhos adicionais são inseridos.
+%Na criação dos fluxos, há uma exceção para quando existir uma divisão de fluxo através de um gateway do tipo inclusivo. Diferente do que acontece com o tipo exclusivo, onde apenas uma opção de pode ser seguida de cada vez, no \emph{gateway} inclusivo as opções podem variar pois um ou mais fluxos podem ser seguidos ao mesmo tempo. Os casos em que apenas um fluxo é seguido já são cobertos pela execução normal do parser, então, após a criação dos fluxos, é identificada a existencia de casos inclusivos e, se necessário, fluxos adicionais são inseridos.
 
 Devido ao fato da estratégia implementada ser executada recursivamente e percorrer o processo baseado no fluxo dos elementos do tipo \emph{SequenceFlow}, ocorreram problemas em processos onde uma parcela do processo também é executada recursivamente. Estes problemas foram causados devido ao fluxo nunca encontrar um "fim". Para solucionar esses problema foi criado um "delimitador de recursão" que define e controla o número de vezes em que o mesmo \emph{SequenceFlow} será executado.
 
@@ -140,7 +146,7 @@ Algumas ferramentas exportam o diagrama para o formato BPMN inserindo um ``tipo'
 %Na criação dos artefatos para o teste funcional são levados em conta apenas tarefas que podem ser executadas por um usuário. 
 Apesar de utilizarem o mesmo padrão BPMN, algumas ferramentas podem utilizar nomes diferentes para representar tarefas no arquivo XML. Por isso, dependendo do BPMS que for utilizado, pode ser necessário substituir o nome das tarefas tratadas diretamente no código.
 
-%pode gerar caminhos iguais, por remover boa parte das tarefas, como pdoe ser visto na figura de antes também
+%pode gerar fluxos iguais, por remover boa parte das tarefas, como pdoe ser visto na figura de antes também
 
 %-subprocess -> apenas como uma tarefa, normalmente sao simples, so testa o principal,subprocessos normalmente sao simples
 
@@ -149,9 +155,7 @@ Apesar de utilizarem o mesmo padrão BPMN, algumas ferramentas podem utilizar no
 O teste funcional é um tipo de teste que permite verificar as saídas de um sistema produzidas a partir de entradas pré-definidas. Este tipo de teste permite testar as funcionalidades, requerimentos e regras de negócio presentes no software\cite{molinari2003testes} verificando a existência de erros, o que auxilia na melhoria da qualidade do software.
 
 Uma das principais medidas para o teste de software é a cobertura de teste. A cobertura de teste mede a abrangência do teste e pode ser expressa pela cobertura dos casos de testes ou pela cobertura do código executado. Existem diversos trabalhos que abordam a importância da cobertura de testes de software\cite{zhu1997software,bieman1996using}, inclusive ligando o crescimento da qualidade e confiabilidade do software ao crescimento da cobertura dos testes\cite{malaiya2002software}.
-%Por esses motivos o aumento da cobertura dos testes de software também é um assunto bastante abordado\cite{}.
 
-%Essa cobertura pode se basear em fluxos de controle (instrução, ramificação ou caminhos) ou fluxos de dados. Na cobertura baseada em fluxo de controle, o objetivo é %testar linhas de código, condições de ramificação, caminhos que percorrem o código ou outros elementos do fluxo de controle do software. Na cobertura baseada em fluxo %de dados, o objetivo é testar se os estados dos dados permanecem válidos durante a operação do software, por exemplo, se um elemento de dados é definido antes de ser %usado.
 
 No entanto, as atividades executadas para criar testes funcionais com uma boa cobertura podem muitas vezes se tornar exaustivas e trabalhosas, dificultando assim a execução dos testes de forma adequada. Com o objetivo de melhorar a qualidade da análise e o tempo de execução dos testes, foram criados os testes automatizados, que proporcionam a execução dos testes mais rapidamente \cite{fantinato2005autotest}. Quando executada corretamente, a automação de teste é uma das melhores formas de reduzir o tempo de teste no ciclo de vida do software, diminuindo o custo e aumentando a produtividade do desenvolvimento de software como um todo, além de, consequentemente, aumentar a qualidade do produto final.
 
@@ -164,7 +168,7 @@ Para efetuar a captura da interação do usuário com a aplicação é utilizado
 
 Os testes utilizando o Cucumber são compostos, basicamente, por dois arquivos: arquivos que especificam as funcionalidades \emph{features} e por arquivos de definição de passos \emph{steps}. 
 
-Os arquivos com as funcionalidades são escritos utilizando a linguagem Gherkin\cite{gherkin} e são compostos por cenários, os cenários representam uma fração da aplicação que vai ser testada. Um cenário também pode ser descrito como a definição, em ordem de execução, das etapas que são executados nessa fração, bem como dos resultados esperados para validar a aplicação. Por exemplo, após um \emph{gateway} exclusivo com dois caminhos disponíveis, já é possível obter dois cenários possíveis: um cenário executando cada caminho.
+Os arquivos com as funcionalidades são escritos utilizando a linguagem Gherkin\cite{gherkin} e são compostos por cenários, os cenários representam uma fração da aplicação que vai ser testada. Um cenário também pode ser descrito como a definição, em ordem de execução, das etapas que são executados nessa fração, bem como dos resultados esperados para validar a aplicação. Por exemplo, após um \emph{gateway} exclusivo com dois fluxos disponíveis, já é possível obter dois cenários possíveis: um cenário executando cada fluxo.
 %Por exemplo, para testar apenas o login em uma aplicação, já é possível obter dois cenários possíveis: (a) dados de acessos corretos e sucesso no login e (b) dados de acesso incorretos e mensagem de erro. 
 
 Para que cada etapa do cenário seja executada, é necessária a criação de \emph{steps} que irão traduzir os passos definidos na linguagem Gherkin para ações que vão interagir com o sistema. Cada \emph{step}, geralmente, irá chamar um método Java que irá efetivamente executar a interação com a aplicação. A implementação destes métodos pode ser feita apenas utilizando o código extraído através do Selenium após a captura das ações do usuário.
@@ -172,7 +176,7 @@ Para que cada etapa do cenário seja executada, é necessária a criação de \e
 Assim, mesmo utilizando o Cucumber e Selenium para facilitar a criação dos testes, ainda é preciso analisar o processo e extrair os cenários de teste que devem ser criados manualmente no arquivo de \emph{features}. Além dos cenários, também deve ser criado manualmente o arquivo de \emph{steps}, contendo uma "passo" correspondente a cada etapa de todos os cenários criados. Esta etapa pode ser trabalhosa, principalmente quando for necessário testar todos diversos cenários que um processo pode ter ou quando o processo for extenso.
 
 \subsection{Uma opção de uso da ferramenta: criação dos elementos utilizados no teste funcional}
-A geração da tabela com informações relevantes para o teste do processo foi a principal motivação da criação da ferramenta. No entanto, além das análises que a própria tabela possibilita, também é possível utilizar a ferramenta criada para gerar outros artefatos conforme a necessidade de cada domínio. No caso deste trabalho, por o teste funcional automatizado utilizando o Selenium e o Cucumber se mostrou promissor em um trabalho anterior \cite{sbqs2015}, decidiu-se por avaliar a possibilidade de aproveitar a ferramenta criada para também gerar elementos importantes para o teste: o arquivo de \emph{features} contendo os cenários cenários e o arquivo de \emph{steps}.
+A geração da tabela com informações relevantes para o teste do processo foi a principal motivação da criação da ferramenta. No entanto, além das análises que a própria tabela possibilita, também é possível utilizar a ferramenta criada para gerar outros elementos conforme a necessidade de cada domínio. No caso deste trabalho, por o teste funcional automatizado utilizando o Selenium e o Cucumber se mostrou promissor em um trabalho anterior \cite{sbqs2015}, decidiu-se por avaliar a possibilidade de aproveitar a ferramenta criada para também gerar elementos importantes para o teste: o arquivo de \emph{features} contendo os cenários cenários e o arquivo de \emph{steps}.
 
 \begin{figure}[ht]
 \centering
@@ -181,7 +185,7 @@ A geração da tabela com informações relevantes para o teste do processo foi 
 \label{fig:abordagem2}
 \end{figure}
 
-O arquivo contendo os cenários de teste é essencial para o teste funcional com o Cucumber, no entanto a criação dos arquivos de \emph{features} contendo os cenários e do arquivo de \emph{steps} pode ser trabalhosa, como foi mencionado na seção anterior. Uma visão geral deste exemplo de uso pode ser vista na Figura \ref{fig:abordagem2}, onde a tabela resultante da execução da abordagem é utilizada para gerar os arquivos com códigos. Para criar estes artefatos, foram adicionadas algumas funcionalidades na ferramenta para que os dados já obtidos fossem tratados. Assim, cada caminho/fluxo que foi obtido pela ferramenta, e consta na tabela de saída, foi considerado um cenário diferente. Como trata-se de um teste funcional, apenas tarefas que podem ser executadas por um usuário foram ser avaliadas (\emph{userTask},\emph{manualTask}...). Assim, para cada fluxo é criado um novo cenário no arquivo de \emph{features} utilizando a notação do Cucumber e contemplando apenas as tarefas que podem ser executadas por um usuário. O método correspondente a cada passo do cenário é criado ao mesmo tempo e inserido no arquivo de \emph{steps}. %Na Figura \ref{fig:exemplo_cenario}, podem ser vistos dois cenários resultante da execução do parser para um processo com dois caminhos possíveis. 
+O arquivo contendo os cenários de teste é essencial para o teste funcional com o Cucumber, no entanto a criação dos arquivos de \emph{features} contendo os cenários e do arquivo de \emph{steps} pode ser trabalhosa, como foi mencionado na seção anterior. Uma visão geral deste exemplo de uso pode ser vista na Figura \ref{fig:abordagem2}, onde a tabela resultante da execução da abordagem é utilizada para gerar os arquivos com códigos. Para criar estes elementos, foram adicionadas algumas funcionalidades na ferramenta para que os dados já obtidos fossem tratados. Assim, cada fluxo que foi obtido pela ferramenta, e consta na tabela de saída, foi considerado um cenário diferente. Como trata-se de um teste funcional, apenas tarefas que podem ser executadas por um usuário foram ser avaliadas (\emph{userTask},\emph{manualTask}...). Assim, para cada fluxo é criado um novo cenário no arquivo de \emph{features} utilizando a notação do Cucumber e contemplando apenas as tarefas que podem ser executadas por um usuário. O método correspondente a cada passo do cenário é criado ao mesmo tempo e inserido no arquivo de \emph{steps}. %Na Figura \ref{fig:exemplo_cenario}, podem ser vistos dois cenários resultante da execução do parser para um processo com dois fluxos possíveis. 
 
 %colocar código aqui
 %\begin{figure}[ht]
@@ -192,6 +196,26 @@ O arquivo contendo os cenários de teste é essencial para o teste funcional com
 %\end{figure}
 
 \section{Avaliação}
+
+\begin{table}[]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{cccc}
+Número de tarefas & Número de Gateways & Tipo do Gateway                 & Fluxos possíveis \\
+3                 & 0                  & -                               & 1                \\
+3                 & 1                  & Exclusivo                       & 2                \\
+4                 & 0                  & Divisão de fluxos sem Gateways  & 2                \\
+5                 & 0                  & Divisão de fluxos sem Gateways  & 3                \\
+5                 & 1                  & Exclusivo                       & 3                \\
+6                 & 2                  & Exclusivo                       & 3                \\
+7                 & 1                  & Exclusivo                       & 2                \\
+8                 & 3                  & Inclusivo, Exclusivo e Paralelo & 3                \\
+8                 & 3                  & Paralelo, Exclusivo e Inclusivo & 6                \\
+10                & 1                  & Exclusivo                       & 2
+\end{tabular}
+\end{table}
+
 \begin{figure}[ht]
 %\centering
 \includegraphics[width=.9\textwidth]{figuras/diagrama_exemplo.png}
@@ -201,11 +225,10 @@ O arquivo contendo os cenários de teste é essencial para o teste funcional com
 
 Para avaliar a ferramenta foram buscados processos já existentes, de diferentes domínios, contendo ao menos quatro tarefas e uma divisão de fluxo ou \emph{gateway}, também era interessante que os processos selecionados tivessem algumas diferenças de notação para verificar como a ferramenta trataria essas diferenças. Assim, os processos utilizados para a validação foram obtidos no site da \emph{Object Management Group} (OMG) e estão disponíveis no \href{http://www.omg.org/spec/BPMN/20100602/2010-06-03/}{site} da organização.
 
-
-Com a análise do arquivo BPMN através da ferramenta criada foi possível obter um elemento importante para o teste funcional de aplicações BPM: a tabela relacionando as tarefas e os fluxos possíveis dentro de um processo. Por exemplo, o processo na Figura \ref{fig:diagrama_exemplo} possui \emph{gateways} de diferentes tipos, gerando assim várias divisões de fluxo e aumentando os caminhos que podem ser seguidos. 
+Com a análise do arquivo BPMN através da ferramenta criada foi possível obter um elemento importante para o teste funcional de aplicações BPM: a tabela relacionando as tarefas e os fluxos possíveis dentro de um processo. Por exemplo, o processo na Figura \ref{fig:diagrama_exemplo} possui \emph{gateways} de diferentes tipos, gerando assim várias divisões de fluxo e aumentando os fluxos que podem ser seguidos. 
 
 %analise da tabelinha (que consegue gargalo...blabla)
-Ao executar a ferramenta utilizando o arquivo BPMN referente ao processo da Figura  \ref{fig:diagrama_exemplo} foi obtida a Tabela \ref{tab:resultado}. Nesta tabela, cada coluna representa uma tarefa do diagrama e cada linha representa um caminho possível, facilitando a visualização do processo. 
+Ao executar a ferramenta utilizando o arquivo BPMN referente ao processo da Figura  \ref{fig:diagrama_exemplo} foi obtida a Tabela \ref{tab:resultado}. Nesta tabela, cada coluna representa uma tarefa do diagrama e cada linha representa um fluxo possível, facilitando a visualização do processo. 
 
 \begin{table}[]
 \centering
@@ -213,7 +236,6 @@ Ao executar a ferramenta utilizando o arquivo BPMN referente ao processo da Figu
 \label{tab:resultado}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{cccccccc}
-
 %Decide if normal post or special shipment & Request quotes from carriers & Assign a carrier \& prepare paperwork & Check if extra insurance is necessary & Take out extra insurance & Fill in a Post label & Package goods & Add paperwork and move package to pick area \\
 Decide if normal... & Request quotes... & Assign a carrier \& prepare paperwork & Check if extra... & Take out extra insurance & Fill in a Post label & Package goods & Add paperwork and...\\
 X & X & X & 0 & 0 & 0 & X & X \\
@@ -290,35 +312,28 @@ public void method3() throws Exception {}
 \end{lstlisting}
 
 
-
 %\begin{itemize}
 %\item Exemplo de processo, Figura \ref{fig:diagrama_exemplo};
 %item Exemplo dos artefatos obtidos: tabelinha e cenário de teste (apenas necessário completar com os códigos obtidos no selenium)
 %	\item Melhoria na criação dos testes (mais rápido e mais completo);
-%	\item Por consequência: Melhoria na cobertura dos testes (todos caminhos e cenários possíveis)
+%	\item Por consequência: Melhoria na cobertura dos testes (todos fluxos e cenários possíveis)
 %	\item Por consequência: auxilia na melhora da qualidade dos sistemas.
 %\end{itemize}
 
 Neste exemplo, apenas um processo foi analisado, mas arquivos BPMN podem conter vários processos. Neste caso, se for necessário gerar os dados para todos os processos dentro de um arquivo, o arquivo contendo a tabela resultante será composto por várias tabelas, uma para cada processos analisado, agilizando ainda mais a obtenção das informações. 
 
 
-%Mini conclusão.
 
-%plus: gerar códigos, mas pode gerar outras coisas pra outroas casos .o arquivo de \emph{features} contendo os cenários e o arquivo de \emph{steps} contendo métodos que para efetuar a execução de cada etapa do cenário.
 
-%Com estes resultados se dizer que este trabalho atingiu seu objetivo, pois foi possível obter dois arquivos muito importantes para a execução do teste funcional automatizado: o arquivo com os cenários de teste e o arquivo com os métodos para executar cada etapa dos cenários. 
-
-Com estes resultados se dizer que este trabalho atingiu seu objetivo, pois foi possível obter uma tabela importante para analise dos processo, permitindo que sejam obtidas muitas informações úteis e importantes para a execução de testes completos e com boa cobertura. Como um exemplo de utilização das informações obtidas foram gerados dois arquivos essenciais para o teste funcional automatizado de aplicações BPM: o arquivo com os cenários de teste e o arquivo com os métodos para executar cada etapa dos cenários.
-
-%A criação automatizada da tabela e dos dois arquivos permite facilitar e melhorar a criação dos testes para os sistemas BPM, diminuindo o tempo de análise dos processos bem como tornando o teste mais completo ao mesmo tempo em que verifica todos os possíveis fluxos que um processo pode seguir. Assim, a qualidade e a cobertura dos testes também é melhorada pois todos os caminhos e cenários possíveis são analisados. Por consequência, a qualidade dos sistemas também pode ser beneficiada com um processo de teste mais completo e facilitado.
+Foi possível obter uma tabela importante para analise dos processo, permitindo que sejam obtidas muitas informações úteis e importantes para a execução de testes completos e com boa cobertura. Como um exemplo de utilização das informações obtidas foram gerados dois arquivos essenciais para o teste funcional automatizado de aplicações BPM: o arquivo com os cenários de teste e o arquivo com os métodos para executar cada etapa dos cenários.
 
 \section{Conclusão}
 
-O objetivo desse trabalho foi melhorar e facilitar o teste funcional de aplicações BPM. Pode se dizer que este objetivo foi alcançado, pois foi possível obter uma tabela com todos caminhos/fluxos possíveis dentro do processo. A criação da tabela possibilita a criação de testes mais completos e com boa cobertura o que, por consequência, contribui para a melhoria da qualidade das aplicações. A tabela gerada também permite que sejam feitas análises importantes sobre o processo como, por exemplo, identificar gargalos.
+O objetivo desse trabalho foi melhorar e facilitar o teste funcional de aplicações BPM. Foi possível obter uma tabela com todos fluxos possíveis dentro do processo. A criação da tabela possibilita a criação de testes mais completos e com boa cobertura o que, por consequência, contribui para a melhoria da qualidade das aplicações. A tabela gerada também permite que sejam feitas análises importantes sobre o processo como, por exemplo, identificar gargalos.
 
 Além da obtenção da própria tabela, a abordagem permite que as informações sejam usadas como entrada na criação de outros elementos. As informações podem ser reutilizadas das mais diversas formas, nesse trabalho decidiu-se por abordar como uma das opções o teste funcional com as ferramentas Selenium e Cucumber. Em um trabalho anterior a execução do teste funcional automatizado em aplicações BPM com as ferramentas mencionados se mostrou promissora, mas trabalhosa. A abordagem utilizada auxilia nesse ponto pois permitiu que se utilizassem as informações obtidas para gerar códigos necessários para a execução dos testes, facilitando ainda mais a automação destes.
 
-A criação automatizada da tabela e dos dois arquivos permite facilitar e melhorar a criação dos testes para os sistemas BPM, diminuindo o tempo de análise dos processos bem como tornando o teste mais completo ao mesmo tempo em que verifica todos os possíveis fluxos que um processo pode seguir. Assim, a qualidade e a cobertura dos testes também é melhorada pois todos os caminhos e cenários possíveis são analisados. Por consequência, a qualidade dos sistemas também pode ser beneficiada com um processo de teste mais completo e facilitado.
+A criação automatizada da tabela e dos dois arquivos permite facilitar e melhorar a criação dos testes para os sistemas BPM, diminuindo o tempo de análise dos processos bem como tornando o teste mais completo ao mesmo tempo em que verifica todos os possíveis fluxos que um processo pode seguir. Assim, a qualidade e a cobertura dos testes também é melhorada pois todos os fluxos e cenários possíveis são analisados. Por consequência, a qualidade dos sistemas também pode ser beneficiada com um processo de teste mais completo e facilitado.
 
 Como trabalhos futuros têm se a melhoria de alguns aspectos técnicos da abordagem como melhorar o tratamento a processos com recursão e reconhecimento dos diferentes nomes de \emph{tag}. Também podem ser avaliadas outras formas de utilizar as informações extraídas de forma a gerar outros elementos.
 %\begin{itemize}
@@ -333,3 +348,4 @@ Como trabalhos futuros têm se a melhoria de alguns aspectos técnicos da aborda
 
 \end{document}
 
+%gerando 
