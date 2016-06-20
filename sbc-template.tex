@@ -38,6 +38,8 @@
 
 \begin{abstract}
 %This paper describes an approach designed to get useful data for the execution of automated functional testing in Business Process Management tools with the support of BPMN notation. The %objective of this work was to facilitate and improve the scope of the tests, in order to improve the applications in question. With this approach, it was possible to obtain important %information about the processes and generate important elements for functional testing, making the test stage faster and more complete.
+
+This paper describes an approach designed to obtain data for the implementation of automated functional testing of applications based on Business Process Management using BPMN notation. The objective of this study was to extract information, through the analysis of BPMN files, for testing processes, in order that this information could assist in the creation and execution of tests. With this approach, it was possible to obtain data that have produced major elements for the test steps, helping to reduce the analysis time and create more complete testing.
 \end{abstract}
      
 \begin{resumo} 
@@ -54,9 +56,11 @@ A gestão de processos de negócio (\emph{Business Process Management} -- BPM) t
 
 Algumas tarefas como verificação e testes ainda são consideradas um desafio na área de BPM~\cite{aalst2013survey}. De fato, o teste automatizado de aplicações BPM é pouco abordado, tanto pela comunidade da área de BPM~\cite{weske} como da área de testes de software~\cite{graham2012experiences}. Devido a isso, em um trabalho anterior \cite{sbqs2015} foram realizados testes de carga e teste funcional em uma aplicação BPM utilizando soluções já consagradas no teste de aplicações Web. Neste trabalho, o teste funcional utilizando as ferramentas Selenium e Cucumber se mostrou mais promissor.
 
-No trabalho anterior, também percebeu-se que a análise necessária para delimitar os aspectos necessários para realizar um bom teste funcional automatizado pode ser complexa. Assim, com a intenção de melhorar a análise, execução e qualidade dos testes decidiu-se por analisar os arquivos BPMN para verificar a possibilidade de extrair informações importantes para os testes. Em relação ao formato das informações obtidas, decidiu-se extrair uma tabela definindo informações importantes sobre os fluxos do processo. A extração das informações nesse formato permite que esses dados possam ser aproveitadas em diversos casos e, inclusive, permitindo gerar outros elementos.
+No trabalho anterior, também percebeu-se que a análise necessária para delimitar os aspectos necessários para realizar o teste funcional automatizado completo de uma aplicação pode ser complexa. Assim, com a intenção de extrair dados importantes para o teste dos processos, decidiu-se por analisar os arquivos BPMN e verificar quais dados poderiam ser extraídos. Optou-se por gerar uma tabela contendo os fluxos possíveis de cada processo, permitindo uma visão completa de como o processo é executado. %A extração das informações nesse formato permite também que esses dados possam ser  analisados de diferentes formas e, inclusive, permite gerar outros elementos a partir da tabela obtida.
 
-Assim, o objetivo desse trabalho foi melhorar e facilitar o teste funcional de aplicações BPM possibilitando a criação e execução de teste mais completos e com boa cobertura.
+%Assim, o objetivo desse trabalho foi melhorar e facilitar o teste funcional de aplicações BPM possibilitando a criação e execução de teste mais completos e com boa cobertura.
+
+Assim, o objetivo deste trabalho foi extrair informações, através da análise de arquivos BPMN, para o teste dos processos, com o propósito de que estas informações pudessem auxiliar na criação e execução de testes.
 
 \section{Business Process Management - \emph{BPM}}
 
@@ -199,14 +203,19 @@ O arquivo contendo os cenários de teste é essencial para o teste funcional com
 %\end{figure}
 
 \section{Avaliação}
+Para avaliar a ferramenta foram buscados processos já existentes, de diferentes domínios, contendo ao menos três tarefas e uma divisão de fluxo com ou sem \emph{gateway}, também era interessante que os processos selecionados tivessem algumas diferenças de notação para verificar como a ferramenta trataria essas diferenças. Assim, os processos utilizados para a validação foram obtidos no site da \emph{Object Management Group} (OMG) e estão disponíveis no \href{http://www.omg.org/spec/BPMN/20100602/2010-06-03/}{site} da organização.
+
+ %A Tabela \ref{tab:resumoprocessos} apresenta uma visão geral dos processos avaliados, as informações referentes ao número de tarefas e de fluxos foram extraídas das tabelas obtidas após executar a abordagem para cada processo. Na Tabela \ref{tab:resumoprocessos}, podemos ver que a divisão de fluxos é importante para os testes pois ela delimita quantos fluxos existem no processo, ou seja, quantos fluxos podem ser testados. 
+ 
+ %Outro ponto importante é que, em alguns casos, podem existir divisão de fluxo sem \emph{gateways}. As divisões sem \emph{gateways}, dependendo da ferrmaneta BPMS utilizada para gerar o processos podem ser visualizadas só analisando o documento xml o que atrapalha a analise no9 entanto a abordagem permite que essas divisões sejam detectadas e tratadas automaticamente
 
 \begin{table}[]
 \centering
-\caption{My caption}
-\label{my-label}
+\caption{Resumo dos processos avaliados}
+\label{tab:resumoprocessos}
 \begin{tabular}{cccc}
 Número de tarefas & Número de Gateways & Tipo do Gateway                 & Fluxos possíveis \\
-3                 & 0                  & -                               & 1                \\
+3                 & 0                  & Sem divisão de fluxos           & 1                \\
 3                 & 1                  & Exclusivo                       & 2                \\
 4                 & 0                  & Divisão de fluxos sem Gateways  & 2                \\
 5                 & 0                  & Divisão de fluxos sem Gateways  & 3                \\
@@ -226,7 +235,9 @@ Número de tarefas & Número de Gateways & Tipo do Gateway                 & Flu
 \label{fig:diagrama_exemplo}
 \end{figure}
 
-Para avaliar a ferramenta foram buscados processos já existentes, de diferentes domínios, contendo ao menos quatro tarefas e uma divisão de fluxo ou \emph{gateway}, também era interessante que os processos selecionados tivessem algumas diferenças de notação para verificar como a ferramenta trataria essas diferenças. Assim, os processos utilizados para a validação foram obtidos no site da \emph{Object Management Group} (OMG) e estão disponíveis no \href{http://www.omg.org/spec/BPMN/20100602/2010-06-03/}{site} da organização.
+%gera a tabela com os caminhos
+%identificar: gargalos, quais tarefas são mais executadas, quais caminhos são mais criticos
+%como gera o código para todos, pode testar todos ou selecionar através da tabela gerada os caminhos mais importante e utilizar o código referente só a aqueles caminhos
 
 Com a análise do arquivo BPMN através da ferramenta criada foi possível obter um elemento importante para o teste funcional de aplicações BPM: a tabela relacionando as tarefas e os fluxos possíveis dentro de um processo. Por exemplo, o processo na Figura \ref{fig:diagrama_exemplo} possui \emph{gateways} de diferentes tipos, gerando assim várias divisões de fluxo e aumentando os fluxos que podem ser seguidos. 
 
