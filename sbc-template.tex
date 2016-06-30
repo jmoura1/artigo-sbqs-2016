@@ -3,7 +3,8 @@
 \usepackage{sbc-template}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx,url}
-\usepackage[pdftex]{hyperref}
+%\usepackage[pdftex]{hyperref}
+%\usepackage[pdftex]{hyperref}
 \usepackage{listings}
 \usepackage[brazil]{babel}   
 %\usepackage[latin1]{inputenc}  
@@ -182,12 +183,12 @@ Para efetuar a captura da interação do usuário com a aplicação é utilizado
 
 Os testes utilizando o Cucumber são compostos, basicamente, por dois arquivos: arquivos que especificam as funcionalidades \emph{features} e por arquivos de definição de passos \emph{steps}. 
 
-Os arquivos com as funcionalidades são escritos utilizando a linguagem Gherkin~\cite{gherkin} e são compostos por cenários, os cenários representam uma fração da aplicação que vai ser testada. Um cenário também pode ser descrito como a definição, em ordem de execução, das etapas que são executados nessa fração, bem como dos resultados esperados para validar a aplicação. Por exemplo, após um \emph{gateway} exclusivo com dois fluxos disponíveis, já é possível obter dois cenários possíveis: um cenário executando cada fluxo.
+Os arquivos com as funcionalidades são escritos na linguagem Gherkin~\cite{gherkin} e são compostos por cenários. Os cenários representam uma fração da aplicação que vai ser testada. Um cenário também pode ser descrito como a definição, em ordem de execução, das etapas que são executadas nessa fração, bem como dos resultados esperados para validar a aplicação. Por exemplo, após um \emph{gateway} exclusivo com dois fluxos disponíveis, já é possível obter dois cenários possíveis, um cenário executando cada fluxo.
 %Por exemplo, para testar apenas o login em uma aplicação, já é possível obter dois cenários possíveis: (a) dados de acessos corretos e sucesso no login e (b) dados de acesso incorretos e mensagem de erro. 
 
-Para que cada etapa do cenário seja executada, é necessária a criação de \emph{steps} que irão traduzir os passos definidos na linguagem Gherkin para ações que vão interagir com o sistema. Cada \emph{step}, geralmente, irá chamar um método Java que irá efetivamente executar a interação com a aplicação. A implementação destes métodos pode ser feita apenas utilizando o código extraído através do Selenium após a captura das ações do usuário.
+Para que cada etapa do cenário seja executada, é necessária a criação de \emph{steps} que irão traduzir os passos definidos na linguagem Gherkin para ações que vão interagir com o sistema. Cada \emph{step}, geralmente, invocará um método Java que irá efetivamente executar a interação com a aplicação. A implementação destes métodos pode ser feita apenas utilizando o código extraído através do Selenium após a captura das ações do usuário.
 
-Assim, mesmo utilizando o Cucumber e Selenium para facilitar a criação dos testes, ainda é preciso analisar o processo e extrair os cenários de teste que devem ser criados manualmente no arquivo de \emph{features}. Além dos cenários, também deve ser criado manualmente o arquivo de \emph{steps}, contendo um ``passo'' correspondente a cada etapa de todos os cenários criados. Esta etapa pode ser trabalhosa, principalmente quando for necessário testar todos diversos cenários que um processo pode ter ou quando o processo for extenso.
+Assim, mesmo utilizando Cucumber e Selenium para facilitar a criação dos testes, ainda é preciso analisar o processo e extrair os cenários de teste que devem ser criados manualmente no arquivo de \emph{features}. Além dos cenários, também deve ser criado manualmente o arquivo de \emph{steps}, contendo um ``passo'' correspondente a cada etapa de todos os cenários criados. Esta etapa pode ser trabalhosa, principalmente quando for necessário testar todos diversos cenários que um processo pode ter ou quando o processo for extenso.
 
 \subsection{Criação de códigos utilizados no teste funcional}
 A geração da tabela com informações relevantes para o teste do processo foi a principal motivação da criação da ferramenta. No entanto, além das análises que a própria tabela possibilita, também é possível utilizar a estratégia criada para gerar outros elementos conforme a necessidade de cada domínio. No caso deste trabalho, por o teste funcional automatizado utilizando o Selenium e o Cucumber se mostrou promissor em um trabalho anterior~\cite{sbqs2015}, decidiu-se por avaliar a possibilidade de aproveitar a abordagem criada para também gerar elementos importantes para o teste: o arquivo de \emph{features} contendo os cenários cenários e o arquivo de \emph{steps}.
@@ -210,7 +211,7 @@ O arquivo contendo os cenários de teste é essencial para o teste funcional com
 %\end{figure}
 
 \section{Avaliação}
-Para avaliar a abordagem foram buscados processos já existentes, de diferentes domínios, contendo ao menos três tarefas e uma divisão de fluxo com ou sem \emph{gateway}, também era interessante que os processos selecionados tivessem algumas diferenças de notação para verificar como a ferramenta trataria essas diferenças. Assim, os processos utilizados para a validação foram obtidos no site da \emph{Object Management Group} (OMG) e estão disponíveis no \href{http://www.omg.org/spec/BPMN/20100602/2010-06-03/}{site} da organização.
+Para avaliar a abordagem foram buscados processos já existentes, de diferentes domínios, contendo ao menos três tarefas e uma divisão de fluxo com ou sem \emph{gateway}, também era interessante que os processos selecionados tivessem algumas diferenças de notação para verificar como a ferramenta trataria essas diferenças. Assim, os processos utilizados para a validação foram obtidos no site da \emph{Object Management Group} (OMG) e estão disponíveis no \url{http://www.omg.org/spec/BPMN/20100602/2010-06-03/}{site} da organização.
 
 A Tabela \ref{tab:resumoprocessos} apresenta uma visão geral dos processos avaliados, as informações referentes ao número de tarefas e de fluxos foram extraídas das tabelas obtidas após executar a abordagem para cada um dos processos. A divisão de fluxos é importante para os testes pois ela delimita quantos fluxos existem no processo, ou seja, quantos fluxos podem ser testados.
  
@@ -244,7 +245,7 @@ Com a análise do arquivo BPMN através da ferramenta criada foi possível obter
 
 \begin{figure}[ht]
 %\centering
-\includegraphics[width=.9\textwidth]{figuras/diagrama_exemplo.png}
+\includegraphics[width=1.0\textwidth]{figuras/diagrama_exemplo.png}
 \caption{Exemplo de Processo. Adaptado de: Object Management Group}
 \label{fig:diagrama_exemplo}
 \end{figure}
@@ -302,9 +303,9 @@ Then
 
 \end{lstlisting}
 
-Para o teste funcional do processo em questão, três cenários são possíveis, representando as duas principais divisões de fluxo encontradas no processo. A primeira divisão de fluxo formada pelo \emph{gateway} do tipo paralelo logo no início do processo, está contida no cenário de forma que os cenários \emph{Hardware Retailer 0} e \emph{Hardware Retailer 1} fazem parte de um fluxo e o cenário \emph{Hardware Retailer 2} representa o segundo fluxo possível. A segunda divisão de fluxo no processo da Figura \ref{fig:diagrama_exemplo} é formada pelo \emph{gateway} do tipo exclusivo, e essa divisão é representada pelos cenários \emph{Hardware Retailer 0} e \emph{Hardware Retailer 1}. Há ainda uma terceira divisão de fluxo no processo, esta divisão não foi levada em conta pelo parser pois as tarefas subsequentes a essa divisão não são tarefas executadas pelo usuário.
+Para o teste funcional do processo em questão, três cenários são possíveis, representando as duas principais divisões de fluxo encontradas no processo. A primeira divisão de fluxo formada pelo \emph{gateway} do tipo paralelo logo no início do processo, está contida no cenário de forma que os cenários \emph{Hardware Retailer 0} e \emph{Hardware Retailer 1} fazem parte de um fluxo e o cenário \emph{Hardware Retailer 2} representa o segundo fluxo possível. A segunda divisão de fluxo no processo da Figura \ref{fig:diagrama_exemplo} é formada pelo \emph{gateway} do tipo exclusivo, e essa divisão é representada pelos cenários \emph{Hardware Retailer 0} e \emph{Hardware Retailer 1}. Há ainda uma terceira divisão de fluxo no processo, mas esta divisão não foi levada em conta pelo parser pois as tarefas subsequentes a essa divisão não são tarefas executadas pelo usuário.
 
-Para cada etapa nos cenários criados será criado um método correspondente dentro do arquivo de \emph{steps} chamado \emph{stepDefinition}. Uma parte do arquivo de \emph{steps} resultante da análise do processo em questão pode ser visto no trecho de código abaixo. Como pode ser visto neste codigo, para a etapa de cenário chamada \emph{I am on the task Decide if normal post or special shipment} foi criado um método com um nome genérico e contendo a anotação \emph{@Given("\^{}I am on the task Decide if normal post or special shipment\textdollar{}")}. Os métodos podem ser preenchidos posteriormente com os dados gravados pelo Selenium na etapa de captura da interação com a aplicação.
+Para cada etapa nos cenários criados, será criado um método correspondente dentro do arquivo de \emph{steps} chamado \emph{stepDefinition}. Uma parte do arquivo de \emph{steps} resultante da análise do processo em questão pode ser visto no trecho de código abaixo. Como pode ser visto neste codigo, para a etapa de cenário chamada \emph{I am on the task Decide if normal post or special shipment} foi criado um método com um nome genérico e contendo a anotação \emph{@Given("\^{}I am on the task Decide if normal post or special shipment\textdollar{}")}. Os métodos podem ser preenchidos posteriormente com os dados gravados pelo Selenium na etapa de captura da interação com a aplicação.
 
 \begin{lstlisting}[language=Java]
 import cucumber.api.java.en.*;
@@ -325,7 +326,7 @@ public void method2() throws Exception {}
 public void method3() throws Exception {} 
 \end{lstlisting}
 
-Neste exemplo, apenas um processo foi analisado, mas arquivos BPMN podem conter vários processos. Caso for necessário gerar os dados para todos os processos dentro de um arquivo, o arquivo contendo a tabela resultante será composto por várias tabelas, uma para cada processos analisado. Como é gerado o código de teste referente a todos os fluxos que contêm \emph{tasks} executadas por usuários é possível executar o teste para todos os fluxos ou, por outro lado, também é possível utilizar a tabela gerada para verificar quais os fluxos mais importantes e utilizar os códigos gerados referentes apenas a esses fluxos.
+Neste exemplo, apenas um processo foi analisado, mas arquivos BPMN podem conter vários processos. Caso seja necessário gerar os dados para todos os processos dentro de um arquivo, o arquivo contendo a tabela resultante será composto por várias tabelas, uma para cada processos analisado. Como é gerado o código de teste referente a todos os fluxos que contêm \emph{tasks} executadas por usuários é possível executar o teste para todos os fluxos ou, por outro lado, também é possível utilizar a tabela gerada para verificar quais os fluxos mais importantes e utilizar os códigos gerados referentes apenas a esses fluxos.
 
 Nesse trabalho foi possível obter uma tabela importante para o teste dos processos, permitindo que sejam obtidas informações úteis e importantes para a execução de testes completos e com boa cobertura. As informações geradas também podem auxiliar na análise e a reduzir o tempo necessário para efetuar os testes. Como um exemplo de utilização dos dados obtidos foram gerados dois arquivos essenciais para o teste funcional automatizado de aplicações BPM: o arquivo com os cenários de teste e o arquivo com os métodos para executar cada etapa dos cenários. %Assim, pode-se dizer que foi possível obter informações úteis que podem auxiliar na análise e reduzir o tempo necessário para efetuar os testes.
 
@@ -338,7 +339,7 @@ Além da obtenção da própria tabela, a abordagem permite que as informações
 
 A criação automatizada da tabela e dos dois arquivos auxilia a criação dos testes para os sistemas BPM, diminuindo o tempo de análise necessário para a criação dos elementos para o teste dos processos bem como tornando o teste mais completo, pois verifica todos os fluxos que um processo pode seguir. Assim, a qualidade e a cobertura dos testes também pode ser melhorada pois todos os fluxos e cenários possíveis são analisados. Por consequência, a qualidade dos sistemas também pode ser beneficiada com um processo de teste mais completo.
 
-Como trabalhos futuros têm se a melhoria de alguns aspectos técnicos da abordagem como melhorar, por exemplo, o tratamento a processos com recursão e reconhecimento dos diferentes nomes de \emph{tag}. Também podem ser avaliadas outras formas de utilizar as informações extraídas de forma a gerar outros elementos.
+Como trabalhos futuros tem-se a melhoria de alguns aspectos técnicos da abordagem como melhorar, por exemplo, o tratamento a processos com recursão e reconhecimento dos diferentes nomes de \emph{tag}. Também podem ser avaliadas outras formas de utilizar as informações extraídas de forma a gerar outros elementos.
 %\begin{itemize}
 %\item Trabalhos futuros (tirar repeticoes de cenários, tentar gerar mais coisas/informações, verificar outras opções pra utilizar), criar um "dicionário" com o maior numero possível de nomes distintos para cada tag e automatizar esse interpretação
 %\end{itemize}
