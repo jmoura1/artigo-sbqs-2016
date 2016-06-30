@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.6.13)  29 JUN 2016 10:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.5.8)  30 JUN 2016 09:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -6,7 +6,7 @@ entering extended mode
 **sbc-template
 (./sbc-template.tex
 LaTeX2e <2016/02/01>
-Babel <3.9q> and hyphenation patterns for 12 language(s) loaded.
+Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
@@ -538,21 +538,21 @@ Package babel Info: Making " an active character on input line 145.
 )) (./sbc-template.aux)
 \openout1 = `sbc-template.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 41.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 42.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
@@ -617,7 +617,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box30
-Package hyperref Info: Link coloring OFF on input line 41.
+Package hyperref Info: Link coloring OFF on input line 42.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
@@ -625,149 +625,141 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count117
 )
-LaTeX Info: Redefining \ref on input line 41.
-LaTeX Info: Redefining \pageref on input line 41.
-LaTeX Info: Redefining \nameref on input line 41.
+LaTeX Info: Redefining \ref on input line 42.
+LaTeX Info: Redefining \pageref on input line 42.
+LaTeX Info: Redefining \nameref on input line 42.
 (./sbc-template.out) (./sbc-template.out)
 \@outlinefile=\write3
 \openout3 = `sbc-template.out'.
 
 \c@lstlisting=\count118
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <16> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 44.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 45.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 45.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 44.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 45.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 44.
+(Font)              <12> on input line 45.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 44.
+(Font)              <8> on input line 45.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 44.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 44.
+(Font)              <6> on input line 45.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 45.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-LaTeX Font Info:    Try loading font information for OMS+pcr on input line 44.
+LaTeX Font Info:    Try loading font information for OMS+pcr on input line 45.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omspcr.fd
 File: omspcr.fd 
 )
 LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 44.
-
-Overfull \hbox (10.7345pt too wide) in paragraph at lines 44--44
- [][] 
- []
-
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 45.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 45.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 46.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <13> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 58.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 59.
 [1
 
 {/home/andrea/.texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <13> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 70.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 71.
 
-Underfull \hbox (badness 1688) in paragraph at lines 74--75
+Underfull \hbox (badness 1688) in paragraph at lines 75--76
 \OT1/ptm/m/n/12 H[]a uma tend[]encia dos BPMS em abre-viar o de-sen-vol-vi-ment
 o de soft-ware, por
  []
 
-<figuras/bpmn.png, id=86, 386.94562pt x 435.87843pt>
+<figuras/bpmn.png, id=82, 386.94562pt x 435.87843pt>
 File: figuras/bpmn.png Graphic file (type png)
 <use figuras/bpmn.png>
-Package pdftex.def Info: figuras/bpmn.png used on input line 81.
+Package pdftex.def Info: figuras/bpmn.png used on input line 82.
 (pdftex.def)             Requested size: 341.43437pt x 384.61841pt.
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 82.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 83.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 82.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 83.
 [2]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[3 <./figuras/bpmn.png>] <figuras/abordagem1.png, id=107, 494.84875pt x 168.63p
+[3 <./figuras/bpmn.png>] <figuras/abordagem1.png, id=103, 494.84875pt x 168.63p
 t>
 File: figuras/abordagem1.png Graphic file (type png)
 <use figuras/abordagem1.png>
-Package pdftex.def Info: figuras/abordagem1.png used on input line 115.
+Package pdftex.def Info: figuras/abordagem1.png used on input line 116.
 (pdftex.def)             Requested size: 341.43437pt x 116.34967pt.
-[4 <./figuras/abordagem1.png>]
+[4]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 136.
+               Default added (so using `tbp') on input line 137.
 
-[5] [6]
-Underfull \hbox (badness 2318) in paragraph at lines 184--186
-[]\OT1/ptm/m/n/12 Os ar-qui-vos com as fun-ci-o-na-li-da-des s[]ao es-cri-tos u
-ti-li-zando a lin-gua-gem
- []
 
-[7] <figuras/abordagem2.png, id=162, 590.205pt x 184.69pt>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[5 <./figuras/abordagem1.png>] [6] [7] <figuras/abordagem2.png, id=158, 590.205
+pt x 184.69pt>
 File: figuras/abordagem2.png Graphic file (type png)
 <use figuras/abordagem2.png>
-Package pdftex.def Info: figuras/abordagem2.png used on input line 196.
+Package pdftex.def Info: figuras/abordagem2.png used on input line 197.
 (pdftex.def)             Requested size: 384.1096pt x 120.19923pt.
 [8 <./figuras/abordagem2.png>]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 216.
+               Default added (so using `tbp') on input line 217.
 
-<figuras/diagrama_exemplo.png, id=174, 958.3303pt x 475.7775pt>
+<figuras/diagrama_exemplo.png, id=170, 958.3303pt x 475.7775pt>
 File: figuras/diagrama_exemplo.png Graphic file (type png)
 <use figuras/diagrama_exemplo.png>
-Package pdftex.def Info: figuras/diagrama_exemplo.png used on input line 246.
+Package pdftex.def Info: figuras/diagrama_exemplo.png used on input line 247.
 (pdftex.def)             Requested size: 384.1096pt x 190.69965pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 [9]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 255.
+               Default added (so using `tbp') on input line 256.
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
-Overfull \hbox (5.21304pt too wide) in paragraph at lines 279--280
+Overfull \hbox (5.21304pt too wide) in paragraph at lines 280--281
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (12.41312pt too wide) in paragraph at lines 284--285
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 [10 <./figuras/diagrama_exemplo.png>]
-Overfull \hbox (5.21304pt too wide) in paragraph at lines 288--289
+Overfull \hbox (12.41312pt too wide) in paragraph at lines 285--286
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (5.21304pt too wide) in paragraph at lines 289--290
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (12.41312pt too wide) in paragraph at lines 293--294
+Overfull \hbox (12.41312pt too wide) in paragraph at lines 294--295
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (12.41312pt too wide) in paragraph at lines 299--300
+Overfull \hbox (12.41312pt too wide) in paragraph at lines 300--301
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 309.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 310.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 309.
-
-Overfull \hbox (77.21378pt too wide) in paragraph at lines 317--318
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 310.
+[11]
+Overfull \hbox (77.21378pt too wide) in paragraph at lines 318--319
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[11]
-Overfull \hbox (34.01334pt too wide) in paragraph at lines 323--324
+
+Overfull \hbox (34.01334pt too wide) in paragraph at lines 324--325
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
@@ -775,23 +767,23 @@ Overfull \hbox (34.01334pt too wide) in paragraph at lines 323--324
 LaTeX Font Info:    Font shape `OMS/ptm/m/it' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 6.
 [13])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 351.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 352.
 [14]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 351.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 352.
 (./sbc-template.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 351.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 351.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 352.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 352.
 Package rerunfilecheck Info: File `sbc-template.out' has not changed.
-(rerunfilecheck)             Checksum: 3C129314D7938A296F20CB53329FFE3D;972.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 351.
+(rerunfilecheck)             Checksum: 03F962C48AABCFA9EB423BF7AE6CF985;922.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 352.
  ) 
 Here is how much of TeX's memory you used:
- 8770 strings out of 494488
- 123543 string characters out of 6172348
- 251504 words of memory out of 5000000
- 11970 multiletter control sequences out of 15000+600000
- 25889 words of font info for 50 fonts, out of 8000000 for 9000
- 266 hyphenation exceptions out of 8191
+ 8771 strings out of 493029
+ 123564 string characters out of 6136235
+ 253781 words of memory out of 5000000
+ 12083 multiletter control sequences out of 15000+600000
+ 27515 words of font info for 52 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
  30i,10n,42p,1330b,1860s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-
@@ -802,10 +794,10 @@ w/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb
 hare/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/urw/times/utmri8a.pfb>
-Output written on sbc-template.pdf (14 pages, 250206 bytes).
+Output written on sbc-template.pdf (14 pages, 249743 bytes).
 PDF statistics:
- 308 PDF objects out of 1000 (max. 8388607)
- 274 compressed objects within 3 object streams
- 104 named destinations out of 1000 (max. 500000)
- 125 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 304 PDF objects out of 1000 (max. 8388607)
+ 270 compressed objects within 3 object streams
+ 103 named destinations out of 1000 (max. 500000)
+ 117 words of extra memory for PDF output out of 10000 (max. 10000000)
 
