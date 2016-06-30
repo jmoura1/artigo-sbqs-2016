@@ -9,6 +9,16 @@
 \usepackage[brazil]{babel}   
 %\usepackage[latin1]{inputenc}  
 
+
+% http://justrocketscience.com/latex-gherkin-and-swift-highlighting
+\lstdefinelanguage{Gherkin}{
+  keywords={When, Then, Given, And},
+  ndkeywords={Feature, Scenario},
+  sensitive=false,
+  comment=[l]{\#},
+  morestring=[b]',
+  morestring=[b]"
+}
      
 \sloppy
 
@@ -141,9 +151,12 @@ Na Tabela \ref{tab:exemplo}, pode ser visto uma tabela resultante da execução 
 \label{tab:exemplo}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{ccccc}
+\hline
 \multicolumn{1}{l}{Quotation Handling} & \multicolumn{1}{l}{Approve Order} & \multicolumn{1}{l}{Order Handling} & \multicolumn{1}{l}{Shipping Handling} & \multicolumn{1}{l}{Review Order} \\
+\hline
 X & X & 0 & 0 & 0 \\
-X & X & X & X & X
+X & X & X & X & X\\
+\hline
 \end{tabular}
 }
 \end{table}
@@ -221,7 +234,9 @@ A Tabela \ref{tab:resumoprocessos} apresenta uma visão geral dos processos aval
 \label{tab:resumoprocessos}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{cccc}
+\hline
 Número de tarefas & Número de Gateways & Tipo do Gateway                 & Fluxos possíveis \\
+\hline
 3                 & 0                  & Sem divisão de fluxos           & 1                \\
 3                 & 1                  & Exclusivo                       & 2                \\
 4                 & 0                  & Divisão de fluxos sem Gateways  & 2                \\
@@ -231,7 +246,8 @@ Número de tarefas & Número de Gateways & Tipo do Gateway                 & Flu
 7                 & 1                  & Exclusivo                       & 2                \\
 8                 & 3                  & Inclusivo, Exclusivo e Paralelo & 3                \\
 8                 & 3                  & Paralelo, Exclusivo e Inclusivo & 5                \\
-10                & 1                  & Exclusivo                       & 2
+10                & 1                  & Exclusivo                       & 2\\
+\hline
 \end{tabular}
 }
 \end{table}
@@ -261,20 +277,26 @@ A tabela também permite que sejam feitas análises importantes para o teste fun
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{cccccccc}
 %Decide if normal post or special shipment & Request quotes from carriers & Assign a carrier \& prepare paperwork & Check if extra insurance is necessary & Take out extra insurance & Fill in a Post label & Package goods & Add paperwork and move package to pick area \\
+\hline
 Decide if normal... & Request quotes... & Assign a carrier...& Check if extra... & Take out extra insurance & Fill in...& Package goods & Add paperwork and...\\
+\hline
 X & X & X & 0 & 0 & 0 & 0 & X \\
 X & 0 & 0 & X & X & 0 & 0 & X \\
 X & 0 & 0 & X & 0 & X & 0 & X \\
 0 & 0 & 0 & 0 & 0 & 0 & X & X \\
-X & 0 & 0 & X & X & X & 0 & X
+X & 0 & 0 & X & X & X & 0 & X\\
+\hline
 \end{tabular}%
 }
 \end{table}
 
 Nesse trabalho abordamos a criação, a partir da tabela gerada pelo abordagem, de códigos para teste funcional de processos utilizando as ferramentas de automação Selenium e Cucumber-JVM. Para executar o teste completo do processo, testando todas as possibilidades e representando as informações obtidas na tabela, seria necessário planejar os cenários de teste e criá-los manualmente. Para criar os cenários também é necessário identificar quais tarefas são executadas por um usuário em um processo que possui várias \emph{tasks}. Por fim, também seria necessário criar os \emph{steps} para cada etapa do cenário manualmente.
 
-Executando o parser criado utilizando o arquivo BPMN referente ao diagrama da Figura \ref{fig:diagrama_exemplo} como exemplo, obtemos os cenários de teste representados no trecho de código abaixo. 
-\begin{lstlisting}[language=Java]
+Executando o parser criado utilizando o arquivo BPMN referente ao diagrama da Figura \ref{fig:diagrama_exemplo}, obtemos os cenários de teste representados no trecho da Figura \ref{fig:cenarios}. 
+
+\begin{figure}[ht]
+\centering
+\begin{lstlisting}[language=Gherkin,frame=single,basicstyle=\footnotesize\ttfamily]
 Feature: Testing BPM Processes  
  
 Scenario: Hardware Retailer 0 
@@ -300,14 +322,18 @@ When I am on task Package goods
 Then 
 When I am on task Add paperwork and move package to pick area 
 Then 
-
 \end{lstlisting}
+\caption{Cenários de teste gerados}
+\label{fig:cenarios}
+\end{figure}
 
 Para o teste funcional do processo em questão, três cenários são possíveis, representando as duas principais divisões de fluxo encontradas no processo. A primeira divisão de fluxo formada pelo \emph{gateway} do tipo paralelo logo no início do processo, está contida no cenário de forma que os cenários \emph{Hardware Retailer 0} e \emph{Hardware Retailer 1} fazem parte de um fluxo e o cenário \emph{Hardware Retailer 2} representa o segundo fluxo possível. A segunda divisão de fluxo no processo da Figura \ref{fig:diagrama_exemplo} é formada pelo \emph{gateway} do tipo exclusivo, e essa divisão é representada pelos cenários \emph{Hardware Retailer 0} e \emph{Hardware Retailer 1}. Há ainda uma terceira divisão de fluxo no processo, mas esta divisão não foi levada em conta pelo parser pois as tarefas subsequentes a essa divisão não são tarefas executadas pelo usuário.
 
-Para cada etapa nos cenários criados, será criado um método correspondente dentro do arquivo de \emph{steps} chamado \emph{stepDefinition}. Uma parte do arquivo de \emph{steps} resultante da análise do processo em questão pode ser visto no trecho de código abaixo. Como pode ser visto neste codigo, para a etapa de cenário chamada \emph{I am on the task Decide if normal post or special shipment} foi criado um método com um nome genérico e contendo a anotação \emph{@Given("\^{}I am on the task Decide if normal post or special shipment\textdollar{}")}. Os métodos podem ser preenchidos posteriormente com os dados gravados pelo Selenium na etapa de captura da interação com a aplicação.
+Para cada etapa nos cenários criados, será criado um método correspondente dentro do arquivo de \emph{steps} chamado \emph{stepDefinition}. Uma parte do arquivo de \emph{steps} resultante da análise do processo em questão pode ser visto na Figura \ref{fig:codigojava}. Como pode ser visto neste código, para a etapa de cenário chamada \emph{I am on the task Decide if normal post or special shipment} foi criado um método com um nome genérico e contendo a anotação \emph{@Given("\^{}I am on the task Decide if normal post or special shipment\textdollar{}")}. Os métodos podem ser preenchidos posteriormente com os dados gravados pelo Selenium na etapa de captura da interação com a aplicação.
 
-\begin{lstlisting}[language=Java]
+\begin{figure}[ht]
+\centering
+\begin{lstlisting}[language=Java,frame=single,basicstyle=\footnotesize\ttfamily]
 import cucumber.api.java.en.*;
 import cucumber.runtime.PendingException;
 public class StepsDefinition{
@@ -325,6 +351,9 @@ public void method2() throws Exception {}
 @When("^I am on the task Assign a carrier & prepare paperwork$") 
 public void method3() throws Exception {} 
 \end{lstlisting}
+\caption{Trecho do arquivo de \emph{steps} resultante}
+\label{fig:codigojava}
+\end{figure}
 
 Neste exemplo, apenas um processo foi analisado, mas arquivos BPMN podem conter vários processos. Caso seja necessário gerar os dados para todos os processos dentro de um arquivo, o arquivo contendo a tabela resultante será composto por várias tabelas, uma para cada processos analisado. Como é gerado o código de teste referente a todos os fluxos que contêm \emph{tasks} executadas por usuários é possível executar o teste para todos os fluxos ou, por outro lado, também é possível utilizar a tabela gerada para verificar quais os fluxos mais importantes e utilizar os códigos gerados referentes apenas a esses fluxos.
 
