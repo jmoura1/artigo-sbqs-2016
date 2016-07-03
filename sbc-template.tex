@@ -1,3 +1,4 @@
+
 \documentclass[12pt]{article}
 
 \usepackage{sbc-template}
@@ -88,7 +89,7 @@ Tarefas como verificação e testes ainda são consideradas um desafio na área 
 
 Assim, o presente trabalho propõe uma abordagem para geração de casos para testes automatizados de aplicações Web implementadas com o apoio de BPMS, a partir de modelos BPMN, visando abreviar o esforço de construção de \emph{scripts} de teste. O trabalho é focado principalmente em testes funcionais e tem como objetivos específicos: (i) gerar uma lista de caminhos de execução da aplicação a partir da análise de fluxos no modelo BPMN e (ii) gerar o código inicial dos \emph{scripts} de teste, a serem executados em um dado arcabouço de teste de aplicações Web.
 
-O restante deste artigo está organizado da seguinte forma:
+O restante deste artigo está organizado da seguinte forma: na seção \ref{sec:bpm} é feita uma discussão sobre BPM, BPMN e testes de BPM, a descrição e o funcionamento da abordagem são apresentados na seção \ref{sec:abordagem}, a seção \ref{sec:testefuncional} apresenta uma visão geral sobre o teste funcional automatizado de aplicações enquanto na seção \ref{sec:avaliacao} são apresentados resultados e exemplos de informações obtidas através da abordagem. Por fim, a seção \ref{sec:conclusao} resume os resultados e as lições aprendidas.
 
 %http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6823873&navigation=1
 %Turning to the help requests, we found that the majority of the help requests were about designing test scripts and not about the areas that appear to be most problematic. From our results and previous publications, we see a clear need to simplify the use, installation, and configuration of test systems of this type. The problems attributable to software development tools suggest that testers implementing test automation need more skills in handling those tools, than historically has been assumed
@@ -118,7 +119,7 @@ O restante deste artigo está organizado da seguinte forma:
 
 %Assim, o objetivo deste trabalho foi extrair informações, através da análise de arquivos BPMN, para o teste dos processos, com o propósito de que estas informações pudessem auxiliar na criação e execução de testes. 
 
-\section{Business Process Management - \emph{BPM}}
+\section{Business Process Management - \emph{BPM}} \label{sec:bpm}
 
 O termo BPM pode ser usado com ênfases diferentes, às vezes com foco em tecnologia (software) e outras vezes em gestão. Mesmo assim, a área tem convergido no entendimento do ciclo de vida de aplicações de BPM, que envolve as atividades de análise, modelagem, execução, monitoramento e otimização~\cite{ABPMP}. 
 
@@ -156,7 +157,7 @@ Os sistemas BPM geralmente oferecerem recursos para definição e modelagem de p
 
 Existem trabalhos que chamam a atenção para a importância e para a as dificuldades trazidas pela execução de testes, bem como trazem alternativas para a melhoria da seleção de casos de teste~\cite{bohmer2015genetic}. Esses trabalhos fortalecem a ideia da importância de informações para facilitar a criação de testes para processos ou sistemas BPM, no entanto, os trabalhos geralmente abordam a criação de casos de teste baseados em modelos de processo e não em sistemas em si. Também não é descrita uma forma de automatizar ou executar os casos de teste criados. Existem também trabalhos que visam maneiras de automatizar e melhorar o monitoramento da conformidade dos modelos de processos~\cite{ly2015compliance, van2012replaying} e que, novamente, são mais voltados para os processos em si e sua administração do que para sistema/software.
 
-\section{Descrição da abordagem}
+\section{Descrição da abordagem}\label{sec:abordagem}
 O objetivo deste trabalho é gerar dados para o Teste Funcional Automatizado de aplicações BPM com o apoio da notação BPMN. Um aspecto importante para o teste funcional são quais fluxos ou etapas serão testadas, pois estes podem definir ou limitar o teste, interferindo assim na qualidade e na cobertura dos testes. No entanto, a construção dessas informações pode ser uma tarefa complexa.
 
 Com o objetivo de obter maiores informações que pudessem auxiliar no processo de teste, decidiu-se analisar os arquivos XML no formato BPMN exportados pelas ferramentas BPMS para extrair destes arquivos as informações. Para tratar essas informações, optou-se por analisar o processo de modo a transforma-lo em uma tabela contendo todos os possíveis fluxos que podem ser executados no processo para então serem realizadas as devidas análises. 
@@ -180,9 +181,16 @@ Foi criada a classe \emph{Node} que define um tipo de objeto que guarda informa�
 
 A partir do \emph{array} de adjacências são criados os fluxos possíveis pelos quais o processo pode passar. O método que cria os fluxos percorre recursivamente o \emph{array} de adjacências criado anteriormente e ``constrói'' um novo fluxo possível, tendo como condição de parada o encontro de uma das últimas tarefas a serem executadas. Uma tarefa é uma das últimas quando o elemento que a sucede no fluxo for elemento do tipo\emph{End Event}. Ao encontrar uma tarefa final, a informação é armazenada e é iniciada a construção de um novo fluxo possível.
 
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.9\textwidth]{figuras/diagram5.png}
+\caption{Exemplo de processo analisado}
+\label{fig:diagram5}
+\end{figure}
+
 Os fluxos obtidos são base para a criação da tabela. Para criar a tabela, cada tarefa existente no processo representará uma coluna na tabela e cada fluxo representará uma nova linha. Para cada fluxo, se a tarefa estiver presente a coluna será marcada com ``X'', caso contrário a coluna será marcada com um ``0''. Caso mais de um processo seja avaliado ao mesmo tempo, a tabela referente à cada processo estará separada individualmente no arquivo final. 
 
-Na Tabela \ref{tab:exemplo}, pode ser visto uma tabela resultante da execução dessa estratégia para um processo com cinco \emph{tasks} e dois fluxos possíveis. Com a geração desta tabela podem ser realizadas diversas análises sobre o processo: número de fluxos possíveis, identificar gargalos, etc.
+Na Tabela \ref{tab:exemplo}, pode ser visto uma tabela resultante da execução dessa estratégia para o processo da Figura \ref{fig:diagram5} que possui cinco \emph{tasks} e dois fluxos possíveis. Com a geração desta tabela podem ser realizadas diversas análises sobre o processo: número de fluxos possíveis, identificar gargalos, etc.
 
 \begin{table}[]
 \centering
@@ -218,7 +226,7 @@ Apesar de utilizarem o mesmo padrão BPMN, algumas ferramentas podem utilizar no
 %-subprocess -> apenas como uma tarefa, normalmente sao simples, so testa o principal,subprocessos normalmente sao simples
 
 
-\section{Teste Funcional de Software e criação de códigos para os testes}
+\section{Teste Funcional de Software e criação de códigos para os testes}\label{sec:testefuncional}
 %O teste funcional é um tipo de teste que permite verificar as saídas de um sistema produzidas a partir de entradas pré-definidas. Este tipo de teste permite testar as funcionalidades, requerimentos e regras de negócio presentes no software~\cite{molinari2003testes} verificando a existência de erros, o que auxilia na melhoria da qualidade do software.
 
 %Uma das principais medidas para o teste de software é a cobertura de teste. A cobertura de teste mede a abrangência do teste e pode ser expressa pela cobertura dos casos de testes ou pela cobertura do código executado. Existem diversos trabalhos que abordam a importância da cobertura de testes de software~\cite{zhu1997software,bieman1996using}, inclusive ligando o crescimento da qualidade e confiabilidade do software ao crescimento da cobertura dos testes~\cite{malaiya2002software}.
@@ -263,7 +271,7 @@ O arquivo contendo os cenários de teste é essencial para o teste funcional com
 %\label{fig:exemplo_cenario}
 %\end{figure}
 
-\section{Avaliação}
+\section{Avaliação}\label{sec:avaliacao}
 Para avaliar a abordagem foram buscados processos já existentes, de diferentes domínios, contendo ao menos três tarefas e uma divisão de fluxo com ou sem \emph{gateway}, também era interessante que os processos selecionados tivessem algumas diferenças de notação para verificar como a ferramenta trataria essas diferenças. Assim, os processos utilizados para a validação foram obtidos no site da \emph{Object Management Group} (OMG) e estão disponíveis no \url{http://www.omg.org/spec/BPMN/20100602/2010-06-03/}{site} da organização.
 
 A Tabela \ref{tab:resumoprocessos} apresenta uma visão geral dos processos avaliados, as informações referentes ao número de tarefas e de fluxos foram extraídas das tabelas obtidas após executar a abordagem para cada um dos processos. A divisão de fluxos é importante para os testes pois ela delimita quantos fluxos existem no processo, ou seja, quantos fluxos podem ser testados.
@@ -399,7 +407,7 @@ Neste exemplo, apenas um processo foi analisado, mas arquivos BPMN podem conter 
 
 Nesse trabalho foi possível obter uma tabela importante para o teste dos processos, permitindo que sejam obtidas informações úteis e importantes para a execução de testes completos e com boa cobertura. As informações geradas também podem auxiliar na análise e a reduzir o tempo necessário para efetuar os testes. Como um exemplo de utilização dos dados obtidos foram gerados dois arquivos essenciais para o teste funcional automatizado de aplicações BPM: o arquivo com os cenários de teste e o arquivo com os métodos para executar cada etapa dos cenários. %Assim, pode-se dizer que foi possível obter informações úteis que podem auxiliar na análise e reduzir o tempo necessário para efetuar os testes.
 
-\section{Conclusão}
+\section{Conclusão}\label{sec:conclusao}
 %O objetivo desse trabalho foi gerar dados para a execução do teste funcional automatizado de aplicações BPM. Foi possível obter uma tabela com todos fluxos possíveis dentro do processo. A criação da tabela possibilita a criação de testes mais completos e com boa cobertura o que, por consequência, contribui para a melhoria da qualidade das aplicações. A tabela gerada também permite que sejam feitas análises importantes sobre o processo como, por exemplo, identificar gargalos.
 
 O objetivo desse trabalho foi gerar dados para a execução do teste funcional automatizado de aplicações BPM. Foi possível obter uma tabela com todos fluxos possíveis dentro do processo. A criação da tabela possibilita a criação de testes mais completos e com boa cobertura. A tabela gerada também permite que sejam feitas análises importantes sobre o processo como, por exemplo, identificar gargalos.
