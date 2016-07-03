@@ -7,12 +7,6 @@ AB (2009).
   CBOK{\textregistered}-[version 2.0-second release]}.
 \newblock ABPMP.
 
-\bibitem[Bieman et~al. 1996]{bieman1996using}
-Bieman, J.~M., Dreilinger, D., and Lin, L. (1996).
-\newblock Using fault injection to increase software test coverage.
-\newblock In {\em Software Reliability Engineering, 1996. Proceedings., Seventh
-  International Symposium on}, pages 166--174. IEEE.
-
 \bibitem[B{\"o}hmer and Rinderle-Ma 2015]{bohmer2015genetic}
 B{\"o}hmer, K. and Rinderle-Ma, S. (2015).
 \newblock A genetic algorithm for automatic business process test case
@@ -20,23 +14,8 @@ B{\"o}hmer, K. and Rinderle-Ma, S. (2015).
 \newblock In {\em On the Move to Meaningful Internet Systems: OTM 2015
   Conferences}, pages 166--184. Springer.
 
-\bibitem[{BPMN} 2016]{bpmn}
-{BPMN} (2016).
-\newblock {Business Process Management and Notation}.
-
-\bibitem[Chiavegatto et~al. 2013]{sbqs2013}
-Chiavegatto, R. et~al. (2013).
-\newblock Especificação e automação colaborativas de testes utilizando a
-  técnica {BDD}.
-\newblock In {\em XII Simpósio Brasileiro de Qualidade de Software}, pages
-  334--341.
-
-\bibitem[{Cucumber Limited} 2015a]{cucumber}
-{Cucumber Limited} (2015a).
-\newblock {Cucumber-JVM Reference}.
-
-\bibitem[{Cucumber Limited} 2015b]{gherkin}
-{Cucumber Limited} (2015b).
+\bibitem[{Cucumber Limited} 2015]{gherkin}
+{Cucumber Limited} (2015).
 \newblock {Gherkin Reference}.
 
 \bibitem[de~Moura and Charão 2015]{sbqs2015}
@@ -46,20 +25,20 @@ de~Moura, J.~L. and Charão, A. (2015).
 \newblock In {\em XIV Simpósio Brasileiro de Qualidade de Software}, pages
   212--219.
 
-\bibitem[Fantinato et~al. 2005]{fantinato2005autotest}
-Fantinato, M., da~Cunha, A. C.~R., Dias, S.~V., Cardoso, S. A.~M., and Cunha,
-  C. A.~Q. (2005).
-\newblock Autotest--um framework reutiliz{\'a}vel para a automa{\c{c}}{\~a}o de
-  teste funcional de software.
-\newblock {\em Cad. CPqD Tecnologia}, 1(1):119--131.
+\bibitem[Delamaro et~al. 2007]{Delamaro:2007}
+Delamaro, M.~E., Maldonado, J.~C., and Jino, M. (2007).
+\newblock {\em Introdução ao Teste de Software}.
+\newblock Campus Elsevier.
+
+\bibitem[Dustin et~al. 2009]{Dustin:2009}
+Dustin, E., Garrett, T., and Gauf, B. (2009).
+\newblock {\em Implementing Automated Software Testing: How to Save Time and
+  Lower Costs While Raising Quality}.
+\newblock Addison-Wesley Professional, 1st edition.
 
 \bibitem[{Forrester Research} 2013]{forrester}
 {Forrester Research} (2013).
 \newblock The forrester wave: {BPM} suites, {Q1} 2013.
-
-\bibitem[{Geb} 2015]{geb}
-{Geb} (2015).
-\newblock {Groovy Browser Automation}.
 
 \bibitem[Graham and Fewster 2012]{graham2012experiences}
 Graham, D. and Fewster, M. (2012).
@@ -78,34 +57,28 @@ Ly, L.~T., Maggi, F.~M., Montali, M., Rinderle-Ma, S., and van~der Aalst, W.~M.
   application, and tool-support.
 \newblock {\em Information systems}, 54:209--234.
 
-\bibitem[Malaiya et~al. 2002]{malaiya2002software}
-Malaiya, Y.~K., Li, M.~N., Bieman, J.~M., and Karcich, R. (2002).
-\newblock Software reliability growth with test coverage.
-\newblock {\em Reliability, IEEE Transactions on}, 51(4):420--426.
-
 \bibitem[Model 2011]{model2011notation}
 Model, B.~P. (2011).
 \newblock Notation (bpmn) version 2.0.
 \newblock {\em OMG Specification, Object Management Group}.
 
-\bibitem[Molinari 2003]{molinari2003testes}
-Molinari, L. (2003).
-\newblock {\em Testes de software: produzindo sistemas melhores e mais
-  confi{\'a}veis: qualidade de software: solu{\c{c}}{\~o}es, t{\'e}cnicas e
-  m{\'e}todos}.
-\newblock {\'E}rica.
-
 \bibitem[{Oracle} 2015]{javadom}
 {Oracle} (2015).
 \newblock {Java Dom XML Reference}.
 
-\bibitem[Pannu ]{pannutest}
-Pannu, Y.~S.
-\newblock Test automation using cucumber and selenium webdriver.
+\bibitem[Pinheiro et~al. 2015]{sbqs:2015}
+Pinheiro, V. S.~F., Valentim, N. M.~C., and Vincenzi, A. M.~R. (2015).
+\newblock Um comparativo na execução de testes manuais e testes de
+  aceitação automatizados em uma aplicação web.
+\newblock In {\em XIV Simpósio Brasileiro de Qualidade de Software}, pages
+  260--267.
 
-\bibitem[Selenium 2015]{selenium}
-Selenium (2015).
-\newblock Selenium browser automation.
+\bibitem[Rafi et~al. 2012]{Rafi:2012}
+Rafi, D.~M., Moses, K. R.~K., Petersen, K., and M\"{a}ntyl\"{a}, M.~V. (2012).
+\newblock Benefits and limitations of automated software testing: Systematic
+  literature review and practitioner survey.
+\newblock In {\em Proceedings of the 7th International Workshop on Automation
+  of Software Test}, AST '12, pages 36--42, Piscataway, NJ, USA. IEEE Press.
 
 \bibitem[Van~der Aalst et~al. 2012]{van2012replaying}
 Van~der Aalst, W., Adriansyah, A., and van Dongen, B. (2012).
@@ -119,24 +92,22 @@ van~der Aalst, W. M.~P. (2013).
 \newblock Business process management: A comprehensive survey.
 \newblock {\em ISRN Software Engineering}, 2013(507984).
 
-\bibitem[{Watir} 2015]{watir}
-{Watir} (2015).
-\newblock {Web Application Testing in Ruby}.
-
 \bibitem[Weske 2012]{weske}
 Weske, M. (2012).
 \newblock {\em Business Process Management: Concepts, Languages,
   Architectures}.
 \newblock Springer, 2nd edition.
 
+\bibitem[Wiklund et~al. 2014]{Wiklund:2014}
+Wiklund, K., Sundmark, D., Eldh, S., and Lundvist, K. (2014).
+\newblock Impediments for automated testing -- an empirical analysis of a user
+  support discussion board.
+\newblock In {\em 2014 IEEE Seventh International Conference on Software
+  Testing, Verification and Validation}, pages 113--122.
+
 \bibitem[{Winter Green Research} 2013]{greenresearch}
 {Winter Green Research} (2013).
 \newblock Business process management ({BPM}) cloud, mobile, and patterns:
   Market shares, strategies, and forecasts, worldwide, 2013 to 2019.
-
-\bibitem[Zhu et~al. 1997]{zhu1997software}
-Zhu, H., Hall, P.~A., and May, J.~H. (1997).
-\newblock Software unit test coverage and adequacy.
-\newblock {\em Acm computing surveys (csur)}, 29(4):366--427.
 
 \end{thebibliography}

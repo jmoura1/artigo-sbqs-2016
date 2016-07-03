@@ -5,47 +5,45 @@ The style file: sbc.bst
 Database file #1: sbc-template.bib
 Warning--empty year in kurzdiagram
 Warning--empty journal in kurzdiagram
-Warning--empty year in pannutest
-Warning--empty journal in pannutest
-You've used 26 entries,
+You've used 19 entries,
             1935 wiz_defined-function locations,
-            592 strings with 7175 characters,
-and the built_in function-call counts, 8860 in all, are:
-= -- 884
-> -- 308
-< -- 23
-+ -- 103
-- -- 98
-* -- 657
-:= -- 1566
-add.period$ -- 69
-call.type$ -- 26
-change.case$ -- 175
-chr.to.int$ -- 25
-cite$ -- 30
-duplicate$ -- 376
-empty$ -- 626
-format.name$ -- 131
-if$ -- 1738
-int.to.chr$ -- 2
+            568 strings with 6771 characters,
+and the built_in function-call counts, 7052 in all, are:
+= -- 698
+> -- 259
+< -- 16
++ -- 88
+- -- 84
+* -- 522
+:= -- 1215
+add.period$ -- 54
+call.type$ -- 19
+change.case$ -- 134
+chr.to.int$ -- 19
+cite$ -- 21
+duplicate$ -- 310
+empty$ -- 503
+format.name$ -- 109
+if$ -- 1416
+int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 21
-newline$ -- 122
-num.names$ -- 78
-pop$ -- 171
+missing$ -- 20
+newline$ -- 93
+num.names$ -- 57
+pop$ -- 148
 preamble$ -- 1
-purify$ -- 178
+purify$ -- 137
 quote$ -- 0
-skip$ -- 299
+skip$ -- 241
 stack$ -- 0
-substring$ -- 569
-swap$ -- 51
-text.length$ -- 4
+substring$ -- 430
+swap$ -- 57
+text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 148
-warning$ -- 4
-while$ -- 74
+type$ -- 104
+warning$ -- 2
+while$ -- 56
 width$ -- 0
-write$ -- 303
-(There were 4 warnings)
+write$ -- 233
+(There were 2 warnings)
